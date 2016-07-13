@@ -89,7 +89,7 @@
     <div id="newclientmodal" class="modal hide fade" role="dialog" aria-labelledby="newClientModalLabel" aria-hidden="true">
       <div class="modal-body">
         <p class="center"> Create new client?</p>
-        <input type="submit" class="button modalyes" id="newclientyes" value="Yes">
+        <input class="button modalyes" id="newclientyes" value="Yes">
         <input type="submit" class="button modalno" id="newclientno" data-dismiss="modal" value="No">
       </div>
     </div>
@@ -154,29 +154,10 @@
         <th>Date</th>
         <th>Service</th>
         <th>Fees</th>
-		<th>Notes</th>
+		    <th>Notes</th>
     </tr>
     </thead>
-    <tbody>
-        <tr class="highlight" data-toggle="modal" data-id="1" data-target="#apptModal">
-            <td>01/12/16</td>
-            <td>Facial</td>
-            <td>$60</td>
-			<td>A</td>
-        </tr>
-        <tr class="highlight" data-toggle="modal" data-id="2" data-target="#apptModal">
-            <td>02/01/16</td>
-            <td>Derma</td>
-            <td>$80</td>
-			<td>B</td>
-        </tr>
-        <tr class="highlight" data-toggle="modal" data-id="3" data-target="#apptModal">
-            <td>02/16/16</td>
-            <td>Makeup asdfasfadfa fdsaf afd</td>
-            <td>$30</td>
-			<td>Cafdadfafa afdadf asdfa daf adsf afa fsaf afd asf asf af asf asf afaf afa fa asf asf af af asf asf asfasdf afasf da fafafaaf asfdaf asfaf</td>
-        </tr>
-		
+    <tbody id="appointments">
     </tbody>
 </table>
 

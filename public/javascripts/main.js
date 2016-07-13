@@ -2,7 +2,7 @@ function main(){
 	var ss = gapi.client.sheets.spreadsheets;
 	var appointmentsId = "1g_RV4hpbn-dJ5GsfyHHOZ6a3FxHecevTmts84kN2jp8";
 	var peopleId = "1LRsyBbR57X9Gc2z1CLeUnHXkEpCiIwacnm2Hj4DbWSI";
-	var currentPersonId = 'iql3gd3d';
+	var currentPersonId = 'iql3hgup';
 	var currentAppointmentId = null;
 	var people = [];
 	var appointments = [];
@@ -42,6 +42,7 @@ function main(){
 					if(value.length) appointments.push(value);
 				});
 			}
+			loadPerson(currentPersonId);
 			console.log('load appointments success', appointments);
 
 		}, function(e){
@@ -69,6 +70,16 @@ function main(){
 				$('#phone').val(response.result.values[row][4]);
 				$('#email').val(response.result.values[row][5]);
 				$('#bday').val(response.result.values[row][6]);
+
+				$('#appointments').empty();
+
+				appointments.forEach(function(appointment){
+					if(appointment[1] === currentPersonId){
+						console.log(appointment);
+						var notes = appointment[10] ? appointment[10] : "";
+						$('#appointments').append($('<tr class="highlight" data-toggle="modal" data-id="1" data-target="#apptModal"><td>'+ appointment[9] +'</td><td>'+ appointment[2] +'</td><td>'+ appointment[7] +'</td><td>'+ notes +'</td></tr>'));
+					}
+				});
 			}, function(e) {
 			  	console.log(e);
 			    console.log('edit person error');
@@ -78,7 +89,7 @@ function main(){
 
 	loadPeople();
 	loadAppointments();
-	loadPerson(currentPersonId);
+	
 
 	function updateSS(id, range, array){
 		return ss.values.update({valueInputOption: 'RAW', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
@@ -105,12 +116,12 @@ function main(){
 		  		}
 		  		var range = 'A' + row + ":G" + row;
 		  		var array = [["", "", "", "", "", "", ""]];
-			  	updateSS(peopleId, range, array).then(function(response){
 				console.log('delete person success');
-				loadPeople();
+			  	updateSS(peopleId, range, array).then(function(response){
 				appointments.forEach(function(appointment){
 					if(appointment[1] === id) deleteAppointment(appointment[0]);
 				});
+				window.location.reload();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -119,7 +130,7 @@ function main(){
 	}
 
 
-	function addPerson(per){
+	function addPerson(){
 		ss.values.get({
 		    spreadsheetId: peopleId,
 		    range: 'A1:G',
@@ -131,12 +142,13 @@ function main(){
 		  		if(!row) row = response.result.values.length + 1;
 		  		var range = 'A' + row + ":G" + row;
 		  		var now = Date.now().toString(36);
-		  		var array = [[now, per.first, per.last, per.address, per.cell, per.email, per.dob]];
+		  		var array = [[now, "", "", "", "", "", ""]];
 			  	console.log(array);
 			  	updateSS(peopleId, range, array).then(function(response){
 			  	currentPersonId = now;
 				console.log('add person success');
 				loadPeople();
+				loadPerson(now);
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -147,17 +159,17 @@ function main(){
 	function editPerson(id, array){
 		ss.values.get({
 		    spreadsheetId: peopleId,
-		    range: 'A1:G',
+		    range: 'A2:G',
 		  }).then(function(response) {
 		  		var row = null;
 		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
-		  			if (response.result.values[i][0] === id) row = i + 1;
+		  			if (response.result.values[i][0] === id) row = i + 2;
 		  		}
 		  		if(!row) {
 		  			console.log('id not found');
 		  			return;
 		  		}
-		  		var range = 'A' + row + ":G" + row;
+		  		var range = 'B' + row + ":G" + row;
 			  	updateSS(peopleId, range, array).then(function(response){
 				console.log('edit person success');
 				loadPeople();
@@ -179,7 +191,7 @@ function main(){
 		  		}
 		  		if(!row) row = response.result.values.length + 1;
 		  		var range = 'A' + row + ":K" + row;
-		  		var now = Date.now().toString(36);
+		  		var now = (Date.now() / 2).toString(36);
 		  		var array = [[
 		  		now,
 		  		appt.id,
@@ -239,7 +251,7 @@ function main(){
 		  		var row = null;
 		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){
 		  		console.log(id, response.result.values[i][0]);		
-		  			if (response.result.values[i][0] === id) row = i + 1;
+		  			if (response.result.values[i][0] === id) row = i + 2;
 		  		}
 		  		if(!row) {
 		  			console.log('id not found');
@@ -297,29 +309,30 @@ function main(){
 	//addAppointment(sophiesBackMassage);
 	//deletePerson('iql3h8vd');
 
-	$('#deletesophie').click(function(){
-		console.log('deleting sophie');
-		deletePerson(peopleIds[0][1]);
-	});
 
-	$('#addsophie').click(function(){
-		console.log('adding sophie');
-		addPerson(sophie);
-	});
 	
 	$('#save-client').click(function(){
-		var client = [
+		var client = [[
 			$('#lname').val(),
 			$('#fname').val(),
 			$('#address').val(),
 			$('#phone').val(),
 			$('#email').val(),
 			$('#bday').val()
-			];
+			]];
 
 		editPerson(currentPersonId, client);
 	});
 
+	$('#newclientyes').click(function(){
+		addPerson();
+		$('#newclientmodal').modal('hide');
+		console.log("adding person");
+	});
+
+	$('#delclientmodal').click(function(){
+		deletePerson(currentPersonId);
+	});
 
 	// function parseId(res){
 	// 	var string = JSON.stringify(res.body);
