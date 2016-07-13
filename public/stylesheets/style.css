@@ -27,14 +27,9 @@
     width: 100%; /* Could be more or less, depending on screen size */
 }
 
-.center {
-	text-align: center;
-	padding-right: 40px;
-}
-
-.modal p, .modal div {
+/*.modal p, .modal div {
 	padding-left: 40px;
-}
+}*/
 .modal label {
     display: inline-block;
     text-align: left;
@@ -69,20 +64,17 @@ border: 0;
 
 .modalno{
 	float:right;
-	margin-right: 25%;
-	padding-left: 40px;
-	padding-right: 40px;
+
 }
 
 .modalyes{
 	float:left;
-	margin-left: 25%;
-	padding-left: 40px;
-	padding-right: 40px;
+
 }
 
-#divfooter{
+.divfooter{
 	padding-right:40px;
+	padding-left:40px;
 }
 
 #apptsave{
@@ -92,8 +84,6 @@ border: 0;
 #apptdelete{
 	float:left;
 }
-
-.modal 
 
 .highlight:hover{
 		background-color: #ffff99;
@@ -357,7 +347,7 @@ border: 0;
 
 		.button:hover
 		{
-			background-color: #333333;
+			background-color: #3F3F3F;
 		}
 		
 		.button:active

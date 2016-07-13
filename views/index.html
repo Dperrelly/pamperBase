@@ -79,29 +79,39 @@
 
       <header>
 	  <div class="clientdelete">
-        <input type="submit" class="button" id="deletebtn" data-toggle="modal" data-target="#delclientmodal" value="Delete Client">
+        <input class="button" id="deletebtn" data-toggle="modal" data-target="#delclientmodal" value="Delete Client">
   	</div>
 
     <div class="clientcreate">
-        <input type="submit" class="button" id="createbtn" data-toggle="modal" data-target="#newclientmodal" value="New Client">
+        <input class="button" id="createbtn" data-toggle="modal" data-target="#newclientmodal" value="New Client">
     </div>
 
     <div id="newclientmodal" class="modal hide fade" role="dialog" aria-labelledby="newClientModalLabel" aria-hidden="true">
+     <div class="modal-header">
+       <h3>Create Client</h3>
+     </div>
       <div class="modal-body">
-        <p class="center"> Create new client?</p>
+        <p> Do you want to create a new client file?</p>
+      </div>
+      <div class="modal-footer">
         <input class="button modalyes" id="newclientyes" value="Yes">
-        <input type="submit" class="button modalno" id="newclientno" data-dismiss="modal" value="No">
+        <input class="button modalno" id="newclientno" data-dismiss="modal" value="No">
       </div>
     </div>
 
-        <h2>Client Information</h2>
+        <h2><br/>Client Information</h2>
       </header>
   <div id="delclientmodal" class="modal hide fade" role="dialog" aria-labelledby="delClientModalLabel" aria-hidden="true">
-   <div class="modal-body">
-     <p> Are you sure you want to delete this client?</p>
-     <input type="submit" class="button modalyes" id="delclientyes" value="Yes">
+    <div class="modal-header">
+      <h3>Delete Client</h3>
+    </div>
+    <div class="modal-body">
+       <p> Are you sure you want to delete this client?</p>
+     </div>
+     <div class="modal-footer">
+     <input class="button modalyes" id="delclientyes" value="Yes">
         
-     <input type="submit" class="button modalno" id="delclientno" data-dismiss="modal" value="No">
+     <input class="button modalno" id="delclientno" data-dismiss="modal" value="No">
 
     </div>
   </div>
@@ -141,7 +151,7 @@
         </div><br/>
 		<div class="clientbuttons">
 			<input class="button" value="Save Changes" id="save-client"><br/><br/>
-			<input type="submit" class="button" value="Add New Appointment" data-toggle="modal" data-target="#apptModal">
+			<input class="button" value="Add New Appointment" data-toggle="modal" data-target="#apptModal">
 		</div>
       </form>
 	</div>
@@ -216,11 +226,11 @@
 				</tr>
 		</table>	
 	</div> <!-- closes table modal body-->
-	<div class="modal-footer" id="divfooter">
+	<div class="modal-footer">
 			
-				<input type="submit" class="button" id="apptdelete" value="Delete">
+				<input class="button" id="apptdelete" value="Delete">
 				
-				<input type="submit" class="button" id="apptsave" value="Save">
+				<input class="button" id="apptsave" value="Save">
             </form>
 	</div>
 			 
@@ -258,7 +268,7 @@
           </div>
           <div class="row">
             <div class="12u">
-              <input type="submit" class="button" value="Send Message">
+              <input class="button" value="Send Message">
             </div>
           </div>
         </div>
