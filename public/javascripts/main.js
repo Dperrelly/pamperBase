@@ -2,7 +2,7 @@ function main(){
 	var ss = gapi.client.sheets.spreadsheets;
 	var appointmentsId = "1g_RV4hpbn-dJ5GsfyHHOZ6a3FxHecevTmts84kN2jp8";
 	var peopleId = "1LRsyBbR57X9Gc2z1CLeUnHXkEpCiIwacnm2Hj4DbWSI";
-	var currentPersonId = null;
+	var currentPersonId = 'iql3gd3d';
 	var currentAppointmentId = null;
 	var people = [];
 	var appointments = [];
@@ -50,8 +50,35 @@ function main(){
 		});
 	}
 
+	var loadPerson = function(id){
+		ss.values.get({
+		    spreadsheetId: peopleId,
+		    range: 'A1:G',
+		  }).then(function(response) {
+		  		var row = null;
+		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
+		  			if (response.result.values[i][0] === id) row = i;
+		  		}
+		  		if(!row) {
+		  			console.log('id not found');
+		  			return;
+		  		}
+		  		$('#lname').val(response.result.values[row][1]);
+				$('#fname').val(response.result.values[row][2]);
+				$('#address').val(response.result.values[row][3]);
+				$('#phone').val(response.result.values[row][4]);
+				$('#email').val(response.result.values[row][5]);
+				$('#bday').val(response.result.values[row][6]);
+			}, function(e) {
+			  	console.log(e);
+			    console.log('edit person error');
+		  });
+		
+	};
+
 	loadPeople();
 	loadAppointments();
+	loadPerson(currentPersonId);
 
 	function updateSS(id, range, array){
 		return ss.values.update({valueInputOption: 'RAW', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
@@ -280,6 +307,18 @@ function main(){
 		addPerson(sophie);
 	});
 	
+	$('#save-client').click(function(){
+		var client = [
+			$('#lname').val(),
+			$('#fname').val(),
+			$('#address').val(),
+			$('#phone').val(),
+			$('#email').val(),
+			$('#bday').val()
+			];
+
+		editPerson(currentPersonId, client);
+	});
 
 
 	// function parseId(res){
