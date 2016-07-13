@@ -18,6 +18,8 @@
     font-style: normal;
 }
 
+.clearboth{clear: both;}
+
 .modal-body {
     background-color: #ffffff;
     margin: 0 auto; /* 0% from the top and centered */
