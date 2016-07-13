@@ -1,20 +1,280 @@
+<!DOCTYPE HTML>
 <html>
-  <head>
-  	<script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="/javascripts/main.js"></script>
-    <script type="text/javascript" src="/javascripts/oauth.js"></script>
-    <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
-  </head>
-  <body>
-    <div id="authorize-div" style="display: none">
-      <span>Authorize access to Google Sheets API</span>
-      <!--Button for the user to click to initiate auth sequence -->
-      <button id="authorize-button" onclick="handleAuthClick(event)">
-        Authorize
-      </button>
-    </div>
+<head>
+<title>pamperBase</title>
+<meta charset="utf-8">
+<script type="text/javascript" src="/javascripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/javascripts/main.js"></script>
+<script type="text/javascript" src="/javascripts/oauth.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+<script src="/stylesheets/5grid/init.js?use=mobile,desktop"></script>
+<script src="/javascripts/jquery.formerize-1.1.js"></script>
+<script src="/javascripts/init.js"></script>
+<noscript>
+<link rel="stylesheet" href="/stylesheets/5grid/core.css">
+<link rel="stylesheet" href="/stylesheets/5grid/core-desktop.css">
+<link rel="stylesheet" href="/stylesheets/5grid/core-1200px.css">
+<link rel="stylesheet" href="/stylesheets/5grid/core-noscript.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
+<link rel="stylesheet" href="/stylesheets/style-desktop.css">
+<link rel="stylesheet" href="/stylesheets/noscript.css">
+</noscript>
+  
+    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-combined.min.css">
+	<script type='text/javascript'>//<![CDATA[
+		$(function(){
+	   	$('#apptModal').modal({
+			keyboard: true,
+			show:false,
+			
+		  })/*.on('show', function(){
+			  var getIdFromRow = $(this).data('apptid');
+			//make your ajax call populate items or what even you need
+			$(this).find('#apptDetails').html($('<b> Appointment selected: ' + getIdFromRow + '</b>'))
+		});
+		$(".table-striped").find('tr[data-target]').on('click', function(){
+			//or do your operations here instead of on show of modal to populate values to modal.
+			 $('#apptModal').data('apptid',$(this).data('id'));
+		});
+		});*/
+		//]]> 
+      $('#delclientmodal').modal({
+      keyboard: true,
+      backdrop: "static",
+      show:false,
+      })
+    })
+	</script>
 
-    <button id='deletesophie'>delete sophie</button>
-    <button id='addsophie'>add sophie</button>
-  </body>
+
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="css/ie8.css">
+<![endif]-->
+</head>
+<body class="homepage">
+  <div id="authorize-div" style="display: none">
+        <span>Authorize access to Google Sheets API</span>
+        <!--Button for the user to click to initiate auth sequence -->
+        <button id="authorize-button" onclick="handleAuthClick(event)">
+          Authorize
+        </button>
+      </div>
+  <div id="wrapper">
+  <nav id="nav"> <a href="#me" class="icon icon-user active"><span>Me</span></a> <a href="#work" class="icon icon-folder"><span>Work</span></a> <a href="#email" class="icon icon-mail"><span>Email Me</span></a> <a href="#" class="icon icon-twitter"><span>Twitter</span></a> </nav>
+  <div id="main">
+    <article id="me" class="panel">
+      <header>
+        <h1>Jane Doe</h1>
+        <span class="byline">Senior Astral Projectionist</span> </header>
+      <a href="#work" class="jumplink pic"> <span class="jumplink arrow icon icon-right"><span>See my work</span></span> <img src="images/me.jpg" alt=""> </a> </article>
+    <article id="work" class="panel">
+
+      <header>
+	  <div class="clientdelete">
+        <input type="submit" class="button" id="deletebtn" data-toggle="modal" data-target="#delclientmodal" value="Delete Client">
+	</div>
+
+<div id="delclientmodal" class="modal hide fade" role="dialog" aria-labelledby="delClientModalLabel" aria-hidden="true">
+  <div class="modal-body">
+    <p> Are you sure you want to delete this client?</p>
+    <input type="submit" class="button" id="delclientyes" value="Yes">
+        
+    <input type="submit" class="button" id="delclientno" data-dismiss="modal" value="No">
+
+  </div>
+</div>
+
+        <h2>Client Information</h2>
+      </header>
+	<div>
+      <form action="#" method="post">
+        <div class="5grid">
+          <div class="row">
+            <div class="6u">
+			  <label for="fname">First Name</label>
+              <input type="text" class="text" id="fname" required>
+            </div>
+			<div class="6u">
+			  <label for="lname">Last Name</label>
+              <input type="text" class="text" id="lname" required>
+            </div>
+	 	  </div>
+		  <div class="row">
+            <div class="6u">
+			  <label for="address">Address</label>
+              <input type="text" class="text" id="address">
+            </div>
+			<div class="6u">
+			  <label for="phone">Telephone</label>
+              <input type="tel" class="text" id="phone">
+            </div>
+          </div>
+		  <div class="row">
+            <div class="6u">
+			  <label for="email">E-mail</label>
+              <input type="email" class="text" id="email">
+            </div>
+			<div class="6u">
+              <label for="bday">Date of Birth</label> 
+			  <input type="date" class="text" id="bday">
+            </div>
+          </div>
+        </div><br/>
+		<div class="clientbuttons">
+			<input type="submit" class="button" value="Save Changes"><br/><br/>
+			<input type="submit" class="button" value="Add New Appointment" data-toggle="modal" data-target="#apptModal">
+		</div>
+      </form>
+	</div>
+	  
+	  
+	  <h3>Appointments</h3>
+
+<table class="table table-striped"> <thead>
+    <tr>
+        <th>Date</th>
+        <th>Service</th>
+        <th>Fees</th>
+		<th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr class="highlight" data-toggle="modal" data-id="1" data-target="#apptModal">
+            <td>01/12/16</td>
+            <td>Facial</td>
+            <td>$60</td>
+			<td>A</td>
+        </tr>
+        <tr class="highlight" data-toggle="modal" data-id="2" data-target="#apptModal">
+            <td>02/01/16</td>
+            <td>Derma</td>
+            <td>$80</td>
+			<td>B</td>
+        </tr>
+        <tr class="highlight" data-toggle="modal" data-id="3" data-target="#apptModal">
+            <td>02/16/16</td>
+            <td>Makeup asdfasfadfa fdsaf afd</td>
+            <td>$30</td>
+			<td>Cafdadfafa afdadf asdfa daf adsf afa fsaf afd asf asf af asf asf afaf afa fa asf asf af af asf asf asfasdf afasf da fafafaaf asfdaf asfaf</td>
+        </tr>
+		
+    </tbody>
+</table>
+
+
+		
+<div id="apptModal" class="modal hide fade" role="dialog" aria-labelledby="apptModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+         <h3>Appointment</h3>
+
+    </div>
+    <!--<div id="apptDetails" class="modal-body"></div>-->
+	<div class="modal-body">
+		<table cellspacing="10">
+			<form>
+				<tr>
+				<td>
+					<label for="servicedate">Date of Service:</label>  <input type="date" id="servicedate" required></td>
+				<td>
+					<label for="servicefee">Service Fee:</label> 
+					<input type="text" id="servicefee"></td>
+				</tr>
+				<tr>
+					<td>
+					<label for="nextappt">Time:</label>
+					<input type="time" name="nexttime" required></td>
+					<td>
+					<label for="productfee">Product Fee:</label> 
+					<input type="text" id="productfee"></td>
+					
+				</tr>
+				<tr>
+					<td>
+					<label for="servicerender">Service Rendered:</label> 
+					<input type="text" id="servicerender"></td>
+					<td>
+					<label for="tax">Sales Tax (%):</label> 
+					<input type="text" id="tax" placeholder="%" value="8"></td>
+					
+				</tr>
+				<tr>
+					<td rowspan="2">
+          <label for="notes">Notes:</label> 
+          <textarea id="notes" rows="5" ></textarea></td>
+
+					<td>
+					<label for="tip">Tip:</label>
+					<input type="text" id="tip"></td>
+				</tr>
+				<tr>
+					
+					<td>
+					<label for="totalfee">Total Fees:</label> 
+					<input type="text" id="totalfee"></td>
+					</td>
+				</tr>
+		</table>	
+	</div> <!-- closes table modal body-->
+	<div class="modal-footer" id="divfooter">
+			
+				<input type="submit" class="button" id="apptdelete" value="Delete">
+				
+				<input type="submit" class="button" id="apptsave" value="Save">
+            </form>
+	</div>
+			 
+			
+          
+	
+    <!--<div id="apptItems" class="modal-body"></div>-->
+
+</div>
+	  
+    </article>
+    <article id="email" class="panel">
+      <header>
+        <h2>Email Me</h2>
+      </header>
+      <form action="#" method="post">
+        <div class="5grid">
+          <div class="row">
+            <div class="6u">
+              <input type="text" class="text" name="name" placeholder="Name">
+            </div>
+            <div class="6u">
+              <input type="text" class="text" name="email" placeholder="Email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u">
+              <input type="text" class="text" name="subject" placeholder="Subject">
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u">
+              <textarea name="message" placeholder="Message"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u">
+              <input type="submit" class="button" value="Send Message">
+            </div>
+          </div>
+        </div>
+      </form>
+    </article>
+  </div>
+  <div id="footer">
+    <ul class="links">
+      <li>&copy; Jane Doe</li>
+      <li>Images : <a href="http://fotogrph.com/">fotogrph</a></li>
+      <li>Design : <a href="http://html5up.net/">HTML5 Up!</a></li>
+    </ul>
+  </div>
+</div>
+</body>
 </html>
