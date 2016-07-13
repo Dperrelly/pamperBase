@@ -137,5 +137,4 @@ function main(){
 		email: 'sophia@sophia.com',
 		dob: 8/7/1992
 	};
-	
 }
