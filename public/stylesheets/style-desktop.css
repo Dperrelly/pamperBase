@@ -1,3 +1,4 @@
+
 /*
 	Astral 1.0 by HTML5 Up!
 	html5up.net | @n33co
@@ -66,7 +67,9 @@
 
 	.button
 	{
+		text-align: center;
 		padding: 0.7em 1.5em 0.7em 1.5em;
+		
 	}
 
 		.button-small
