@@ -27,6 +27,11 @@
     width: 100%; /* Could be more or less, depending on screen size */
 }
 
+.center {
+	text-align: center;
+	padding-right: 40px;
+}
+
 .modal p, .modal div {
 	padding-left: 40px;
 }
@@ -59,7 +64,21 @@ border: 0;
  text-align:center;
 }
 .clientdelete{
- padding-left:725px;
+	 float:right;
+}
+
+.modalno{
+	float:right;
+	margin-right: 25%;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.modalyes{
+	float:left;
+	margin-left: 25%;
+	padding-left: 40px;
+	padding-right: 40px;
 }
 
 #divfooter{
