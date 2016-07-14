@@ -21,10 +21,10 @@
 <link rel="stylesheet" href="/stylesheets/noscript.css">
 </noscript>
   
-    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-combined.min.css">
-	<script type='text/javascript'>//<![CDATA[
+<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/javascripts/list.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-combined.min.css">
+<script type='text/javascript'>//<![CDATA[
 		$(function(){
 	   	$('#apptModal').modal({
 			keyboard: true,
@@ -52,7 +52,7 @@
       show:false,
       })
     })
-	</script>
+</script>
 
 
 <!--[if lte IE 8]>
@@ -70,11 +70,18 @@
   <div id="wrapper">
   <nav id="nav"> <a href="#me" class="icon icon-user active"><span>Me</span></a> <a href="#work" class="icon icon-folder"><span>Work</span></a> <a href="#email" class="icon icon-mail"><span>Email Me</span></a> <a href="#" class="icon icon-twitter"><span>Twitter</span></a> </nav>
   <div id="main">
+
+
     <article id="me" class="panel">
       <header>
-        <h1>Jane Doe</h1>
-        <span class="byline">Senior Astral Projectionist</span> </header>
-      <a href="#work" class="jumplink pic"> <span class="jumplink arrow icon icon-right"><span>See my work</span></span> <img src="images/me.jpg" alt=""> </a> </article>
+        <h2></h2>
+      </header>
+          
+
+    </article>
+
+
+
     <article id="work" class="panel">
 
       <header>
@@ -244,35 +251,22 @@
     </article>
     <article id="email" class="panel">
       <header>
-        <h2>Email Me</h2>
+        <h2>Search</h2>
       </header>
-      <form action="#" method="post">
-        <div class="5grid">
-          <div class="row">
-            <div class="6u">
-              <input type="text" class="text" name="name" placeholder="Name">
-            </div>
-            <div class="6u">
-              <input type="text" class="text" name="email" placeholder="Email">
-            </div>
-          </div>
-          <div class="row">
-            <div class="12u">
-              <input type="text" class="text" name="subject" placeholder="Subject">
+      <div id="searchlist">
+        <input class="search" placeholder="Search" /><br/><br/>
+          <div class="data">
+            <ul class="row-header data">
+              <li>Last Name</li>
+              <li>First Name</li>
+              <li>Telephone</li>
+              <li>Last Appointment</li>
+            </ul>
+            <div class="list">
+            <!--search list will print here-->
             </div>
           </div>
-          <div class="row">
-            <div class="12u">
-              <textarea name="message" placeholder="Message"></textarea>
-            </div>
-          </div>
-          <div class="row">
-            <div class="12u">
-              <input class="button" value="Send Message">
-            </div>
-          </div>
-        </div>
-      </form>
+      </div>
     </article>
   </div>
   <div id="footer">

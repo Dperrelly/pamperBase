@@ -24,6 +24,7 @@ function main(){
 					if(value.length) people.push(value);
 				});
 			}
+			loadAppointments();
 			console.log('load people success', people);
 
 		}, function(e){
@@ -42,6 +43,7 @@ function main(){
 					if(value.length) appointments.push(value);
 				});
 			}
+			createList();
 			loadPerson(currentPersonId);
 			console.log('load appointments success', appointments);
 
@@ -88,7 +90,7 @@ function main(){
 	};
 
 	loadPeople();
-	loadAppointments();
+
 	
 
 	function updateSS(id, range, array){
@@ -330,7 +332,7 @@ function main(){
 		console.log("adding person");
 	});
 
-	$('#delclientmodal').click(function(){
+	$('#delclientyes').click(function(){
 		deletePerson(currentPersonId);
 	});
 
@@ -366,6 +368,36 @@ function main(){
 	// 		console.log('creation error');
 	// 	});
 	// }
+
+
+	function createList() {
+		var columns = {
+		    valueNames: ['a', 'b', 'c', 'd'],
+		    item: '<ul class="row-content"><li class ="a" id="a"></li><li class="b" id="b"></li><li class="c" id="c"></li><li class="d" id="d"></li></ul>'
+	    };
+	    var values = [];
+
+		var date = [];
+		var row = null;
+		var recentd = null;
+		for(var i = 0; i < people.length ; i++){
+			values.push({
+		       a: people[i][2],
+		       b: people[i][1],
+		       c: people[i][4],
+			})
+			console.log(values);
+			for(var j = 0; j < appointments.length; j++){
+				if (appointments[j][1] === people[i][0]){
+			  		date.push(appointments[j][9]);
+			  	}
+			}
+			console.log(date);
+		}
+	    var searchable = new List('searchlist', columns, values);
+	}
+	console.log(people);
+
 
 	
 }
