@@ -14,6 +14,54 @@ function main(){
 	// 	['Treatment Name', 'Product Cost', 'Treatment Fee', 'Total Cost', 'Date', 'Notes']
 	// 	];
 
+	$('#time').timepicker({
+	    timeFormat: 'h:mm p',
+	    dropdown: false,
+	});
+
+	function parseTime(time){
+		var hours = Number(time.match(/^(\d+)/)[1]);
+		var minutes = Number(time.match(/:(\d+)/)[1]);
+		var AMPM = time.match(/\s(.*)$/)[1];
+		if(AMPM == "PM" && hours<12) hours = hours+12;
+		if(AMPM == "AM" && hours==12) hours = hours-12;
+		var sHours = hours.toString();
+		var sMinutes = minutes.toString();
+		if(hours<10) sHours = "0" + sHours;
+		if(minutes<10) sMinutes = "0" + sMinutes;
+		return sHours + ":" + sMinutes + ":00";
+	}
+
+	var calendarSetup = function(){
+		var events = [];
+		console.log(appointments);
+		appointments.forEach(function(appointment){
+			var first, last;
+			people.forEach(function(person){
+				if(person[0] === appointment[1]){
+					console.log(person[0], appointment[1]);
+					first = person[1];
+					last = person[2];
+				}
+			});
+			events.push({
+				start: appointment[9] + "T" + parseTime(appointment[8]),
+				title: last + ", " + first
+			});
+		});
+		console.log('events: ', events);
+		$('#calendar').fullCalendar({
+	            events: events,
+	            height: 800,
+	            contentHeight: 800
+	    });
+	    $('#mail').click(function(){
+	    	window.setTimeout(function(){
+				$('#calendar').fullCalendar('today');
+	    	},2000);
+	    });
+	};
+
 	var setCurrentAppointmentId = function(event){
 		console.log(event.currentTarget.attributes.apptId.nodeValue);
 		currentAppointmentId = event.currentTarget.attributes.apptId.nodeValue;
@@ -50,6 +98,7 @@ function main(){
 					if(value.length) people.push(value);
 				});
 			}
+			loadAppointments();
 			console.log('load people success', people);
 
 		}, function(e){
@@ -69,6 +118,7 @@ function main(){
 					if(value.length) appointments.push(value);
 				});
 			}
+			calendarSetup();
 			loadPerson(currentPersonId);
 			console.log('load appointments success', appointments);
 
@@ -95,7 +145,7 @@ function main(){
 				$('#fname').val(response.result.values[row][2]);
 				$('#address').val(response.result.values[row][3]);
 				$('#phone').val(response.result.values[row][4]);
-				$('#email').val(response.result.values[row][5]);
+				$('#eMail').val(response.result.values[row][5]);
 				$('#bday').val(response.result.values[row][6]);
 
 				$('#appointments').empty();
@@ -121,7 +171,6 @@ function main(){
 
 
 	loadPeople();
-	loadAppointments();
 	
 
 	function updateSS(id, range, array){
@@ -154,6 +203,7 @@ function main(){
 				appointments.forEach(function(appointment){
 					if(appointment[1] === id) deleteAppointment(appointment[0]);
 				});
+
 				window.location.reload();
 			});
 		  }, function(e) {
@@ -407,7 +457,7 @@ function main(){
 			$('#fname').val(),
 			$('#address').val(),
 			$('#phone').val(),
-			$('#email').val(),
+			$('#eMail').val(),
 			$('#bday').val()
 			]];
 
