@@ -467,26 +467,40 @@ function main(){
 		    item: '<ul class="row-content"><li class ="a" id="a"></li><li class="b" id="b"></li><li class="c" id="c"></li><li class="d" id="d"></li></ul>'
 	    };
 	    var values = [];
-
 		var date = [];
-		var row = null;
+		var sortByDateDesc = function (lhs, rhs) { return lhs < rhs ? 1 : lhs > rhs ? -1 : 0; };
 		var recentd = null;
 		for(var i = 0; i < people.length ; i++){
-			values.push({
-		       a: people[i][2],
-		       b: people[i][1],
-		       c: people[i][4],
-			});
-			console.log(values);
 			for(var j = 0; j < appointments.length; j++){
 				if (appointments[j][1] === people[i][0]){
 			  		date.push(appointments[j][9]);
 			  	}
 			}
-			console.log(date);
+			date.sort(sortByDateDesc);
+			recentd = date[0];
+			values.push({a: people[i][2],
+		       b: people[i][1],
+		       c: people[i][4],
+		       d: recentd,});
+			date = [];
 		}
 	    var searchable = new List('searchlist', columns, values);
 	}
 	console.log(people);
 	
 }
+
+// for(var i = 0 ; i < date.length ; i++){
+// 			for(var j = 1 ; j < date.length ; j++){
+// 			  	if (date[i] > date[j]){
+// 			  		recentd = date[i]; 
+// 			  	}
+// 			  	else if (date[j] > date[i]){
+// 			  		recentd = date[j];
+// 			  	}
+// 			}	
+// 			values.push({d: recentd,});
+// 			console.log('date', recentd);
+// 		}
+
+
