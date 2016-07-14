@@ -51,7 +51,7 @@ function main(){
 	};
 
 	var setCurrentAppointmentId = function(event){
-		console.log(event.currentTarget.attributes.apptId.nodeValue);
+		console.log("setting current appointment ID and fields");
 		currentAppointmentId = event.currentTarget.attributes.apptId.nodeValue;
 		appointments.forEach(function(appointment){
 			if(appointment[0] === currentAppointmentId){
@@ -156,6 +156,7 @@ function main(){
 		  });
 		
 	};
+
 
 	loadPeople();	
 
