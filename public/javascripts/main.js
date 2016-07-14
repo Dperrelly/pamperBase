@@ -6,13 +6,6 @@ function main(){
 	var currentAppointmentId = null;
 	var people = [];
 	var appointments = [];
-	// var templateArray = [
-	// 	['First Name', 'Last Name', 'Address', 'Cell Phone', 'E-mail', 'DOB'],
-	// 	['','','','',''],
-	// 	['','','','',''],
-	// 	['<APPOINTMENTS>','','','',''],
-	// 	['Treatment Name', 'Product Cost', 'Treatment Fee', 'Total Cost', 'Date', 'Notes']
-	// 	];
 
 	$('#time').timepicker({
 	    timeFormat: 'h:mm p',
@@ -114,6 +107,7 @@ function main(){
 				});
 			}
 			calendarSetup();
+			createList();
 			loadPerson(currentPersonId);
 			console.log('load appointments success', appointments);
 
@@ -163,10 +157,7 @@ function main(){
 		
 	};
 
-
-
-	loadPeople();
-	
+	loadPeople();	
 
 	function updateSS(id, range, array){
 		return ss.values.update({valueInputOption: 'RAW', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
@@ -469,38 +460,32 @@ function main(){
 		deletePerson(currentPersonId);
 	});
 
-	// function parseId(res){
-	// 	var string = JSON.stringify(res.body);
-	// 	var ID = "";
-	// 	for(var x = 27; string[x] != '\\' ; x++){
-	// 		ID += string[x];
-	// 	}
-	// 	return ID;
-	// }
+	function createList() {
+		var columns = {
+		    valueNames: ['a', 'b', 'c', 'd'],
+		    item: '<ul class="row-content"><li class ="a" id="a"></li><li class="b" id="b"></li><li class="c" id="c"></li><li class="d" id="d"></li></ul>'
+	    };
+	    var values = [];
 
-	// function addPerson(per){
-	// 	ss.create({properties: {title: per.last + ", " + per.first}})
-	// 	.then(function(resp){
-	// 		ID = parseId(resp);
-	// 		window.localStorage.ssId = ID;
-
-	// 		personalArray = templateArray;
-	// 		personalArray[1] = [per.first, per.last, per.address, per.cell, per.email, per.dob];
-
-	// 		updateSS(ID, 'A1:F5', personalArray).then(function(res){
-	// 			console.log('GOTTEM');
-	// 			loadPeople();
-	// 			// go to person's page
-	// 		});
-
-	// 		appendRow(peopleId, [per.last + ", " + per.first, ID]);
-
-			
-	// 	}, function(e){
-	// 		console.log(e);
-	// 		console.log('creation error');
-	// 	});
-	// }
-
+		var date = [];
+		var row = null;
+		var recentd = null;
+		for(var i = 0; i < people.length ; i++){
+			values.push({
+		       a: people[i][2],
+		       b: people[i][1],
+		       c: people[i][4],
+			});
+			console.log(values);
+			for(var j = 0; j < appointments.length; j++){
+				if (appointments[j][1] === people[i][0]){
+			  		date.push(appointments[j][9]);
+			  	}
+			}
+			console.log(date);
+		}
+	    var searchable = new List('searchlist', columns, values);
+	}
+	console.log(people);
 	
 }
