@@ -460,6 +460,7 @@ function main(){
 		deletePerson(currentPersonId);
 	});
 
+
 	function createList() {
 		var columns = {
 		    valueNames: ['a', 'b', 'c', 'd'],
@@ -477,6 +478,7 @@ function main(){
 			}
 			date.sort(sortByDateDesc);
 			recentd = date[0];
+			if(values[i][0])
 			values.push({a: people[i][2],
 		       b: people[i][1],
 		       c: people[i][4],
