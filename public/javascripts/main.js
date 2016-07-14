@@ -55,11 +55,6 @@ function main(){
 	            height: 800,
 	            contentHeight: 800
 	    });
-	    $('#mail').click(function(){
-	    	window.setTimeout(function(){
-				$('#calendar').fullCalendar('today');
-	    	},2000);
-	    });
 	};
 
 	var setCurrentAppointmentId = function(event){
