@@ -185,8 +185,8 @@
 <table class="table table-striped"> <thead>
     <tr>
         <th>Date</th>
-        <th>Service</th>
-        <th>Fees</th>
+        <th>Services</th>
+        <th>Total</th>
         <th>Notes</th>
     </tr>
     </thead>
@@ -203,54 +203,84 @@
 
     </div>
     <!--<div id="apptDetails" class="modal-body"></div>-->
-  <div class="modal-body">
-    <table cellspacing="10">
-      <form>
+  <div class="modal-body apptBody">
+    <form>
+      <table cellspacing="10">
         <tr>
-        <td>
-          <label for="servicedate">Date of Service:</label>  
-          <input name='date_B' type='date' value='' id="servicedate" required/>
-        <td>
-          <label for="servicefee">Service Fee:</label> 
-          <input type="text" id="servicefee"></td>
+          <td>
+            <label for="servicedate">Date of Service:</label>  
+            <input name='date_B' type='date' value='' id="servicedate" required/></td>
+          <td>
+            <label for="time">Time:</label>
+            <input type="text" id="time" required></td>
+        </tr>
+      </table>
+      <table class="table table-striped" align="center">
+        <tr>
+          <td>
+            <table class="table table-striped"> 
+              <thead>
+                <th>Service</th>
+                <th>Price</th>
+              </thead>
+              <tbody id="">
+                <tr class="highlight clearboth" data-toggle="modal" data-target="#apptModal">
+                  <td>
+                    Facial
+                  </td>
+                  <td>
+                    $$$
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <table class="table table-striped"> 
+              <thead>
+                <th>Product</th>
+                <th>Price</th>
+              </thead>
+              <tbody id="">
+                <tr class="highlight clearboth" data-toggle="modal" data-target="#apptModal">
+                  <td>
+                    Acne mask
+                  </td>
+                  <td>
+                    $$$
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <td>
+            <label for="tip">Tip:</label>
+            <input type="text" id="tip"></td>
+          <td>
+            <label for="tax">Tax:</label> 
+            <input type="text" id="tax"></td>
         </tr>
         <tr>
           <td>
-          <label for="nextappt">Time:</label>
-          <input type="text" id="time" required></td>
+            <label for="discount">Discount:</label> 
+            <input type="text" id="discount"></td>
           <td>
-          <label for="productfee">Product Fee:</label> 
-          <input type="text" id="productfee"></td>
-          
+            <label for="grandtotal">Grand Total:</label> 
+            <input type="text" id="grandtotal"></td>
         </tr>
         <tr>
-          <td>
-          <label for="servicerender">Service Rendered:</label> 
-          <input type="text" id="servicerender"></td>
-          <td>
-          <label for="tax">Sales Tax (%):</label> 
-          <input type="text" id="tax" placeholder="%" value="8"></td>
-          
-        </tr>
-        <tr>
-          <td rowspan="2">
+          <td colspan="2">
           <label for="notes">Notes:</label> 
           <textarea id="notes" rows="5" ></textarea></td>
-
-          <td>
-          <label for="tip">Tip:</label>
-          <input type="text" id="tip"></td>
-        </tr>
-        <tr>
-          
-          <td>
-          <label for="totalfee">Total Fees:</label> 
-          <input type="text" id="totalfee"></td>
-          </td>
         </tr>
     </table>  
   </div> <!-- closes table modal body-->
-  <div class="modal-footer">
+  <div id="apptFooter" class="modal-footer">
       
         <input class="button" id="apptdelete" value="Delete">
         
@@ -258,8 +288,8 @@
             </form>
   </div>
        
-      
-          
+                
+
   
     <!--<div id="apptItems" class="modal-body"></div>-->
 

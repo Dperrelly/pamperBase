@@ -63,7 +63,7 @@ function main(){
 				$('#tax').val(appointment[2]);
 				$('#tip').val(appointment[3]);
 				$('#discount').val(appointment[4]);
-				$('#totalfee').val(appointment[5]);
+				$('#grandtotal').val(appointment[5]);
 				$('#time').val(appointment[6]);
 				$('#servicedate').val(appointment[7]);
 				$('#notes').val(appointment[8]);
@@ -456,8 +456,12 @@ function main(){
 		id: currentPersonId,
 		tax: $('#tax').val(),
 		tip: $('#tip').val(),
+<<<<<<< HEAD
 		discount: $('#discount').val(),
 		total: $('#totalfee').val(),
+=======
+		total: $('#grandtotal').val(),
+>>>>>>> 290be2b1e2ae49c4022eb6fa9294de57397d0879
 		time: $('#time').val(),
 		date: $('#servicedate').val(),
 		notes: $('#notes').val(),
@@ -470,7 +474,7 @@ function main(){
 				$('#tax').val(),
 				$('#tip').val(),
 				$('#discount').val(),
-				$('#totalfee').val(),
+				$('#grandtotal').val(),
 				$('#time').val(),
 				$('#servicedate').val(),
 				$('#notes').val(),
@@ -486,7 +490,7 @@ function main(){
 		$('#servicefee').val(0);
 		$('#tax').val(8);
 		$('#tip').val(0);
-		$('#totalfee').val(0);
+		$('#grandtotal').val(0);
 		$('#time').val("");
 		$('#servicedate').val(0);
 		$('#notes').val("");
