@@ -57,6 +57,28 @@ function main(){
 	    });
 	};
 
+	function calculateGrandTotal(){
+		appointments.forEach(function(appointment){
+			if(appointment[0] === currentAppointmentId){
+				var total = 0;
+				var tax = $('#tax').val();
+				var tip = $('#tip').val();
+				var discount = $('#discount').val();
+				var cost = 0;
+				servucts.forEach(function(servuct){
+					if(servuct[1] === currentAppointmentId) {
+						cost = Number(servuct[4]);
+						if(servuct[3] === "Service") total += cost;
+						else total += (cost * (tax / 100 + 1));
+					}
+				});
+				total += (tip - discount);
+				total = Math.round(total * 100) / 100;
+				$('#grandtotal').val(total);
+			}
+		});
+	}
+
 	var setCurrentAppointmentId = function(event){
 		console.log("setting current appointment ID and fields");
 		currentAppointmentId = event.currentTarget.attributes.apptId.nodeValue;
@@ -70,6 +92,11 @@ function main(){
 				$('#servicedate').val(appointment[7]);
 				$('#notes').val(appointment[8]);
 			}
+		});
+		servucts.forEach(function(servuct){
+			var chart = servuct[3] === "Service" ? '#serviceBody' : '#productBody';
+			console.log(servuct[1], currentAppointmentId);
+			if(servuct[1] === currentAppointmentId) $(chart).append('<tr class="highlight clearboth" data-toggle="modal" data-target="#apptModal"><td>'+ servuct[2] +'</td><td>'+ servuct[4] +'</td></tr>');
 		});
 
 	};
@@ -113,7 +140,7 @@ function main(){
 			}
 			calendarSetup();
 			createList();
-			loadPerson(currentPersonId);
+			loadServucts();
 
 		}, function(e){
 			console.log('load appointments error');
@@ -156,12 +183,10 @@ function main(){
 						newNode.click(setCurrentAppointmentId);
 					}
 				});
-				loadServucts();
 			}, function(e) {
 			  	console.log(e);
 			    console.log('edit person error');
 		  });
-		
 	};
 
 	function loadServucts(){
@@ -169,13 +194,13 @@ function main(){
 			spreadsheetId: servuctsId,
 			range: 'A2:E'
 		}).then(function(res){
-			people = [];
+			servucts = [];
 			if(res.result.values && res.result.values.length){
 				res.result.values.forEach(function(value){
 					if(value.length) servucts.push(value);
 				});
 			}
-
+			loadPerson(currentPersonId);
 		}, function(e){
 			console.log('load servucts error');
 			console.log(e);
@@ -537,9 +562,6 @@ function main(){
 	
 	$('#newappt').click(function(){
 		currentAppointmentId = null;
-		$('#servicerender').val("");
-		$('#productfee').val(0);
-		$('#servicefee').val(0);
 		$('#tax').val(8);
 		$('#tip').val(0);
 		$('#grandtotal').val(0);
@@ -583,6 +605,10 @@ function main(){
 	$('#delclientyes').click(function(){
 		deletePerson(currentPersonId);
 	});
+
+	$('#tax').keyup(calculateGrandTotal);
+	$('#tip').keyup(calculateGrandTotal);
+	$('#discount').keyup(calculateGrandTotal);
 
 	function createList() {
 		var columns = {
