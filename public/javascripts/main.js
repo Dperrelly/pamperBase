@@ -60,7 +60,7 @@ function main(){
 				$('#servicefee').val(appointment[4]);
 				$('#tax').val(appointment[5]);
 				$('#tip').val(appointment[6]);
-				$('#totalfee').val(appointment[7]);
+				$('#grandtotal').val(appointment[7]);
 				$('#time').val(appointment[8]);
 				$('#servicedate').val(appointment[9]);
 				$('#notes').val(appointment[10]);
@@ -395,7 +395,7 @@ function main(){
 		sfee: $('#servicefee').val(),
 		tax: $('#tax').val(),
 		tip: $('#tip').val(),
-		total: $('#totalfee').val(),
+		total: $('#grandtotal').val(),
 		time: $('#time').val(),
 		date: $('#servicedate').val(),
 		notes: $('#notes').val(),
@@ -410,7 +410,7 @@ function main(){
 				$('#servicefee').val(),
 				$('#tax').val(),
 				$('#tip').val(),
-				$('#totalfee').val(),
+				$('#grandtotal').val(),
 				$('#time').val(),
 				$('#servicedate').val(),
 				$('#notes').val(),
@@ -426,7 +426,7 @@ function main(){
 		$('#servicefee').val(0);
 		$('#tax').val(8);
 		$('#tip').val(0);
-		$('#totalfee').val(0);
+		$('#grandtotal').val(0);
 		$('#time').val("");
 		$('#servicedate').val(0);
 		$('#notes').val("");
