@@ -86,21 +86,39 @@ border: 0;
 /*Appointment Modal*/
 #apptModal {
 	width: 50%;
-	height:80%;
+	min-width: 50%;
+	min-height: 20%;
+	max-height:80%;
 	left: 35em;
 	top:10px;
 }
+	#apptBody {
+		height: 80%;
+	}
 
-#servicetable, #producttable {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	min-width: 200px !important;
-	max-width: 200px !important;
-}
+	#servprotable {
+		text-align: center;
+	}
+	.row00 {
+		width:300px;
+		min-width: 300px !important;
+		max-width: 300px !important;
+	}
 
-#apptBody {
-	height: 80%;
-}
+	.col200 {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width:200px;
+		min-width: 200px !important;
+		max-width: 200px !important;
+	}
+
+	.col100 {
+		width:100px !important;
+		min-width: 100px !important;
+		max-width: 100px !important;
+	}
+
 
 /*Buttons for Client page*/
 .clientbuttons { /*Save Changes / Add New Appointment Buttons*/
