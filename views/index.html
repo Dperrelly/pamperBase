@@ -55,6 +55,16 @@
       backdrop: "static",
       show:false,
       });
+      $('#servModal').modal({
+      keyboard: true,
+      backdrop: "static",
+      show:false,
+      });
+      $('#proModal').modal({
+      keyboard: true,
+      backdrop: "static",
+      show:false,
+      });
     });
   </script>
 
@@ -172,13 +182,12 @@
             </div>
           </div>
         </div><br/>
-    <div class="clientbuttons">
-      <input class="button" value="Save Changes" id="save-client"><br/><br/>
-      <input id="newappt" class="button" value="Add New Appointment" data-toggle="modal" data-target="#apptModal">
-    </div>
+      <div class="clientbuttons">
+        <input class="button" value="Save Changes" id="save-client"><br/><br/>
+        <input id="newappt" class="button" value="Add New Appointment" data-toggle="modal" href="#apptModal">
+      </div>
       </form>
   </div>
-    
     
     <h3>Appointments</h3>
 
@@ -195,8 +204,7 @@
 </table>
 
 
-    
-<div id="apptModal" class="modal hide fade" role="dialog" aria-labelledby="apptModalLabel" aria-hidden="true">
+<div id="apptModal" class="modal hide fade" data-focus-on="input:first">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
          <h3>Appointment</h3>
@@ -215,22 +223,22 @@
             <input type="text" id="time" required></td>
         </tr>
       </table>
-      <table class="table table-striped" align="center">
+      <table id="servprotable" class="table table-striped" align="center">
         <tr>
           <td>
             <table class="table table-striped"> 
               <thead>
-                <tr class="servicetable">
-                  <th>Service</th>
-                  <th>Price</th>
+                <tr class="">
+                  <th class="col200">Service</th>
+                  <th class="col100">Price</th>
                 </tr>
               </thead>
               <tbody id="">
-                <tr class="highlight clearboth" data-toggle="modal" data-target="#apptModal">
-                  <td>
+                <tr class="highlight clearboth" data-toggle="modal" href="#servModal">
+                  <td class="col200">
                     Facial
                   </td>
-                  <td>
+                  <td class="col100">
                     $$$
                   </td>
                 </tr>
@@ -240,17 +248,17 @@
           <td>
             <table class="table table-striped"> 
               <thead>
-                <tr class="servicetable">
-                  <th>Product</th>
-                  <th>Price</th>
+                <tr class="">
+                  <th class="col200">Product</th>
+                  <th class="col100">Price</th>
                 </tr>
               </thead>
               <tbody id="">
-                <tr class="highlight clearboth" data-toggle="modal" data-target="#apptModal">
-                  <td>
-                    Acne mask
+                <tr class="highlight clearboth" data-toggle="modal" href="#proModal">
+                  <td class="col200">
+                    Acneasdfafa maskasfasdfafaf
                   </td>
-                  <td>
+                  <td class="col100">
                     $$$
                   </td>
                 </tr>
@@ -258,16 +266,22 @@
             </table>
           </td>
         </tr>
-              <tfoot>
+<!--               <tfoot>
                 <tr>
-                  <td>
-                   
+                  <td class="col200">
+                   Total Services:
                   </td>
-                  <td>
-                   
+                  <td class="col100">
+                   $$$$
+                  </td>
+                  <td class="col200">
+                  Total Products:
+                  </td>
+                  <td class="col100">
+                  $$$$
                   </td>
                 </tr>
-              </tfoot>
+              </tfoot> -->
       </table>
 
       <table>
@@ -301,10 +315,26 @@
         <input class="button" id="apptsave" value="Save">
             </form>
   </div>
-       
+  
+   <div id="servModal" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+    <div class="modal-header">
+      <h3>Add Client Services</h3>
+    </div>
+    <div class="modal-body">
+       <p> SECOND MODAL?</p>
+     </div>
+     <div class="modal-footer">
+     <input class="button modalyes" id="" value="Yes">
+     <input class="button modalno" id="" data-dismiss="modal" value="No">
+    </div>
+  </div>
                 
 
-  
+
+
+
+
+
     <!--<div id="apptItems" class="modal-body"></div>-->
 
 </div>

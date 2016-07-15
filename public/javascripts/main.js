@@ -604,17 +604,3 @@ function main(){
 	}	
 }
 
-// for(var i = 0 ; i < date.length ; i++){
-// 			for(var j = 1 ; j < date.length ; j++){
-// 			  	if (date[i] > date[j]){
-// 			  		recentd = date[i]; 
-// 			  	}
-// 			  	else if (date[j] > date[i]){
-// 			  		recentd = date[j];
-// 			  	}
-// 			}	
-// 			values.push({d: recentd,});
-// 			console.log('date', recentd);
-// 		}
-
-
