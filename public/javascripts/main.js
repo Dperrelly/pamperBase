@@ -58,26 +58,22 @@ function main(){
 	};
 
 	function calculateGrandTotal(){
-		appointments.forEach(function(appointment){
-			if(appointment[0] === currentAppointmentId){
-				var total = 0;
-				var tax = $('#tax').val();
-				var tip = $('#tip').val();
-				var discount = $('#discount').val();
-				var cost = 0;
-				servucts.forEach(function(servuct){
-					if(servuct[1] === currentAppointmentId) {
-						cost = Number(servuct[4]);
-						if(servuct[3] === "Service") total += cost;
-						else total += (cost * (tax / 100 + 1));
-						console.log(total);
-					}
-				});
-				total += (tip - discount);
-				total = Math.round(total * 100) / 100;
-				$('#grandtotal').val(total);
+		var total = 0;
+		var tax = $('#tax').val();
+		var tip = $('#tip').val();
+		var discount = $('#discount').val();
+		var cost = 0;
+		servucts.forEach(function(servuct){
+			if(servuct[1] === currentAppointmentId) {
+				cost = Number(servuct[4]);
+				if(servuct[3] === "Service") total += cost;
+				else total += (cost * (tax / 100 + 1));
+				console.log(total);
 			}
 		});
+		total += (tip - discount);
+		total = Math.round(total * 100) / 100;
+		$('#grandtotal').val(total);
 	}
 
 	var setCurrentAppointmentId = function(event){
@@ -95,6 +91,8 @@ function main(){
 			}
 		});
 		servucts.forEach(function(servuct){
+			$('#serviceBody').empty();
+			$('#productBody').empty();
 			var chart = servuct[3] === "Service" ? '#serviceBody' : '#productBody';
 			if(servuct[1] === currentAppointmentId) $(chart).append('<tr class="highlight clearboth" data-toggle="modal" data-target="#apptModal"><td>'+ servuct[2] +'</td><td>'+ servuct[4] +'</td></tr>');
 		});
@@ -330,9 +328,8 @@ function main(){
 		  		}
 		  		if(!row) row = response.result.values.length + 1;
 		  		var range = 'A' + row + ":I" + row;
-		  		var now = (Date.now() / 2).toString(36);
 		  		var array = [[
-		  		now,
+		  		currentAppointmentId,
 		  		appt.id,
 		  		appt.tax,
 		  		appt.tip,
@@ -345,7 +342,6 @@ function main(){
 			  	console.log(array);
 			  	updateSS(appointmentsId, range, array).then(function(response){
 				console.log('add appointment success');
-				currentAppointmentId = now;
 				loadAppointments();
 			});
 		  }, function(e) {
@@ -561,13 +557,17 @@ function main(){
 	});
 	
 	$('#newappt').click(function(){
-		currentAppointmentId = null;
+		var now = (Date.now() / 2).toString(36);
+		currentAppointmentId = now;
+		$('#serviceBody').empty();
+		$('#productBody').empty();
 		$('#tax').val(8);
 		$('#tip').val(0);
-		$('#grandtotal').val(0);
+		$('#discount').val(0);
 		$('#time').val("");
 		$('#servicedate').val(0);
 		$('#notes').val("");
+		calculateGrandTotal();
 		console.log('current appt nulled');
 	});
 
