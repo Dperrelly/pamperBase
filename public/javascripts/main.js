@@ -479,7 +479,7 @@ function main(){
 	]];
 
 	//addServuct(sophiesLegRemoval);
-	editServuct(currentServuctId, sophiesLegRemoval2);
+	//editServuct(currentServuctId, sophiesLegRemoval2);
 	//deleteServuct(currentServuctId);
 
 	var sophiesBackMassage2 = [[
