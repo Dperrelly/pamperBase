@@ -5,7 +5,7 @@ function main(){
 	var servuctsId = '1S0rzD4T5ougGfzZGqp6H8bm-QP8Zy29oPJeQpDiUYQ0';
 	var currentPersonId = 'iql3hgup';
 	var currentAppointmentId = null;
-	var currentServuctId = null;
+	var currentServuctId = '68w2dvp2.o00y66r';
 	var people = [];
 	var appointments = [];
 	var servucts = [];
@@ -16,7 +16,6 @@ function main(){
 	});
 
 	function parseTime(time){
-		console.log('time: ',time);
 		var hours = Number(time.match(/^(\d+)/)[1]);
 		var minutes = Number(time.match(/:(\d+)/)[1]);
 		var AMPM = time.match(/\s(.*)$/)[1];
@@ -31,13 +30,10 @@ function main(){
 
 	var calendarSetup = function(){
 		var events = [];
-		console.log("appointments:", appointments);
-		console.log("people:", people);
 		appointments.forEach(function(appointment){
 			var first, last;
 			people.forEach(function(person){
 				if(person[0] === appointment[1]){
-					console.log(person[0], appointment[1]);
 					first = person[1];
 					last = person[2];
 				}
@@ -47,7 +43,6 @@ function main(){
 				title: last + ", " + first
 			});
 		});
-		console.log('events: ', events);
 		$('#calendar').fullCalendar({
 	            events: events,
 	            height: 800,
@@ -91,7 +86,6 @@ function main(){
 				});
 			}
 			loadAppointments();
-			console.log('load people success', people);
 
 		}, function(e){
 			console.log('load people error');
@@ -113,7 +107,6 @@ function main(){
 			calendarSetup();
 			createList();
 			loadPerson(currentPersonId);
-			console.log('load appointments success', appointments);
 
 		}, function(e){
 			console.log('load appointments error');
@@ -175,7 +168,6 @@ function main(){
 					if(value.length) servucts.push(value);
 				});
 			}
-			console.log('load servucts success', people);
 
 		}, function(e){
 			console.log('load servucts error');
@@ -187,8 +179,6 @@ function main(){
 
 	function updateSS(id, range, array){
 		return ss.values.update({valueInputOption: 'RAW', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
-			console.log('update success');
-			//loadPeople();
 		}, function(e){
 			console.log('update error');
 			console.log(e);
@@ -379,13 +369,13 @@ function main(){
 			});
 		  }, function(e) {
 		  	console.log(e);
-		    console.log('edit editAppointment error');
+		    console.log('edit appointment error');
 		  });
 	}
 
 	function addServuct(servuct){
 		ss.values.get({
-		    spreadsheetId: appointmentsId,
+		    spreadsheetId: servuctsId,
 		    range: 'A1:E',
 		  }).then(function(response) {
 		  		var row = null;
@@ -393,8 +383,9 @@ function main(){
 		  			if (!response.result.values[i].length) row = i + 1;
 		  		}
 		  		if(!row) row = response.result.values.length + 1;
+		  		console.log("here:", row, response.result.values);
 		  		var range = 'A' + row + ":E" + row;
-		  		var now = (Date.now() / 3).toString(36);
+		  		var now = (Date.now() / 25).toString(36);
 		  		var array = [[
 		  		now,
 		  		servuct.id,
@@ -402,7 +393,6 @@ function main(){
 		  		servuct.type,
 		  		servuct.cost,
 		  		]];
-			  	console.log(array);
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('add servuct success');
 				currentServuctId = now;
@@ -411,6 +401,56 @@ function main(){
 		  }, function(e) {
 		  	console.log(e);
 		    console.log('add servuct error');
+		  });
+	}
+
+	function editServuct(id, array){
+		ss.values.get({
+		    spreadsheetId: servuctsId,
+		    range: 'A1:E',
+		  }).then(function(response) {
+		  		var row = null;
+		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){
+		  			if (response.result.values[i][0] === id) row = i + 1;
+		  		}
+		  		if(!row) {
+		  			console.log('id not found');
+		  			return;
+		  		}
+		  		var range = 'B' + row + ":E" + row;
+		  		console.log("updating:", id, range, array);
+			  	updateSS(servuctsId, range, array).then(function(response){
+				console.log('edit servuct success');
+				loadAppointments();
+			});
+		  }, function(e) {
+		  	console.log(e);
+		    console.log('edit servucts error');
+		  });
+	}
+
+	function deleteServuct(id){
+		ss.values.get({
+		    spreadsheetId: servuctsId,
+		    range: 'A1:E',
+		  }).then(function(response) {
+		  		var row = null;
+		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
+		  			if (response.result.values[i][0] === id) row = i + 1;
+		  		}
+		  		if(!row) {
+		  			console.log('id not found');
+		  			return;
+		  		}
+		  		var range = 'A' + row + ":E" + row;
+		  		var array = [["", "", "", "", ""]];
+			  	updateSS(servuctsId, range, array).then(function(response){
+				console.log('delete servuct success');
+				loadAppointments();
+			});
+		  }, function(e) {
+		  	console.log(e);
+		    console.log('delete servuct error');
 		  });
 	}
 
@@ -431,7 +471,16 @@ function main(){
   		cost: '5.00'
 	};
 
-	addServuct(sophiesLegRemoval);
+	var sophiesLegRemoval2 = [[
+		'9daonruu',
+  		'Leg Removal',
+  		'Service',
+  		'11.00'
+	]];
+
+	//addServuct(sophiesLegRemoval);
+	//editServuct(currentServuctId, sophiesLegRemoval2);
+	//deleteServuct(currentServuctId);
 
 	var sophiesBackMassage2 = [[
 		'iql3h8vd',
@@ -552,9 +601,7 @@ function main(){
 			date = [];
 		}
 	    var searchable = new List('searchlist', columns, values);
-	}
-	console.log(people);
-	
+	}	
 }
 
 // for(var i = 0 ; i < date.length ; i++){
