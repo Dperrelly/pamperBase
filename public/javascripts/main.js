@@ -427,7 +427,7 @@ function main(){
 		$('#tax').val(8);
 		$('#tip').val(0);
 		$('#totalfee').val(0);
-		$('#time').val(0);
+		$('#time').val("");
 		$('#servicedate').val(0);
 		$('#notes').val("");
 		console.log('current appt nulled');
@@ -461,7 +461,6 @@ function main(){
 		deletePerson(currentPersonId);
 	});
 
-
 	function createList() {
 		var columns = {
 		    valueNames: ['a', 'b', 'c', 'd'],
@@ -479,7 +478,6 @@ function main(){
 			}
 			date.sort(sortByDateDesc);
 			recentd = date[0];
-			if(values[i][0])
 			values.push({a: people[i][2],
 		       b: people[i][1],
 		       c: people[i][4],
