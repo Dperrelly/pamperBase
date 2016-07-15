@@ -18,46 +18,39 @@
     font-style: normal;
 }
 
-/*.searchtable {
-	text-align: left !important;
-	border: 1px solid black;
-	width: 750px !important;
-	max-width: none !important;
-	list-style-type: none;
-
-}*/
-	.data ul {
-	  display:table-row;
-	}
-	.data li
-	  {
-	  display: table-cell;
-	  list-style-type: none;
-	  vertical-align: middle;
-	  padding:10px;
-	  list-style-position: inside; 
-	  border-bottom:1px solid #ccc;
-	  font-family:Arial, Helvetica, sans-serif;
-	  overflow: hidden;
-	  text-overflow: ellipsis;
-	  min-width: 200px !important;
-	  max-width: 200px !important;
-	  }
-	.row-header {
-	  background-color:#360;
-	  color:#FFF;
-	  text-align:left;
-	  font-size: 18px;
-	  }
-	.row-content {
-	  background-color:#DBE8DC;
-	  font-size: 16px;
-	  color:#333;
-	  text-align:left;
-	  }
+/*Search People Table*/
+.data ul {
+  display:table-row;
+}
+.data li
+  {
+  display: table-cell;
+  list-style-type: none;
+  vertical-align: middle;
+  padding:10px;
+  list-style-position: inside; 
+  border-bottom:1px solid #ccc;
+  font-family:Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 200px !important;
+  max-width: 200px !important;
+  }
+.row-header {
+  background-color:#360;
+  color:#FFF;
+  text-align:left;
+  font-size: 18px;
+  }
+.row-content {
+  background-color:#DBE8DC;
+  font-size: 16px;
+  color:#333;
+  text-align:left;
+  }
 
 
-
+/*Modals*/
 .modal-body {
     background-color: #ffffff;
     margin: 0 auto; /* 0% from the top and centered */
@@ -65,9 +58,6 @@
     width: 100%; /* Could be more or less, depending on screen size */
 }
 
-/*.modal p, .modal div {
-	padding-left: 40px;
-}*/
 .modal label {
     display: inline-block;
     text-align: left;
@@ -93,6 +83,7 @@ border: 0;
 			font-weight: bold;
 }
 
+/*Appointment Modal*/
 #apptModal {
 	width: 50%;
 	height:80%;
@@ -100,14 +91,19 @@ border: 0;
 	top:10px;
 }
 
-#apptFooter {
+#servicetable, #producttable {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-width: 200px !important;
+	max-width: 200px !important;
 }
 
 #apptBody {
 	height: 80%;
 }
 
-.clientbuttons {
+/*Buttons for Client page*/
+.clientbuttons { /*Save Changes / Add New Appointment Buttons*/
  text-align:center;
 }
 .clientdelete{
@@ -116,12 +112,10 @@ border: 0;
 
 .modalno{
 	float:right;
-
 }
 
 .modalyes{
 	float:left;
-
 }
 
 .divfooter{
@@ -137,12 +131,13 @@ border: 0;
 	float:left;
 }
 
-.highlight:hover{
+.highlight:hover{ /*Button hover*/
 		background-color: #ffff99;
 		cursor: pointer; cursor: hand; 
 	}
 
-#notes{resize: vertical !important;
+#notes{/*Resize note textarea only vertical*/
+	resize: vertical !important;
 	max-height: 200px; }
 
 
@@ -594,7 +589,7 @@ border: 0;
 
 
 	#calendar{
-		height:800px;
+		height:900px;
 	}
 
 	#main
@@ -611,11 +606,11 @@ border: 0;
 
 	/* Me */
 	
-		#me
+/*		#me
 		{
 			height:1200px;
 		}
-		
+		*/
 
 /*********************************************************************************/
 /* Footer                                                                        */

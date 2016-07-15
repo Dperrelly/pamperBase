@@ -456,12 +456,8 @@ function main(){
 		id: currentPersonId,
 		tax: $('#tax').val(),
 		tip: $('#tip').val(),
-<<<<<<< HEAD
 		discount: $('#discount').val(),
-		total: $('#totalfee').val(),
-=======
 		total: $('#grandtotal').val(),
->>>>>>> 290be2b1e2ae49c4022eb6fa9294de57397d0879
 		time: $('#time').val(),
 		date: $('#servicedate').val(),
 		notes: $('#notes').val(),
