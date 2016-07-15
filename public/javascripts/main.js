@@ -427,7 +427,7 @@ function main(){
 		$('#tax').val(8);
 		$('#tip').val(0);
 		$('#totalfee').val(0);
-		$('#time').val(0);
+		$('#time').val("");
 		$('#servicedate').val(0);
 		$('#notes').val("");
 		console.log('current appt nulled');
