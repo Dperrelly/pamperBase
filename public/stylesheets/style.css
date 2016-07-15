@@ -529,7 +529,11 @@ border: 0;
 	.icon-share:before			{ content: '\E118'; }
 	.icon-tilemenu:before		{ content: '\E12a'; }
 	.icon-user:before			{ content: '\E137'; }
-	
+	.icon-search:before			{ content: '\E116'; }
+	.icon-calendar:before		{ content: '\E15e'; }
+	.icon-memo:before			{ content: '\E08d'; }
+	.icon-drawer:before			{ content: '\E028'; }
+
 	.icon-dribbble:before		{ content: '\E03f'; }
 	.icon-facebook:before		{ content: '\E047'; }
 	.icon-google:before			{ content: '\E05a'; }
