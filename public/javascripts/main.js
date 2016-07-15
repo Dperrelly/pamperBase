@@ -70,6 +70,7 @@ function main(){
 						cost = Number(servuct[4]);
 						if(servuct[3] === "Service") total += cost;
 						else total += (cost * (tax / 100 + 1));
+						console.log(total);
 					}
 				});
 				total += (tip - discount);
@@ -95,7 +96,6 @@ function main(){
 		});
 		servucts.forEach(function(servuct){
 			var chart = servuct[3] === "Service" ? '#serviceBody' : '#productBody';
-			console.log(servuct[1], currentAppointmentId);
 			if(servuct[1] === currentAppointmentId) $(chart).append('<tr class="highlight clearboth" data-toggle="modal" data-target="#apptModal"><td>'+ servuct[2] +'</td><td>'+ servuct[4] +'</td></tr>');
 		});
 
