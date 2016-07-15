@@ -39,6 +39,8 @@ function main(){
 				}
 			});
 			events.push({
+				id: appointment[0],
+				clientId: appointment[1],
 				start: appointment[7] + "T" + parseTime(appointment[6]),
 				title: last + ", " + first
 			});
@@ -46,7 +48,12 @@ function main(){
 		$('#calendar').fullCalendar({
 	            events: events,
 	            height: 800,
-	            contentHeight: 800
+	            contentHeight: 800,
+	            eventClick: function(event) {
+	            	currentPersonId = event.clientId;
+	            	loadPerson(currentPersonId);
+	            	$('#clientLink').trigger('click');
+			    }
 	    });
 	};
 
