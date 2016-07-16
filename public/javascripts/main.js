@@ -635,5 +635,12 @@ function main(){
 		}
 	    var searchable = new List('searchlist', columns, values);
 	}	
+
+	$('#servModal').on('show', function() {
+  		$('#apptModal').unbind();
+	});
+	$('#proModal').on('show', function() {
+  		$('#apptModal').unbind();
+	});
 }
 
