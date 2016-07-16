@@ -637,7 +637,7 @@ function main(){
 		for(var i = 0; i < people.length ; i++){
 			for(var j = 0; j < appointments.length; j++){
 				if (appointments[j][1] === people[i][0]){
-			  		date.push(appointments[j][9]);
+			  		date.push(appointments[j][7]);
 			  	}
 			}
 			date.sort(sortByDateDesc);
