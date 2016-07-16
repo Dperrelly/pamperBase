@@ -98,7 +98,7 @@ function main(){
 			if(servuct[3] === "Service"){
 				$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
 			} else {
-				$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+				$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#proModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
 			}
 		});
 	};

@@ -182,7 +182,7 @@
             </div>
           </div>
         </div><br/>
-      <div class="clientbuttons">
+      <div class="centerbuttons">
         <input class="button" value="Save Changes" id="save-client"><br/><br/>
         <input id="newappt" class="button" value="Add New Appointment" data-toggle="modal" href="#apptModal">
       </div>
@@ -213,7 +213,7 @@
     <!--<div id="apptDetails" class="modal-body"></div>-->
   <div class="modal-body apptBody">
     <form>
-      <table cellspacing="10">
+      <table  id="servprotable" class="table table-striped" align="center">
         <tr>
           <td>
             <label for="servicedate">Date of Service:</label>  
@@ -221,10 +221,19 @@
           <td>
             <label for="time">Time:</label>
             <input type="text" id="time" required></td>
+          <td rowspan="2">
+          <label for="notes">Notes:</label> 
+          <textarea id="notes" rows="5" ></textarea></td>
         </tr>
-      </table>
-      <table id="servprotable" class="table table-striped" align="center">
         <tr>
+          <td class="centerbuttons">
+            <input class="button" id="servadd" value="Add Services">
+          </td>
+          <td class="centerbuttons">
+            <input class="button" id="proadd" value="Add Products">
+          </td>
+          
+        </tr>
           <td>
             <table class="table table-striped"> 
               <thead>
@@ -235,6 +244,12 @@
               </thead>
               <tbody id="serviceBody">
               </tbody>
+              <tfoot>
+                <tr>
+                  <th class="col200"># Services:</th>
+                  <th class="col100">$$$$</th>
+                </tr>
+              </tfoot>
             </table>
           </td>
           <td>
@@ -247,50 +262,35 @@
               </thead>
               <tbody id="productBody">
               </tbody>
+              <tfoot>
+                <tr>
+                  <th class="col200"># Products:</th>
+                  <th class="col100">$$$$</th>
+                </tr>
+              </tfoot>
             </table>
           </td>
-        </tr>
-<!--               <tfoot>
-                <tr>
-                  <td class="col200">
-                   Total Services:
-                  </td>
-                  <td class="col100">
-                   $$$$
-                  </td>
-                  <td class="col200">
-                  Total Products:
-                  </td>
-                  <td class="col100">
-                  $$$$
-                  </td>
-                </tr>
-              </tfoot> -->
+          <td>    
+           <table class="table table-striped"> 
+            <div>
+              <label for="tax">Tax:</label> 
+              <input class="smallinput" type="text" id="tax">
+              <label for="subtotal">Subtotal:</label> 
+              <input class="smallinput" type="text" id="subtotal" readonly>
+              <label for="discount">Discount:</label> 
+              <input class="smallinput" type="text" id="discount">
+              <label for="tip">Tip:</label>
+              <input class="smallinput" type="text" id="tip">
+              <label for="grandtotal">Grand Total:</label> 
+              <input class="smallinput" type="text" id="grandtotal" readonly>
+            </div>
+          </table>
+        </td>
+      </tr>
       </table>
 
-      <table>
-        <tr>
-          <td>
-            <label for="tip">Tip:</label>
-            <input type="text" id="tip"></td>
-          <td>
-            <label for="tax">Tax:</label> 
-            <input type="text" id="tax"></td>
-        </tr>
-        <tr>
-          <td>
-            <label for="discount">Discount:</label> 
-            <input type="text" id="discount"></td>
-          <td>
-            <label for="grandtotal">Grand Total:</label> 
-            <input type="text" id="grandtotal" readonly></td>
-        </tr>
-        <tr>
-          <td colspan="2">
-          <label for="notes">Notes:</label> 
-          <textarea id="notes" rows="5" ></textarea></td>
-        </tr>
-    </table>  
+      
+          
   </div> <!-- closes table modal body-->
   <div id="apptFooter" class="modal-footer">
       
@@ -318,14 +318,14 @@
                 
    <div id="proModal" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
     <div class="modal-header">
-      <h3>Add Client Services</h3>
+      <h3>Add Client Products</h3>
     </div>
     <div class="modal-body">
        <p> PRO MODAL?</p>
      </div>
      <div class="modal-footer">
      <input class="button modalyes" id="" value="Yes">
-     <input class="button modalno" id="servno" data-dismiss="modal" value="No">
+     <input class="button modalno" id="prono" data-dismiss="modal" value="No">
     </div>
   </div>
 
