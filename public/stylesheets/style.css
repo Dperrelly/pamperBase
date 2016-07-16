@@ -89,7 +89,12 @@
     background-color: #ffffff;
     margin: 0 auto; /* 0% from the top and centered */
     padding: 0.5em 1em 0.5em 1em;
-    width: 100%; /* Could be more or less, depending on screen size */
+/*    width: 100%;  Could be more or less, depending on screen size */
+	text-align:center;
+	position:relative;
+	overflow-y:auto;
+
+	padding-top:30px;
 }
 
 .modal label {
@@ -119,24 +124,37 @@ border: 0;
 
 /*Appointment Modal*/
 #apptModal {
-	width: 50%;
-	min-width: 50% !important;
-	min-height: 60vh !important;
-	max-height:80vh !important;
-	top:10%px;
-	left:39.7% !important;
+	width: 100vh !important;
+	max-width: 100vh !important;
+	min-width: 50vh !important;
+/*	min-height: 20vh !important;
+	height: 70vh !important;
+	max-height:70vh !important;*/
+	top:7%;
+	left:40% !important;
 /*	display: flex !important;
  	flex-flow: row wrap;
   	justify-content: space-around;*/
 
 }
 	#apptBody {
-		height: 70vh !important;
-	}
+	min-height: 30vh !important;
+	height: 70vh !important;
+	max-height:70vh !important;
 
+	}
+/*
+	#apptFooter {
+		height: 30% !important;
+		min-height: 20% !important;
+		max-height:80% !important;
+	}
+*/
 	.smallinput {
 		/*display:flex !important;*/
 		width:200px !important;
+		min-width: 100px !important;
+		max-width: 200px !important;
 		margin:10px auto !important;
 	}
 
@@ -154,13 +172,13 @@ border: 0;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		width:200px;
-		min-width: 200px !important;
+		min-width: 100px !important;
 		max-width: 200px !important;
 	}
 
 	.col100 {
 		width:100px !important;
-		min-width: 100px !important;
+		min-width: 60px !important;
 		max-width: 100px !important;
 	}
 
