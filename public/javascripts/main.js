@@ -99,9 +99,9 @@ function main(){
 		servucts.forEach(function(servuct){
 			if(servuct[1] === currentAppointmentId){
 				if(servuct[3] === "Service"){
-					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
 				} else {
-					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#proModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
 				}
 			}
 		});
@@ -651,11 +651,11 @@ function main(){
 	    var searchable = new List('searchlist', columns, values);
 	}	
 
-	$('#servModal').on('show', function() {
+	$('#addServuct').on('show', function() {
   		$('#apptModal').unbind();
 	});
-	$('#proModal').on('show', function() {
-  		$('#apptModal').unbind();
-	});
+	// $('#proModal').on('show', function() {
+ //  		$('#apptModal').unbind();
+	// });
 }
 

@@ -112,11 +112,11 @@
 
       <header>
     <div class="clientdelete">
-        <input class="button" id="deletebtn" data-toggle="modal" data-target="#delclientmodal" value="Delete Client">
+        <button type="button" class="button" id="deletebtn" data-toggle="modal" data-target="#delclientmodal">Delete Client</button>
     </div>
 
     <div class="clientcreate">
-        <input class="button" id="createbtn" data-toggle="modal" data-target="#newclientmodal" value="New Client">
+        <button type="button" class="button" id="createbtn" data-toggle="modal" data-target="#newclientmodal">New Client</button>
     </div>
 
     <div id="newclientmodal" class="modal hide fade" role="dialog" aria-labelledby="newClientModalLabel" aria-hidden="true">
@@ -127,8 +127,8 @@
         <p> Do you want to create a new client file?</p>
       </div>
       <div class="modal-footer">
-        <input class="button modalyes" id="newclientyes" value="Yes">
-        <input class="button modalno" id="newclientno" data-dismiss="modal" value="No">
+        <button type="button" class="button modalyes" id="newclientyes">Yes</button>
+        <button type="button" class="button modalno" id="newclientno" data-dismiss="modal">No</button>
       </div>
     </div>
 
@@ -142,9 +142,9 @@
        <p> Are you sure you want to delete this client?</p>
      </div>
      <div class="modal-footer">
-     <input class="button modalyes" id="delclientyes" value="Yes">
+     <button type="button" class="button modalyes" id="delclientyes">Yes</button>
         
-     <input class="button modalno" id="delclientno" data-dismiss="modal" value="No">
+     <button type="button" class="button modalno" id="delclientno" data-dismiss="modal">No</button>
 
     </div>
   </div>
@@ -183,8 +183,8 @@
           </div>
         </div><br/>
       <div class="centerbuttons">
-        <input class="button" value="Save Changes" id="save-client"><br/><br/>
-        <input id="newappt" class="button" value="Add New Appointment" data-toggle="modal" href="#apptModal">
+        <button type="button" class="button" id="save-client">Save Changes</button><br/><br/>
+        <button type="button" id="newappt" class="button" data-toggle="modal" href="#apptModal">Add Appointment</button>
       </div>
       </form>
   </div>
@@ -220,16 +220,17 @@
           <td>
             <label for="time">Time:</label>
             <input type="text" id="time" required></td>
-          <td rowspan="2">
+          <td rowspan="2" colspan="2">
           <label for="notes">Notes:</label> 
           <textarea id="notes" rows="5" ></textarea></td>
+
         </tr>
         <tr>
           <td class="centerbuttons">
-            <input class="button" id="servadd" value="Add Services">
+            <button type="button" class="button" id="servadd">Add Services</button>
           </td>
           <td class="centerbuttons">
-            <input class="button" id="proadd" value="Add Products">
+            <button type="button" class="button" id="proadd">Add Products</butotn>
           </td>
           
         </tr>
@@ -270,48 +271,69 @@
               </tfoot>
             </table>
           </td>
-          <td>    
-            <table class="table table-striped"> 
-              <div class="col200">
+          <td class="col200">    
+<!--             <table class="table table-striped"> 
+              <div class="col200"> -->
                 <label for="tax">Tax %:</label> 
                 <input class="smallinput" type="text" id="tax">
                 <label for="subtotal">Subtotal:</label> 
                 <input class="smallinput" type="text" id="subtotal" readonly>
-                <label for="discount">Discount:</label> 
-                <input class="smallinput" type="text" id="discount" step="0.01">
-                <label for="tip">Tip:</label>
-                <input class="smallinput" type="text" id="tip">
-                <label for="grandtotal">Grand Total:</label> 
-                <input class="smallinput" type="text" id="grandtotal" readonly>
-              </div>
-            </table>
+<!--               </div>
+            </table> -->
+          </td>
+          <td rowspan="4">
+            <label for="discount">Discount:</label> 
+              <input class="smallinput" type="text" id="discount" step="0.01">
+              <label for="tip">Tip:</label>
+              <input class="smallinput" type="text" id="tip">
+              <label for="grandtotal">Grand Total:</label> 
+              <input class="smallinput" type="text" id="grandtotal" readonly>
           </td>
         </tr>
       </table>
       </div> <!-- closes table modal body-->
       <div id="apptFooter" class="modal-footer">
-        <input class="button" id="apptdelete" value="Delete">
-        <input class="button" id="apptsave" value="Save">
+        <button type="button" class="button" id="apptdelete">Delete</button>
+        <button type="button" class="button" id="apptcancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="button" id="apptsave">Save</button>
       </div>
     </form>
 
   
 
+  <!--SERVUCT more details-->
 
-   <div id="servModal" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+   <div id="addServuct" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
     <div class="modal-header">
-      <h3>Add Client Services</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+      <h3>Edit Servuct</h3>
     </div>
     <div class="modal-body">
-       <p> SECOND MODAL?</p>
+      <table class="table table-striped"> 
+       <tr>
+        <td> 
+        <label for="editservname">Servuct:</label> 
+          <input type="text" id="editservname">
+        </td>
+        <td>
+        <label for="editservprice">Price:</label> 
+          <input type="text" id="editservprice">
+        </td>
+       </tr>
+      </table>
      </div>
      <div class="modal-footer">
-     <input class="button modalyes" id="" value="Yes">
-     <input class="button modalno" id="servno" data-dismiss="modal" value="No">
+      <table class="table table-striped">
+        <tr>
+          <button type="button" class="button small centerbuttons" id="servdelete">Delete</button>
+          <button type="button" class="button small centerbuttons" id="servcancel" data-dismiss="modal">Cancel</button>
+          <button type="button" class="button small centerbuttons" id="servsave">Save</button>
+        </tr>
+      </table>
     </div>
   </div>
                 
-   <div id="proModal" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+   <div id="addservuct" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
     <div class="modal-header">
       <h3>Add Client Products</h3>
     </div>
@@ -319,8 +341,8 @@
        <p> PRO MODAL?</p>
      </div>
      <div class="modal-footer">
-     <input class="button modalyes" id="" value="Yes">
-     <input class="button modalno" id="prono" data-dismiss="modal" value="No">
+     <button type="button" class="button modalyes" id="">Yes</button>
+     <button type="button" class="button modalno" id="prono" data-dismiss="modal">No</button>
     </div>
   </div>
 
