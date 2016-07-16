@@ -91,9 +91,10 @@ function main(){
 			}
 		});
 
-		$('#serviceBody').empty();
-		$('#productBody').empty();
+		// $('#serviceBody').empty();
+		// $('#productBody').empty();
 		servucts.forEach(function(servuct){
+			console.log(servucts);
 			if(servuct[3] === "Service"){
 				$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal><td>'+ servuct[2] +'</td><td>'+ servuct[4] +'</td></tr>');
 			} else {
