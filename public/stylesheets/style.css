@@ -51,6 +51,10 @@
   @include order(2);
 }*/
 
+.fc-event {
+    font-size: .5em;
+}
+
 
 /*Search People Table*/
 .data ul {
@@ -671,7 +675,7 @@ border: 0;
 /* Panels                                                                        */
 /*********************************************************************************/
 
-
+	
 
 	#calendar{
 		height:900px;

@@ -84,7 +84,7 @@
       </div>
   <div id="wrapper">
   <nav id="nav"> 
-        <a href="#calendar" class="icon icon-calendar active">
+        <a id="calendarLink" href="#calendar" class="icon icon-calendar active">
           <span>Calendar</span>
         </a> 
         <a id="clientLink" href="#client" class="icon icon-user">
@@ -93,10 +93,10 @@
         <a id="mail" href="#search" class="icon icon-search">
           <span>Search</span>
         </a> 
-        <a href="#report" class="icon icon-memo">
+        <a id="reportLink" href="#report" class="icon icon-memo">
           <span>Report</span>
         </a>
-        <a href="#inventory" class="icon icon-drawer">
+        <a id="inventoryLink" href="#inventory" class="icon icon-drawer">
           <span>Inventory</span>
         </a>
   </nav>
@@ -278,7 +278,7 @@
                 <label for="subtotal">Subtotal:</label> 
                 <input class="smallinput" type="text" id="subtotal" readonly>
                 <label for="discount">Discount:</label> 
-                <input class="smallinput" type="text" id="discount" step='0.01'>
+                <input class="smallinput" type="text" id="discount" step="0.01">
                 <label for="tip">Tip:</label>
                 <input class="smallinput" type="text" id="tip">
                 <label for="grandtotal">Grand Total:</label> 

@@ -9,6 +9,9 @@ function main(){
 	var people = [];
 	var appointments = [];
 	var servucts = [];
+	var parseTimeRegex1 = /^(\d+)/;
+	var parseTimeRegex2 = /:(\d+)/;
+	var parseTimeRegex3 = /\s(.*)$/;
 
 	$('#time').timepicker({
 	    timeFormat: 'h:mm p',
@@ -16,9 +19,9 @@ function main(){
 	});
 
 	function parseTime(time){
-		var hours = Number(time.match(/^(\d+)/)[1]);
-		var minutes = Number(time.match(/:(\d+)/)[1]);
-		var AMPM = time.match(/\s(.*)$/)[1];
+		var hours = Number(time.match(parseTimeRegex1)[1]);
+		var minutes = Number(time.match(parseTimeRegex2)[1]);
+		var AMPM = time.match(parseTimeRegex3)[1];
 		if(AMPM == "PM" && hours<12) hours = hours+12;
 		if(AMPM == "AM" && hours==12) hours = hours-12;
 		var sHours = hours.toString();
@@ -42,7 +45,7 @@ function main(){
 				id: appointment[0],
 				clientId: appointment[1],
 				start: appointment[7] + "T" + parseTime(appointment[6]),
-				title: last + ", " + first
+				title: last
 			});
 		});
 		$('#calendar').fullCalendar({
@@ -141,6 +144,13 @@ function main(){
 					if(value.length) appointments.push(value);
 				});
 			}
+			appointments.sort(function(a, b){
+				var datetime1 = a[7] + "T" + parseTime(a[6]);
+				var datetime2 = b[7] + "T" + parseTime(b[6]);
+				if(datetime1 === datetime2) return 0;
+				if(datetime1 > datetime2) return 1;
+				if(datetime1 < datetime2) return -1;
+			});
 			calendarSetup();
 			createList();
 			loadServucts();
@@ -627,7 +637,7 @@ function main(){
 		for(var i = 0; i < people.length ; i++){
 			for(var j = 0; j < appointments.length; j++){
 				if (appointments[j][1] === people[i][0]){
-			  		date.push(appointments[j][9]);
+			  		date.push(appointments[j][7]);
 			  	}
 			}
 			date.sort(sortByDateDesc);
