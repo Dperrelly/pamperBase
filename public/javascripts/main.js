@@ -164,8 +164,8 @@ function main(){
 		  			console.log('id not found');
 		  			return;
 		  		}
-		  		$('#lname').val(response.result.values[row][1]);
-				$('#fname').val(response.result.values[row][2]);
+				$('#fname').val(response.result.values[row][1]);
+		  		$('#lname').val(response.result.values[row][2]);
 				$('#address').val(response.result.values[row][3]);
 				$('#phone').val(response.result.values[row][4]);
 				$('#eMail').val(response.result.values[row][5]);
