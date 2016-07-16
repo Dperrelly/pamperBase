@@ -208,7 +208,6 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
          <h3>Appointment</h3>
-
     </div>
     <!--<div id="apptDetails" class="modal-body"></div>-->
   <div class="modal-body apptBody">
@@ -234,6 +233,7 @@
           </td>
           
         </tr>
+        <tr>
           <td>
             <table class="table table-striped"> 
               <thead>
@@ -271,36 +271,31 @@
             </table>
           </td>
           <td>    
-           <table class="table table-striped"> 
-            <div>
-              <label for="tax">Tax:</label> 
-              <input class="smallinput" type="text" id="tax">
-              <label for="subtotal">Subtotal:</label> 
-              <input class="smallinput" type="text" id="subtotal" readonly>
-              <label for="discount">Discount:</label> 
-              <input class="smallinput" type="text" id="discount">
-              <label for="tip">Tip:</label>
-              <input class="smallinput" type="text" id="tip">
-              <label for="grandtotal">Grand Total:</label> 
-              <input class="smallinput" type="text" id="grandtotal" readonly>
-            </div>
-          </table>
-        </td>
-      </tr>
+            <table class="table table-striped"> 
+              <div>
+                <label for="tax">Tax %:</label> 
+                <input class="smallinput" type="text" id="tax">
+                <label for="subtotal">Subtotal:</label> 
+                <input class="smallinput" type="text" id="subtotal" readonly>
+                <label for="discount">Discount:</label> 
+                <input class="smallinput" type="text" id="discount">
+                <label for="tip">Tip:</label>
+                <input class="smallinput" type="text" id="tip">
+                <label for="grandtotal">Grand Total:</label> 
+                <input class="smallinput" type="text" id="grandtotal" readonly>
+              </div>
+            </table>
+          </td>
+        </tr>
       </table>
-
-      
-          
-  </div> <!-- closes table modal body-->
-  <div id="apptFooter" class="modal-footer">
-      
+      </div> <!-- closes table modal body-->
+      <div id="apptFooter" class="modal-footer">
         <input class="button" id="apptdelete" value="Delete">
         <input class="button" id="apptsave" value="Save">
-            </form>
-  </div>
+      </div>
+    </form>
+
   
-
-
 
 
    <div id="servModal" class="modal hide fade" tabindex="-1" data-focus-on="input:first">

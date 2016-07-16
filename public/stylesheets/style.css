@@ -18,7 +18,7 @@
     font-style: normal;
 }
 
-@mixin flexbox() {
+/*@mixin flexbox() {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -49,7 +49,7 @@
 .item {
   @include flex(1 200px);
   @include order(2);
-}
+}*/
 
 
 /*Search People Table*/
@@ -111,7 +111,7 @@
 .modal-body input[type="text"], .modal input[type="date"], .modal input[type="time"]{
 border: 0;
 			background: #f0f0f0;
-			font-size: 16px;
+			font-size: 18px;
 			width: 90%;
 			height: 2.2em;
 			font-weight: bold;
@@ -119,35 +119,32 @@ border: 0;
 
 /*Appointment Modal*/
 #apptModal {
-	width: 65%;
-	min-width: 50%;
-	min-height: 20%;
-	max-height:80%;
-	top:10px;
-	left:0;
-
-	display: flex !important;
+	width: 50%;
+	min-width: 50% !important;
+	min-height: 60vh !important;
+	max-height:80vh !important;
+	top:10%px;
+	left:39.7% !important;
+/*	display: flex !important;
  	flex-flow: row wrap;
-  	justify-content: space-around;
-
-
+  	justify-content: space-around;*/
 
 }
 	#apptBody {
-		height: 80%;
+		height: 70vh !important;
 	}
 
 	.smallinput {
-		display:flex !important;
-		width:300px !important;
-		margin:5px auto !important;
+		/*display:flex !important;*/
+		width:200px !important;
+		margin:10px auto !important;
 	}
 
 	#servprotable {
 		text-align: center;
 		display: flex !important;
- 	flex-flow: row wrap;
-  	justify-content: space-around;
+/* 	flex-flow: row wrap;
+  	justify-content: space-around;*/
 	}
 
 /*	.servprofooter {
