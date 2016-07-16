@@ -90,16 +90,13 @@ function main(){
 				$('#notes').val(appointment[8]);
 			}
 		});
-
-		$('#serviceBody').empty();
-		$('#productBody').empty();
 		servucts.forEach(function(servuct){
-			if(servuct[3] === "Service"){
-				$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal><td>'+ servuct[2] +'</td><td>'+ servuct[4] +'</td></tr>');
-			} else {
-				$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#proModal><td>'+ servuct[2] +'</td><td>'+ servuct[4] +'</td></tr>');
-			}
+			$('#serviceBody').empty();
+			$('#productBody').empty();
+			var chart = servuct[3] === "Service" ? '#serviceBody' : '#productBody';
+			if(servuct[1] === currentAppointmentId) $(chart).append('<tr class="highlight clearboth" data-toggle="modal" data-target="#apptModal"><td>'+ servuct[2] +'</td><td>'+ servuct[4] +'</td></tr>');
 		});
+
 	};
 
 	function reloadStylesheets() {
@@ -638,5 +635,12 @@ function main(){
 		}
 	    var searchable = new List('searchlist', columns, values);
 	}	
+
+	$('#servModal').on('show', function() {
+  		$('#apptModal').unbind();
+	});
+	$('#proModal').on('show', function() {
+  		$('#apptModal').unbind();
+	});
 }
 
