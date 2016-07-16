@@ -91,14 +91,15 @@ function main(){
 			}
 		});
 
-		// $('#serviceBody').empty();
-		// $('#productBody').empty();
+		$('#serviceBody').empty();
+		$('#productBody').empty();
 		servucts.forEach(function(servuct){
-			console.log(servucts);
-			if(servuct[3] === "Service"){
-				$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
-			} else {
-				$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#proModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+			if(servuct[1] === currentAppointmentId){
+				if(servuct[3] === "Service"){
+					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+				} else {
+					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#proModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+				}
 			}
 		});
 	};
