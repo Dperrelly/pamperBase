@@ -157,9 +157,9 @@ function main(){
 			appointments.sort(function(a, b){
 				var datetime1 = a[7] + "T" + parseTime(a[6]);
 				var datetime2 = b[7] + "T" + parseTime(b[6]);
+				if(datetime1 > datetime2) return -1;
+				if(datetime1 < datetime2) return 1;
 				if(datetime1 === datetime2) return 0;
-				if(datetime1 > datetime2) return 1;
-				if(datetime1 < datetime2) return -1;
 			});
 			calendarSetup();
 			createList();
@@ -198,8 +198,17 @@ function main(){
 						var date = appointment[7] ? appointment[7] : "";
 						//var service = appointment[2] ? appointment[2] : "";
 						//var total = appointment[7] ? "$" + appointment[7] : "";
-						var service = 'MAKE LIST';
-						var total = 'CALCULATE THIS';
+						var service;
+						var numServs = 0;
+						servucts.forEach(function(servuct){
+							if(servuct[3] === "Service" && servuct[1] === appointment[0]){
+								if(!service) service = servuct[2];
+								else numServs++;
+							}
+						});
+						if(!service) service = "";
+						else if(numServs) service += "\n + " + numServs + " others";
+						var total = appointment[5];
 						var notes = appointment[8] ? appointment[8] : "";
 						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight clearboth" data-toggle="modal" data-id="1" data-target="#apptModal"><td>'+ date +'</td><td>'+ service +'</td><td>'+ total +'</td><td>'+ notes +'</td></tr>');
 						$('#appointments').append(newNode);
