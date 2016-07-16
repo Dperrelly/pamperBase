@@ -18,39 +18,6 @@
     font-style: normal;
 }
 
-/*@mixin flexbox() {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-}
-
-@mixin flex($values) {
-  -webkit-box-flex: $values;
-  -moz-box-flex:  $values;
-  -webkit-flex:  $values;
-  -ms-flex:  $values;
-  flex:  $values;
-}
-
-@mixin order($val) {
-  -webkit-box-ordinal-group: $val;  
-  -moz-box-ordinal-group: $val;     
-  -ms-flex-order: $val;     
-  -webkit-order: $val;  
-  order: $val;
-}
-
-.wrapper {
-  @include flexbox();
-}
-
-.item {
-  @include flex(1 200px);
-  @include order(2);
-}*/
-
 .fc-event {
     font-size: .5em;
 }
@@ -98,13 +65,15 @@
 	position:relative;
 	overflow-y:auto;
 
-	padding-top:30px;
+/*	padding-top:30px;*/
 }
 
 .modal label {
     display: inline-block;
     text-align: left;
-    width: 200px;
+    width: 200px !important;
+    min-width: 100px !important;
+    max-width: 200px !important;
 	font-size: 20px;
 	font-weight: bold;
 }
@@ -128,34 +97,24 @@ border: 0;
 
 /*Appointment Modal*/
 #apptModal {
-	width: 100vh !important;
-	max-width: 100vh !important;
-	min-width: 50vh !important;
-/*	min-height: 20vh !important;
-	height: 70vh !important;
-	max-height:70vh !important;*/
+	margin:0 auto !important;
+	width: 920px !important;
+	max-width: 920px !important;
+	min-width: 600px !important;
 	top:7%;
-	left:40% !important;
-/*	display: flex !important;
- 	flex-flow: row wrap;
-  	justify-content: space-around;*/
-
+	left:50% !important;
+	transform: translateX(-50%);
 }
 	#apptBody {
-	min-height: 30vh !important;
-	height: 70vh !important;
+	text-align:center !important;
+	min-height: 360px !important;
+	height: 500px !important;
 	max-height:70vh !important;
+	overflow-x:hidden;
 
 	}
-/*
-	#apptFooter {
-		height: 30% !important;
-		min-height: 20% !important;
-		max-height:80% !important;
-	}
-*/
+
 	.smallinput {
-		/*display:flex !important;*/
 		width:200px !important;
 		min-width: 100px !important;
 		max-width: 200px !important;
@@ -164,14 +123,9 @@ border: 0;
 
 	#servprotable {
 		text-align: center;
-		display: flex !important;
-/* 	flex-flow: row wrap;
-  	justify-content: space-around;*/
+		max-width:415px;
 	}
 
-/*	.servprofooter {
-		text-align: center !important;
-	}*/
 	.col200 {
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -221,8 +175,19 @@ border: 0;
 		cursor: pointer; cursor: hand; 
 	}
 
+.small {
+	margin: 5px;
+	width: 140px !important;
+}
+
+/*form input.button {
+
+}
+*/
 #notes{/*Resize note textarea only vertical*/
 	resize: vertical !important;
+	height: 5.25em;
+	width:415px;
 	max-height: 200px; }
 
 
@@ -477,6 +442,8 @@ border: 0;
 		border: 0;
 		cursor: pointer;
 		outline: 0;
+		font-size: 18px;
+		width:200px;
 		-moz-transition: background-color .25s ease-in-out;
 		-webkit-transition: background-color .25s ease-in-out;
 		-o-transition: background-color .25s ease-in-out;

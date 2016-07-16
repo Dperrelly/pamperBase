@@ -107,10 +107,10 @@ function main(){
 		servucts.forEach(function(servuct){
 			if(servuct[1] === currentAppointmentId){
 				if(servuct[3] === "Service"){
-					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
 					numServices++;
 				} else if(servuct[3] === "Product"){
-					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#proModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
 					numProducts++;
 				}
 			}
@@ -319,16 +319,16 @@ function main(){
 						loadPeople();
 						loadPerson(now);
 						window.setTimeout(function(){
-							$('#save-client').val('Save Changes');
+							$("#save-client").html('Save Changes');
 						},2000);
 					});
 		  			return;
 		  		}
 			  	updateSS(peopleId, range, array).then(function(response){
 				console.log('edit person success');
-				$('#save-client').val('Saved!');
+				$("#save-client").html('Saved!');
 				window.setTimeout(function(){
-					$('#save-client').val('Save Changes');
+					$("#save-client").html('Save Changes');
 				},2000);
 				loadPeople();
 			});
@@ -662,11 +662,11 @@ function main(){
 	    var searchable = new List('searchlist', columns, values);
 	}	
 
-	$('#servModal').on('show', function() {
+	$('#addServuct').on('show', function() {
   		$('#apptModal').unbind();
 	});
-	$('#proModal').on('show', function() {
-  		$('#apptModal').unbind();
-	});
+	// $('#proModal').on('show', function() {
+ //  		$('#apptModal').unbind();
+	// });
 }
 
