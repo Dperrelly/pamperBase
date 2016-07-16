@@ -31,6 +31,10 @@ function main(){
 		return sHours + ":" + sMinutes + ":00";
 	}
 
+	function twoNumberDecimal(number) {
+	    return parseFloat(number).toFixed(2);
+	}
+
 	var calendarSetup = function(){
 		var events = [];
 		appointments.forEach(function(appointment){
@@ -76,7 +80,8 @@ function main(){
 		});
 		total += (tip - discount);
 		total = Math.round(total * 100) / 100;
-		$('#grandtotal').val(total);
+		total = total.toFixed(2);
+		$('#grandtotal').val("$" + total);
 	}
 
 	var setCurrentAppointmentId = function(event){
@@ -96,12 +101,17 @@ function main(){
 
 		$('#serviceBody').empty();
 		$('#productBody').empty();
+
+		var numServices = 0, numProducts = 0;
+
 		servucts.forEach(function(servuct){
 			if(servuct[1] === currentAppointmentId){
 				if(servuct[3] === "Service"){
 					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#servModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
-				} else {
+					numServices++;
+				} else if(servuct[3] === "Product"){
 					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#proModal"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+					numProducts++;
 				}
 			}
 		});
@@ -621,9 +631,10 @@ function main(){
 		deletePerson(currentPersonId);
 	});
 
-	$('#tax').keyup(calculateGrandTotal);
-	$('#tip').keyup(calculateGrandTotal);
-	$('#discount').keyup(calculateGrandTotal);
+	$('.updateGrandTotal').keyup(calculateGrandTotal);
+	$('.money').blur(function(event){
+		$(this).val(twoNumberDecimal($(this).val()));
+	});
 
 	function createList() {
 		var columns = {

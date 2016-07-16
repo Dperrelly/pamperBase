@@ -246,8 +246,8 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th class="col200"># Services:</th>
-                  <th class="col100">$$$$</th>
+                  <th id="numServices" class="col200">0 Services:</th>
+                  <th id="servicesCost" class="col100">$0.00</th>
                 </tr>
               </tfoot>
             </table>
@@ -264,8 +264,8 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th class="col200"># Products:</th>
-                  <th class="col100">$$$$</th>
+                  <th id="numProducts" class="col200">0 Products:</th>
+                  <th id="productsCost" class="col100">$0.00</th>
                 </tr>
               </tfoot>
             </table>
@@ -274,13 +274,13 @@
             <table class="table table-striped"> 
               <div class="col200">
                 <label for="tax">Tax %:</label> 
-                <input class="smallinput" type="text" id="tax">
+                <input class="smallinput money updateGrandTotal" type="text" id="tax">
                 <label for="subtotal">Subtotal:</label> 
                 <input class="smallinput" type="text" id="subtotal" readonly>
                 <label for="discount">Discount:</label> 
-                <input class="smallinput" type="text" id="discount" step="0.01">
+                <input class="smallinput money updateGrandTotal" type="text" id="discount" step="0.01">
                 <label for="tip">Tip:</label>
-                <input class="smallinput" type="text" id="tip">
+                <input class="smallinput money updateGrandTotal" type="text" id="tip">
                 <label for="grandtotal">Grand Total:</label> 
                 <input class="smallinput" type="text" id="grandtotal" readonly>
               </div>
