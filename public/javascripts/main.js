@@ -91,7 +91,6 @@ function main(){
 			if(appointment[0] === currentAppointmentId){
 				$('#tax').val(appointment[2]);
 				$('#tip').val(appointment[3]);
-				$('#discount').val(appointment[4]);
 				$('#grandtotal').val(appointment[5]);
 				$('#time').val(appointment[6]);
 				$('#servicedate').val(appointment[7]);
@@ -102,10 +101,12 @@ function main(){
 		$('#serviceBody').empty();
 		$('#productBody').empty();
 
-		var numServices = 0, numProducts = 0;
+		var numServices = 0, numProducts = 0, subtotal = 0, discount = 0;
 
 		servucts.forEach(function(servuct){
 			if(servuct[1] === currentAppointmentId){
+				subtotal += Number(servuct[4]);
+				discount += Number(servuct[5]);
 				if(servuct[3] === "Service"){
 					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
 					numServices++;
@@ -115,6 +116,8 @@ function main(){
 				}
 			}
 		});
+		$('#discount').val(discount);
+		$('#subtotal').val(subtotal);
 	};
 
 	function reloadStylesheets() {
@@ -224,7 +227,7 @@ function main(){
 	function loadServucts(){
 		ss.values.get({
 			spreadsheetId: servuctsId,
-			range: 'A2:E'
+			range: 'A2:F'
 		}).then(function(res){
 			servucts = [];
 			if(res.result.values && res.result.values.length){
@@ -232,6 +235,24 @@ function main(){
 					if(value.length) servucts.push(value);
 				});
 			}
+			var servTotal = 0, proTotal = 0, taxTotal = 0, tax;
+			var apptKey = {};
+			appointments.forEach(function(appointment){
+				apptKey[appointment[0]] = appointment;
+			});
+			servucts.forEach(function(servuct){
+				if(servuct[3] === "Service"){
+					servTotal += Number(servuct[4]);
+				} else if(servuct[3] === "Product"){
+					proTotal += Number(servuct[4]);
+					tax = Number(apptKey[servuct[1]][2]) / 100;
+					taxTotal += servuct[4] * tax;
+				}
+
+			});
+			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
+			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
+			$('#taxTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
 			loadPerson(currentPersonId);
 		}, function(e){
 			console.log('load servucts error');
@@ -296,7 +317,6 @@ function main(){
 			  	currentPersonId = now;
 				console.log('add person success');
 				loadPeople();
-				loadPerson(now);
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -376,7 +396,7 @@ function main(){
 			  	console.log(array);
 			  	updateSS(appointmentsId, range, array).then(function(response){
 				console.log('add appointment success');
-				loadAppointments();
+				loadPeople();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -402,7 +422,7 @@ function main(){
 		  		var array = [["", "", "", "", "", "", "", "", ""]];
 			  	updateSS(appointmentsId, range, array).then(function(response){
 				console.log('delete appointment success');
-				loadAppointments();
+				loadPeople();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -427,7 +447,7 @@ function main(){
 		  		var range = 'B' + row + ":I" + row;
 			  	updateSS(appointmentsId, range, array).then(function(response){
 				console.log('edit appointment success', range, array);
-				loadAppointments();
+				loadPeople();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -458,7 +478,7 @@ function main(){
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('add servuct success');
 				currentServuctId = now;
-				loadServucts();
+				loadPeople();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -483,7 +503,7 @@ function main(){
 		  		console.log("updating:", id, range, array);
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('edit servuct success');
-				loadAppointments();
+				loadPeople();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -508,7 +528,7 @@ function main(){
 		  		var array = [["", "", "", "", ""]];
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('delete servuct success');
-				loadAppointments();
+				loadPeople();
 			});
 		  }, function(e) {
 		  	console.log(e);
