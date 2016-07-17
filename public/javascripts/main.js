@@ -248,11 +248,12 @@ function main(){
 					tax = Number(apptKey[servuct[1]][2]) / 100;
 					taxTotal += servuct[4] * tax;
 				}
-
 			});
 			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
 			$('#taxTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
+			$('#yearlyTotal').html(
+				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal));
 			loadPerson(currentPersonId);
 		}, function(e){
 			console.log('load servucts error');
