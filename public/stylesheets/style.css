@@ -129,8 +129,8 @@ border: 0;
 	.col200 {
 		overflow: hidden;
 		text-overflow: ellipsis;
-		width:200px;
-		min-width: 100px !important;
+		width:200px !important;
+		min-width: 150px !important;
 		max-width: 200px !important;
 	}
 
@@ -142,7 +142,7 @@ border: 0;
 
 
 /*Buttons for Client page*/
-.centerbuttons { /*Save Changes / Add New Appointment Buttons*/
+.center{ /*Save Changes / Add New Appointment Buttons*/
  text-align:center !important;
 }
 .clientdelete{
@@ -187,8 +187,15 @@ border: 0;
 #notes{/*Resize note textarea only vertical*/
 	resize: vertical !important;
 	height: 5.25em;
-	width:415px;
+	width:400px;
 	max-height: 200px; }
+
+
+/*Reports*/
+.reportYear {
+	height:30px;
+	margin:3;
+}
 
 
 /*********************************************************************************/
@@ -659,6 +666,7 @@ border: 0;
 	{
 		position: relative;
 	}
+
 
 	/* Me */
 	

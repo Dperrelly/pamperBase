@@ -27,192 +27,279 @@
 <link rel='stylesheet' href='/stylesheets/fullcalendar.css' />
 <script type="text/javascript" src="/javascripts/list.js"></script>
 <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-combined.min.css">
-<script type='text/javascript'>//<![CDATA[
-		$(function(){
-	   	$('#apptModal').modal({
-			keyboard: true,
-			show:false,
-			
-		  });/*.on('show', function(){
-			  var getIdFromRow = $(this).data('apptid');
-			//make your ajax call populate items or what even you need
-			$(this).find('#apptDetails').html($('<b> Appointment selected: ' + getIdFromRow + '</b>'))
-		});
-		$(".table-striped").find('tr[data-target]').on('click', function(){
-			//or do your operations here instead of on show of modal to populate values to modal.
-			 $('#apptModal').data('apptid',$(this).data('id'));
-		});
-		});*/
-		//]]> 
-
-      $('#delclientmodal').modal({
-      keyboard: true,
-      backdrop: "static",
-      show:false,
-      });
-      $('#newclientmodal').modal({
-      keyboard: true,
-      backdrop: "static",
-      show:false,
-      });
-      $('#servModal').modal({
-      keyboard: true,
-      backdrop: "static",
-      show:false,
-      });
-      $('#proModal').modal({
-      keyboard: true,
-      backdrop: "static",
-      show:false,
-      });
+<script type='text/javascript'>
+	$(function(){
+   	$('#apptModal').modal({
+		keyboard: true,
+		show:false,
+	  });
+    $('#delclientmodal').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false,
     });
-  </script>
-
-
+    $('#newclientmodal').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false,
+    });
+    $('#servModal').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false,
+    });
+    $('#proModal').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false,
+    });
+  });
+</script>
 
 <!--[if lte IE 8]>
 <link rel="stylesheet" href="css/ie8.css">
 <![endif]-->
+
 </head>
 <body class="homepage">
   <div id="authorize-div" style="display: none">
-        <span>Authorize access to Google Sheets API</span>
-        <!--Button for the user to click to initiate auth sequence -->
-        <button id="authorize-button" onclick="handleAuthClick(event)">
-          Authorize
-        </button>
-      </div>
+    <span>Authorize access to Google Sheets API</span>
+      <!--Button for the user to click to initiate auth sequence -->
+    <button id="authorize-button" onclick="handleAuthClick(event)">
+      Authorize
+    </button>
+  </div>
   <div id="wrapper">
-  <nav id="nav"> 
-        <a id="calendarLink" href="#calendar" class="icon icon-calendar active">
-          <span>Calendar</span>
-        </a> 
-        <a id="clientLink" href="#client" class="icon icon-user">
-          <span>Client</span>
-        </a> 
-        <a id="mail" href="#search" class="icon icon-search">
-          <span>Search</span>
-        </a> 
-        <a id="reportLink" href="#report" class="icon icon-memo">
-          <span>Report</span>
-        </a>
-        <a id="inventoryLink" href="#inventory" class="icon icon-drawer">
-          <span>Inventory</span>
-        </a>
-  </nav>
-  <div id="main">
+    <nav id="nav"> 
+      <a id="calendarLink" href="#calendar" class="icon icon-calendar active">
+        <span>Calendar</span>
+      </a> 
+      <a id="clientLink" href="#client" class="icon icon-user">
+        <span>Client</span>
+      </a> 
+      <a id="mail" href="#search" class="icon icon-search">
+        <span>Search</span>
+      </a> 
+      <a id="reportLink" href="#report" class="icon icon-memo">
+        <span>Report</span>
+      </a>
+      <a id="inventoryLink" href="#inventory" class="icon icon-drawer">
+        <span>Inventory</span>
+      </a>
+    </nav>
+    <div id="main">
+      <article id="calendar" class="panel">
+        <header></header>
+          <div id='calendar'></div>
+      </article>
 
+      <!--
+          Client Information Page
+            -->
+      <article id="client" class="panel">
+        <header>
+          <div class="clientdelete">
+              <button type="button" class="button" id="deletebtn" data-toggle="modal" data-target="#delclientmodal">Delete Client</button>
+          </div>
+          <div class="clientcreate">
+              <button type="button" class="button" id="createbtn" data-toggle="modal" data-target="#newclientmodal">New Client</button>
+          </div>
+          <h2><br/>Client Information</h2>
+        </header>
+        <form action="#" method="post">
+          <div class="5grid">
+            <div class="row">
+              <div class="6u">
+                <label for="fname">First Name</label>
+                <input type="text" class="text" id="fname" required>
+              </div>
+              <div class="6u">
+                <label for="lname">Last Name</label>
+                <input type="text" class="text" id="lname" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="6u">
+                <label for="address">Address</label>
+                <input type="text" class="text" id="address">
+              </div>
+              <div class="6u">
+                <label for="phone">Telephone</label>
+                <input type="tel" class="text" id="phone">
+              </div>
+            </div>
+            <div class="row">
+              <div class="6u">
+                <label for="eMail">E-mail</label>
+                <input type="email" class="text" id="eMail">
+              </div>
+              <div class="6u">
+                <label for="bday">Date of Birth</label> 
+                <input type="date" class="text" id="bday">
+              </div>
+            </div>
+          </div><br/>
+          <div class="center">
+            <button type="button" class="button" id="save-client">Save Changes</button><br/><br/>
+            <button type="button" id="newappt" class="button" data-toggle="modal" href="#apptModal">Add Appointment</button>
+          </div>
+        </form>
+        <!--
+            Appointments Table
+             -->
+        <h3>Appointments</h3>
+        <table class="table table-striped"> 
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Services</th>
+              <th>Total</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="appointments">
+          </tbody>
+        </table>
+      </article> <!-- closes client page -->
 
-    <article id="calendar" class="panel">
-      <header></header>
-        <div id='calendar'></div>
+<!--
+    Search Page
+      -->
+      <article id="search" class="panel">
+        <header>
+          <h2>Search</h2>
+        </header>
+        <div class="table" id="searchlist">
+          <input class="search" placeholder="Search" /><br/><br/>
+            <div class="data">
+              <ul class="row-header">
+                <li>Last Name</li>
+                <li>First Name</li>
+                <li>Telephone</li>
+                <li>Current Appointment</li>
+              </ul>
+              <div class="list" id="listpeople">
+              <!--search list will print here-->
+              </div>
+            </div>
+        </div>
+      </article>
+<!--
+    Report Page
+      -->
+      <article id="report" class="panel">
+        <header>
+          <h2>Yearly Report</h2><br/>
+          <div>
+            <h2 class="center reportYear">2016</h2>
+            <table id="reportTable" class="table table-striped" align="center">
+            <thead>
+              <tr>
+               <td></td><th class="col200 center">Yearly Total: $15464</td><td></td>
+              </tr>
+              <tr>
+              <th class="col200 center">Total Services: $800.57</td>
+              <th class="col200 center">Total Products: $564.45</td>
+              <th class="col200 center">Total Tax: $60.30</td>
+              </tr>
+              </thead>
+            </table>
+          </div>
+        </header>
+        <table id="reportTable" class="table table-striped" align="center">
+          <thead>
+            <tr>
+              <td>
+                <th>Last Name, First Name</th>
+              </td>
+              <td>
+                <th>Total Services</th>
+              </td>
+              <td>
+                <th>$$$</th>
+              </td>
+              <td>
+                <th>Total Products</th>
+              </td>
+                <th>$$$</th>
+              <td>
+                <th>Total Tax</th>
+              </td>
+              <td>
+                <th>$$$</th>
+              </td>
+            </tr>
+          </thead>
+          <tr>
+            <td>
+            <p> </p>
+            </td>
+          </tr>
+        </table>
+  </div>
+
+<div id="main">
     </article>
-
-    <article id="client" class="panel">
-
+    <article id="inventory  " class="panel">
       <header>
-    <div class="clientdelete">
-        <button type="button" class="button" id="deletebtn" data-toggle="modal" data-target="#delclientmodal">Delete Client</button>
-    </div>
-
-    <div class="clientcreate">
-        <button type="button" class="button" id="createbtn" data-toggle="modal" data-target="#newclientmodal">New Client</button>
-    </div>
-
-    <div id="newclientmodal" class="modal hide fade" role="dialog" aria-labelledby="newClientModalLabel" aria-hidden="true">
-     <div class="modal-header">
-       <h3>Create Client</h3>
-     </div>
-      <div class="modal-body">
-        <p> Do you want to create a new client file?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="button modalyes" id="newclientyes">Yes</button>
-        <button type="button" class="button modalno" id="newclientno" data-dismiss="modal">No</button>
-      </div>
-    </div>
-
-        <h2><br/>Client Information</h2>
-      </header>
-  <div id="delclientmodal" class="modal hide fade" role="dialog" aria-labelledby="delClientModalLabel" aria-hidden="true">
-    <div class="modal-header">
-      <h3>Delete Client</h3>
-    </div>
-    <div class="modal-body">
-       <p> Are you sure you want to delete this client?</p>
-     </div>
-     <div class="modal-footer">
-     <button type="button" class="button modalyes" id="delclientyes">Yes</button>
         
-     <button type="button" class="button modalno" id="delclientno" data-dismiss="modal">No</button>
+      </header>
+    </article>
+  </div>
+  <div id="footer">
+    <ul class="links">
+      <li>&copy; Daniel and Sophie</li>
+    </ul>
+  </div>
+</div>
 
+</body>
+
+<!-- MODALS -->
+
+<!-- 
+    Create new client modal 
+      -->
+<div id="newclientmodal" class="modal hide fade" role="dialog" aria-labelledby="newClientModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3>Create Client</h3>
+  </div>
+    <div class="modal-body">
+      <p> Do you want to create a new client file?</p>
     </div>
+  <div class="modal-footer">
+    <button type="button" class="button modalyes" id="newclientyes">Yes</button>
+    <button type="button" class="button modalno" id="newclientno" data-dismiss="modal">No</button>
   </div>
-  <div>
-      <form action="#" method="post">
-        <div class="5grid">
-          <div class="row">
-            <div class="6u">
-        <label for="fname">First Name</label>
-              <input type="text" class="text" id="fname" required>
-            </div>
-      <div class="6u">
-        <label for="lname">Last Name</label>
-              <input type="text" class="text" id="lname" required>
-            </div>
-      </div>
-      <div class="row">
-            <div class="6u">
-        <label for="address">Address</label>
-              <input type="text" class="text" id="address">
-            </div>
-      <div class="6u">
-        <label for="phone">Telephone</label>
-              <input type="tel" class="text" id="phone">
-            </div>
-          </div>
-      <div class="row">
-            <div class="6u">
-        <label for="eMail">E-mail</label>
-              <input type="email" class="text" id="eMail">
-            </div>
-      <div class="6u">
-              <label for="bday">Date of Birth</label> 
-        <input type="date" class="text" id="bday">
-            </div>
-          </div>
-        </div><br/>
-      <div class="centerbuttons">
-        <button type="button" class="button" id="save-client">Save Changes</button><br/><br/>
-        <button type="button" id="newappt" class="button" data-toggle="modal" href="#apptModal">Add Appointment</button>
-      </div>
-      </form>
+</div>
+
+<!-- 
+    Delete client modal 
+      -->
+<div id="delclientmodal" class="modal hide fade" role="dialog" aria-labelledby="delClientModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3>Delete Client</h3>
   </div>
-    
-    <h3>Appointments</h3>
+  <div class="modal-body">
+     <p> Are you sure you want to delete this client?</p>
+   </div>
+  <div class="modal-footer">
+   <button type="button" class="button modalyes" id="delclientyes">Yes</button>
+   <button type="button" class="button modalno" id="delclientno" data-dismiss="modal">No</button>
+  </div>
+</div>
 
-<table class="table table-striped"> <thead>
-    <tr>
-        <th>Date</th>
-        <th>Services</th>
-        <th>Total</th>
-        <th>Notes</th>
-    </tr>
-    </thead>
-    <tbody id="appointments">
-    </tbody>
-</table>
-
-
+<!--
+    Appointments Modal Popup
+        -->
 <div id="apptModal" class="modal hide fade" data-focus-on="input:first">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-         <h3>Appointment</h3>
-    </div>
-    <!--<div id="apptDetails" class="modal-body"></div>-->
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3>Appointment</h3>
+  </div>
   <div id="apptBody" class="modal-body">
     <form>
-      <table  id="servprotable" class="table table-striped" align="center">
+      <table id="servprotable" class="table table-striped" align="center">
         <tr>
           <td>
             <label for="servicedate">Date of Service:</label>  
@@ -223,20 +310,18 @@
           <td rowspan="2" colspan="2">
           <label for="notes">Notes:</label> 
           <textarea id="notes" rows="5" ></textarea></td>
-
         </tr>
         <tr>
-          <td class="centerbuttons">
+          <td class="center">
             <button type="button" class="button" id="servadd">Add Services</button>
           </td>
-          <td class="centerbuttons">
+          <td class="center">
             <button type="button" class="button" id="proadd">Add Products</butotn>
           </td>
-          
         </tr>
         <tr>
           <td>
-            <table class="table table-striped"> 
+            <table class="table table-striped"> <!-- Services table -->
               <thead>
                 <tr class="">
                   <th class="col200">Service</th>
@@ -251,10 +336,10 @@
                   <th id="servicesCost" class="col100">$0.00</th>
                 </tr>
               </tfoot>
-            </table>
+            </table> <!-- Closes services table -->
           </td>
           <td>
-            <table class="table table-striped"> 
+            <table class="table table-striped"> <!-- Products table-->
               <thead>
                 <tr class="">
                   <th class="col200">Product</th>
@@ -269,17 +354,13 @@
                   <th id="productsCost" class="col100">$0.00</th>
                 </tr>
               </tfoot>
-            </table>
+            </table> <!-- Closes products table -->
           </td>
           <td class="col200">    
-<!--             <table class="table table-striped"> 
-              <div class="col200"> -->
-                <label for="tax">Tax %:</label> 
-                <input class="smallinput money updateGrandTotal" type="text" id="tax">
-                <label for="subtotal">Subtotal:</label> 
-                <input class="smallinput" type="text" id="subtotal" readonly>
-<!--               </div>
-            </table> -->
+            <label for="tax">Tax %:</label> 
+            <input class="smallinput money updateGrandTotal" type="text" id="tax">
+            <label for="subtotal">Subtotal:</label> 
+            <input class="smallinput" type="text" id="subtotal" readonly>
           </td>
           <td rowspan="4">
             <label for="discount">Discount:</label> 
@@ -290,107 +371,66 @@
               <input class="smallinput" type="text" id="grandtotal" readonly>
           </td>
         </tr>
-      </table>
-      </div> <!-- closes table modal body-->
-      <div id="apptFooter" class="modal-footer">
-        <button type="button" class="button" id="apptdelete">Delete</button>
-        <button type="button" class="button" id="apptcancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="button" id="apptsave">Save</button>
-      </div>
+      </table> <!--Closes servprotable-->
+  </div> <!-- closes apptBody-->
+  <div id="apptFooter" class="modal-footer">
+    <button type="button" class="button" id="apptdelete">Delete</button>
+    <button type="button" class="button" id="apptcancel" data-dismiss="modal">Cancel</button>
+    <button type="button" class="button" id="apptsave">Save</button>
+  </div>
     </form>
+</div> <!-- closes apptModal -->
 
-  
-
-  <!--SERVUCT more details-->
-
-   <div id="addServuct" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-header">
+<!--
+    SERVUCT more details
+      -->
+<div id="addServuct" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+  <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-      <h3>Edit Servuct</h3>
-    </div>
-    <div class="modal-body">
-      <table class="table table-striped"> 
-       <tr>
+    <h3>Edit Servuct</h3>
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped"> 
+      <tr>
         <td> 
-        <label for="editservname">Servuct:</label> 
+          <label for="editservname">Servuct Name:</label> 
           <input type="text" id="editservname">
         </td>
-        <td>
-        <label for="editservprice">Price:</label> 
+        <td rowspan="2" class="small">
+          <label for="editservprice">Price:</label> 
           <input type="text" id="editservprice">
+          <label for="editservdiscount">Discount:</label> 
+          <input type="text" id="editservdiscount">
         </td>
-       </tr>
-      </table>
-     </div>
-     <div class="modal-footer">
-      <table class="table table-striped">
-        <tr>
-          <button type="button" class="button small centerbuttons" id="servdelete">Delete</button>
-          <button type="button" class="button small centerbuttons" id="servcancel" data-dismiss="modal">Cancel</button>
-          <button type="button" class="button small centerbuttons" id="servsave">Save</button>
-        </tr>
-      </table>
-    </div>
+      </tr>
+    </table>
   </div>
-                
-   <div id="addservuct" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-header">
-      <h3>Add Client Products</h3>
-    </div>
-    <div class="modal-body">
-       <p> PRO MODAL?</p>
-     </div>
-     <div class="modal-footer">
-     <button type="button" class="button modalyes" id="">Yes</button>
-     <button type="button" class="button modalno" id="prono" data-dismiss="modal">No</button>
-    </div>
+  <div class="modal-footer">
+    <table class="table table-striped">
+      <tr>
+        <button type="button" class="button small center" id="servdelete">Delete</button>
+        <button type="button" class="button small center" id="servcancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="button small center" id="servsave">Save</button>
+      </tr>
+    </table>
   </div>
+</div> <!-- closes addServuct modal -->
+
+            
+<!--        <div id="addservuct" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+        <div class="modal-header">
+          <h3>Add Client Servucts</h3>
+        </div>
+        <div class="modal-body">
+           <p> PRO MODAL?</p>
+         </div>
+         <div class="modal-footer">
+         <button type="button" class="button modalyes" id="">Yes</button>
+         <button type="button" class="button modalno" id="prono" data-dismiss="modal">No</button>
+        </div>
+      </div> -->
 
 
 
-
-
-    <!--<div id="apptItems" class="modal-body"></div>-->
-
-</div>
-    
-    </article>
-    <article id="search" class="panel">
-      <header>
-        <h2>Search</h2>
-      </header>
-      <div class="table" id="searchlist">
-        <input class="search" placeholder="Search" /><br/><br/>
-          <div class="data">
-            <ul class="row-header">
-              <li>Last Name</li>
-              <li>First Name</li>
-              <li>Telephone</li>
-              <li>Current Appointment</li>
-            </ul>
-            <div class="list" id="listpeople">
-            <!--search list will print here-->
-            </div>
-          </div>
-      </div>
-    </article>
-    <article id="report" class="panel">
-      <header>
-        
-      </header>
-    </article>
-    <article id="inventory  " class="panel">
-      <header>
-        
-      </header>
-    </article>
-  </div>
-  <div id="footer">
-    <ul class="links">
-      <li>&copy; Daniel and Sophie</li>
-    </ul>
-  </div>
-</div>
-</body>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </html>
