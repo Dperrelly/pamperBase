@@ -207,7 +207,7 @@ function main(){
 							}
 						});
 						if(!service) service = "";
-						else if(numServs) service += "\n + " + numServs + " others";
+						else if(numServs) service += " + " + numServs + " others";
 						var total = appointment[5];
 						var notes = appointment[8] ? appointment[8] : "";
 						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight clearboth" data-toggle="modal" data-id="1" data-target="#apptModal"><td>'+ date +'</td><td>'+ service +'</td><td>'+ total +'</td><td>'+ notes +'</td></tr>');
