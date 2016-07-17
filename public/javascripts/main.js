@@ -45,11 +45,19 @@ function main(){
 					last = person[2];
 				}
 			});
+
+			var now = new Date(), past;
+		  	now = now.getFullYear() + "-" + 
+		  	("0" + (now.getMonth() + 1)).slice(-2) + "-" + 
+		  	("0" + now.getDate()).slice(-2);
+			past = appointment[7] < now;
+
 			events.push({
 				id: appointment[0],
 				clientId: appointment[1],
 				start: appointment[7] + "T" + parseTime(appointment[6]),
-				title: last
+				title: last,
+				past: past
 			});
 		});
 		$('#calendar').fullCalendar({
@@ -60,7 +68,11 @@ function main(){
 	            	currentPersonId = event.clientId;
 	            	loadPerson(currentPersonId);
 	            	$('#clientLink').trigger('click');
-			    }
+			    },
+			    eventRender: function(event, element) {
+			      if (event.past)
+			        element.addClass("past");
+			    },
 	    });
 	};
 
@@ -672,17 +684,18 @@ function main(){
 		    item: '<ul class="row-content"><li class ="a" id="a"></li><li class="b" id="b"></li><li class="c" id="c"></li><li class="d" id="d"></li></ul>'
 	    };
 	    var values = [];
-		var date = [];
-		var sortByDateDesc = function (lhs, rhs) { return lhs < rhs ? 1 : lhs > rhs ? -1 : 0; };
 		var recentd = null;
 		for(var i = 0; i < people.length ; i++){
-			for(var j = 0; j < appointments.length; j++){
+			recentd = "None";
+			for(var j = appointments.length - 1; j >= 0; j--){
 				if (appointments[j][1] === people[i][0]){
-			  		date.push(appointments[j][7]);
+				  	now = new Date();
+				  	now = now.getFullYear() + "-" + 
+				  	("0" + (now.getMonth() + 1)).slice(-2) + "-" + 
+				  	("0" + now.getDate()).slice(-2);
+					if(appointments[j][7] > now) recentd = appointments[j][7];
 			  	}
 			}
-			date.sort(sortByDateDesc);
-			recentd = date[0];
 			values.push({a: people[i][2],
 		       b: people[i][1],
 		       c: people[i][4],
