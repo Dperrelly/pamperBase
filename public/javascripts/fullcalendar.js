@@ -9034,10 +9034,10 @@ var Scroller = FC.Scroller = Class.extend({
 					// OR scrolling pane with massless scrollbars?
 					this.scrollEl[0].scrollHeight - 1 > this.scrollEl[0].clientHeight
 						// subtract 1 because of IE off-by-one issue
-				) ? 'scroll' : 'hidden';
+				) ? 'auto' : 'visible';
 		}
 
-		this.scrollEl.css({ 'overflow-x': overflowX, 'overflow-y': overflowY });
+		this.scrollEl.css({ 'overflow-x': overflowX, 'overflow-y': overflowY, 'height': 900 });
 	},
 
 

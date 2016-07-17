@@ -197,6 +197,12 @@ border: 0;
 	margin:3;
 }
 
+#appointmentsTable {
+	height: 370px !important;
+	max-height: 370px !important;
+	overflow-y: auto;
+}
+
 
 /*********************************************************************************/
 /* Basic                                                                         */
@@ -382,16 +388,16 @@ border: 0;
 		clear: both;
 	}
 	
-	p, ul, ol, dl, table, blockquote, form
+	p, ul, ol, dl, blockquote, form
 	{
 		margin-bottom: 2em;
 	}
 	
-	section,
+/*	section,
 	article
 	{
 		margin-bottom: 3em;
-	}
+	}*/
 	
 	section > :last-child,
 	article > :last-child
@@ -649,12 +655,6 @@ border: 0;
 /* Panels                                                                        */
 /*********************************************************************************/
 
-	
-
-	#calendar{
-		height:900px;
-	}
-
 	#main
 	{
 		position: relative;
@@ -667,6 +667,12 @@ border: 0;
 		position: relative;
 	}
 
+/*	#report{
+		width: 60em;
+		margin-top: -5.7em;
+		background: #fff;
+		box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.25);
+	}*/
 
 	/* Me */
 	
