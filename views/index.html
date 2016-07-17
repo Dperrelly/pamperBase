@@ -243,15 +243,17 @@
             </td>
           </tr>
         </table>
-  </div>
-
-<div id="main">
     </article>
-    <article id="inventory  " class="panel">
+
+<!--
+    Inventory Page
+      -->
+    <article id="inventory" class="panel">
       <header>
-        
       </header>
     </article>
+
+
   </div>
   <div id="footer">
     <ul class="links">
@@ -330,7 +332,7 @@
           <td>
             <table class="table table-striped"> <!-- Services table -->
               <thead>
-                <tr class="">
+                <tr>
                   <th class="col200">Service</th>
                   <th class="col100">Price</th>
                 </tr>
@@ -348,7 +350,7 @@
           <td>
             <table class="table table-striped"> <!-- Products table-->
               <thead>
-                <tr class="">
+                <tr>
                   <th class="col200">Product</th>
                   <th class="col100">Price</th>
                 </tr>
@@ -363,20 +365,51 @@
               </tfoot>
             </table> <!-- Closes products table -->
           </td>
-          <td class="col200">    
-            <label for="tax">Tax %:</label> 
-            <input class="smallinput money updateGrandTotal" type="text" id="tax">
-            <label for="subtotal">Subtotal:</label> 
-            <input class="smallinput" type="text" id="subtotal" readonly>
-          </td>
-          <td rowspan="4">
-            <label for="discount">Discount:</label> 
-              <input class="smallinput updateGrandTotal" type="text" id="discount" step="0.01">
-              <label for="tip">Tip:</label>
-              <input class="smallinput updateGrandTotal" type="text" id="tip">
-              <label for="grandtotal">Grand Total:</label> 
-              <input class="smallinput" type="text" id="grandtotal" readonly>
-          </td>
+          <td>
+          <table class="col200 table table-striped"> <!-- calculations table -->
+            <tr>
+              <td class="col200">    
+                <span class="labels">Tax
+                <input class="tiny money updateGrandTotal" type="text" id="tax">
+                %:</span> 
+              </td>
+              <td class="col100">
+                $<span id="taxtotal">tax</span><br/><br/>
+              </td>
+            </tr>
+            <tr>
+              <td class="col200">
+                <span class="labels">Subtotal:</span>               
+              </td>
+              <td>
+                $<span class="col100" id="subtotal">subtotal</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="col200">
+                <span class="labels">Discount:</span> 
+              </td>
+              <td>
+                $<span class="col100 updateGrandTotal" id="discount" step="0.01">discount</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="col200">
+                <span class="labels">Tip:</span>
+              </td>
+              <td>
+                <input class="smallinput updateGrandTotal" type="text" id="tip">
+              </td>
+            </tr>
+            <tr>
+              <td class="col200">
+                <span class="labels">Grand Total:</span> 
+              </td>
+              <td>
+                $<span class="smallinput" id="grandtotal">grandtotal</span>
+              </td>
+            </tr>
+          </table> <!--  closes calculations table -->
         </tr>
       </table> <!--Closes servprotable-->
   </div> <!-- closes apptBody-->

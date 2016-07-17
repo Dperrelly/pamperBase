@@ -140,6 +140,15 @@ border: 0;
 		max-width: 100px !important;
 	}
 
+	.tiny {
+	width: 50px !important;
+	}
+
+	.labels {
+		font-size: 20px;
+		margin-bottom: 10px;
+		font-weight: bold;
+	}
 
 /*Buttons for Client page*/
 .center{ /*Save Changes / Add New Appointment Buttons*/
