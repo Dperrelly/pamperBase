@@ -22,6 +22,53 @@
     font-size: .5em;
 }
 
+/*flexbox*/
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+.wrapper {
+  @include flexbox();
+}
+
+.item {
+  @include flex(1 200px);
+  @include order(2);
+}
+
+/*report table*/
+.parent {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.child {
+	width:30vw;
+	height:30px;
+	margin:auto;
+}
 
 /*Search People Table*/
 .data ul {
@@ -129,6 +176,44 @@ border: 0;
 		max-width:415px;
 	}
 
+	#monthsTable {
+		width:70vw !important;
+		min-width: 500px !important;
+		max-width: 70vw !important;
+		margin-left: -1%;
+	}
+
+	.col500 {
+		overflow-x: visible !important;
+		/*text-overflow: ellipsis;*/
+		width:33vw !important;
+		min-width: 450px !important;
+		max-width: 33vw !important;
+/*		padding-right: 50px !important;*/
+		float:left;
+		margin-right: 20px !important;
+	}
+
+	.colFixedL {
+		width:153px !important;
+		min-width:153px !important;
+		max-width:153px !important;
+		text-align: center !important;
+	}
+
+	.colFixedB {
+		width:103px !important;
+		min-width:103px !important;
+		max-width:103px !important;
+		text-align: center !important;
+	}
+	.colFixedS {
+		width:83px !important;
+		min-width:83px !important;
+		max-width:83px !important;
+		text-align: center !important;
+	}
+
 	.col200 {
 		overflow: hidden !important;
 		text-overflow: ellipsis;
@@ -139,7 +224,7 @@ border: 0;
 
 	.col100 {
 		width:100px !important;
-		min-width: 60px !important;
+		min-width: 90px !important;
 		max-width: 100px !important;
 		/*text-align: center !important;*/
 	}
@@ -151,15 +236,25 @@ border: 0;
 	}
 
 	.overflowTable {
-	height: auto !important;
-	min-height: 0px !important;
-	max-height: 200px !important;
-	width:280px !important;
-	min-width: 200px !important;
-	max-width: 280px !important;
-	overflow-y: auto !important;
-	overflow-x: hidden !important;
-}
+		height: auto !important;
+		min-height: 0px !important;
+		max-height: 200px !important;
+		width:280px !important;
+		min-width: 200px !important;
+		max-width: 280px !important;
+		overflow-y: auto !important;
+		overflow-x: hidden !important;
+	}
+
+	.overflowMonths {
+		height: auto !important;
+		min-height: 0px !important;
+		max-height: 220px !important;
+		min-width: 655px !important;
+		max-width: 34vw !important;
+		overflow-y: auto !important;
+		overflow-x: hidden !important;
+	}
 
 	.tiny {
 	width: 80px !important;
@@ -679,14 +774,40 @@ border: 0;
 
 	#main
 	{
+		width: 70vw !important;
+		max-width: 70vw !important;
+		min-width: 900px !important;
+		left:50% !important;
+		top: -120px;
+		transform: translateX(-50%) !important;
+		background: #fff;
+		box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.25);
 		position: relative;
 		overflow: hidden;
 		
 	}
 
+	#report {
+		width: 75vw !important;
+		max-width: 75vw !important;
+		min-width: 900px !important;
+		top: -25px;
+	}
+
 	.panel
 	{
-		position: relative;
+		padding: 2em 3.5em 1.5em 3.5em;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 70vw !important;
+		max-width: 70vw !important;
+		min-width: 900px !important;
+		height: 120vh !important;
+		max-height: 120vh !important;
+		min-height: 1000px !important;
+		left:50% !important;
+		transform: translateX(-50%) !important;
 	}
 
 /*	#report{

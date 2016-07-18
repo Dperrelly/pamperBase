@@ -194,7 +194,7 @@
 <!--
     Report Page
       -->
-      <article id="report" class="panel">
+      <article id="report" class="reportpanel panel">
         <header>
           <h2>Yearly Report</h2><br/>
           <div> 
@@ -215,96 +215,282 @@
           </div>
         </header>
        <!--  monthly totals -->
-          <!-- Jan - Apr -->
-        <table class="table table-striped">
-          <thead>
-            <th class=" center">January</th>
-            <th class=" center">February</th>
-            <th class="center">March</th>
-          </thead>
-        </table>
-        <div class="overflowTable"> <!-- scrolls excess services -->
-          <table class="table table-striped">
-            <tbody id="reportJan">
-            <tr>
-                <td>
-                  <th>LName</th>
-                </td>
-                <td>
-                  <th>Services</th>
-                </td>
-                <td>
-                  <th>$$$</th>
-                </td>
-                <td>
-                  <th>Products</th>
-                </td>
-                  <th>$$$</th>
-                <td>
-                  <th>Tax</th>
-                </td>
-                <td>
-                  <th>$$$</th>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-          <!-- end Jan - Apr -->
-          <!-- May - Aug -->
-        <table class="table table-striped">
-          <thead>
-            <th class="col200 center">April</th>
-            <th class="col200 center">May</th>
-            <th class="col200 center">June</th>
+          <!-- Jan Feb -->
+        <table id="monthsTable" class="table table-striped">
+          <tr>
+            <!-- jaunary column -->
+            <td class="col500">
+              <table id="january" class="col500 table table-striped">
+                <thead>
+                  <tr><th class="center">January</th></tr>
+                  <tr><th class="center" id="janTotal">Month Total: $2644.00</th></tr>
+                  <tr class="col500">
+                      <th class="colFixedL">Name</th>
+                      <th class="colFixedB">Services</th>
+                      <th class="colFixedB">Products</th>
+                      <th class="colFixedS">Tax</th>
+                      <th class="colFixedB">Discount</th>
+                      <th class="colFixedB">Total</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="overflowMonths"> <!-- scrolls excess apps -->
+                <table class="table table-striped">
+                  <tbody class="col500" id="janApps">
+                  <!-- january appointment details print here -->
+                    <tr class="highlight">
+                      <td id="janName" class="colFixedL">lastname, first</td>
+                      <td id="janServ" class="colFixedB">150.00</td>
+                      <td id="janPro" class="colFixedB">547.00</td>
+                      <td id="janTax" class="colFixedS">20.15</td>
+                      <td id="janDisc" class="colFixedB">20.00</td>
+                      <td id="janAppTotal" class="colFixedB">8120.00</td>
+                    </tr>
+                  </tbody>
+                </table> <!-- closes month appointments -->
+              </div> <!-- close overflow -->
+              <table class="table table-striped"> 
+                <tfoot>
+                  <tr>
+                    <th id="janClients" class="colFixedL center">0 Clients</th>
+                    <th id="janServTotal" class="colFixedB center">2310.00</th>
+                    <th id="janProTotal" class="colFixedB center">2310.00</th>
+                    <th id="janTaxTotal" class="colFixedS center">210.00</th>
+                    <th id="janDiscTotal" class="colFixedB center">2310.00</th>
+                    <th class="colFixedB"></th>
+                  </tr>
+                </tfoot>
+              </table> <!-- closes month totals -->
+            </td> <!-- closes january column -->
+            <!-- february column -->
+            <td class="col500">
+              <table id="February" class="col500 table table-striped">
+                <thead>
+                  <tr><th class="center">February</th></tr>
+                  <tr><th class="center" id="febTotal">Month Total: $2644.00</th></tr>
+                  <tr class="col500">
+                      <th class="colFixedL">Name</th>
+                      <th class="colFixedB">Services</th>
+                      <th class="colFixedB">Products</th>
+                      <th class="colFixedS">Tax</th>
+                      <th class="colFixedB">Discount</th>
+                      <th class="colFixedB">Total</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="overflowMonths"> <!-- scrolls excess apps -->
+                <table class="table table-striped">
+                  <tbody class="col500" id="febApps">
+                  <!-- february appointment details print here -->
+                    <tr class="highlight">
+                      <td id="febName" class="colFixedL">lastname, first</td>
+                      <td id="febServ" class="colFixedB">150.00</td>
+                      <td id="febPro" class="colFixedB">547.00</td>
+                      <td id="febTax" class="colFixedS">20.15</td>
+                      <td id="febDisc" class="colFixedB">20.00</td>
+                      <td id="febAppTotal" class="colFixedB">8120.00</td>
+                    </tr>
+                  </tbody>
+                </table> <!-- closes month appointments -->
+              </div> <!-- close overflow -->
+              <table class="table table-striped"> 
+                <tfoot>
+                  <tr>
+                    <th id="febClients" class="colFixedL center">0 Clients</th>
+                    <th id="febServTotal" class="colFixedB center">2310.00</th>
+                    <th id="febProTotal" class="colFixedB center">2310.00</th>
+                    <th id="febTaxTotal" class="colFixedS center">210.00</th>
+                    <th id="febDiscTotal" class="colFixedB center">2310.00</th>
+                    <th class="colFixedB"></th>
+                  </tr>
+                </tfoot>
+              </table> <!-- closes month totals -->
+            </td> <!-- closes february column -->
+          </tr> 
+          <!-- Mar - Apr  -->
+          <tr>
+            <!-- march column -->
+            <td class="col500">
+              <table id="march" class="col500 table table-striped">
+                <thead>
+                  <tr><th class="center">March</th></tr>
+                  <tr><th class="center" id="marTotal">Month Total: $2644.00</th></tr>
+                  <tr class="col500">
+                      <th class="colFixedL">Name</th>
+                      <th class="colFixedB">Services</th>
+                      <th class="colFixedB">Products</th>
+                      <th class="colFixedS">Tax</th>
+                      <th class="colFixedB">Discount</th>
+                      <th class="colFixedB">Total</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="overflowMonths"> <!-- scrolls excess apps -->
+                <table class="table table-striped">
+                  <tbody class="col500" id="marApps">
+                  <!-- March appointment details print here -->
+                    <tr class="highlight">
+                      <td id="marName" class="colFixedL">lastname, first</td>
+                      <td id="marServ" class="colFixedB">150.00</td>
+                      <td id="marPro" class="colFixedB">547.00</td>
+                      <td id="marTax" class="colFixedS">20.15</td>
+                      <td id="marDisc" class="colFixedB">20.00</td>
+                      <td id="marAppTotal" class="colFixedB">8120.00</td>
+                    </tr>
+                  </tbody>
+                </table> <!-- closes month appointments -->
+              </div> <!-- close overflow -->
+              <table class="table table-striped"> 
+                <tfoot>
+                  <tr>
+                    <th id="marClients" class="colFixedL center">0 Clients</th>
+                    <th id="marServTotal" class="colFixedB center">2310.00</th>
+                    <th id="marProTotal" class="colFixedB center">2310.00</th>
+                    <th id="marTaxTotal" class="colFixedS center">210.00</th>
+                    <th id="marDiscTotal" class="colFixedB center">2310.00</th>
+                    <th class="colFixedB"></th>
+                  </tr>
+                </tfoot>
+              </table> <!-- closes month totals -->
+            </td> <!-- closes March column -->
+            <!-- April column -->
+            <td class="col500">
+              <table id="april" class="col500 table table-striped">
+                <thead>
+                  <tr><th class="center">April</th></tr>
+                  <tr><th class="center" id="aprTotal">Month Total: $2644.00</th></tr>
+                  <tr class="col500">
+                      <th class="colFixedL">Name</th>
+                      <th class="colFixedB">Services</th>
+                      <th class="colFixedB">Products</th>
+                      <th class="colFixedS">Tax</th>
+                      <th class="colFixedB">Discount</th>
+                      <th class="colFixedB">Total</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="overflowMonths"> <!-- scrolls excess apps -->
+                <table class="table table-striped">
+                  <tbody class="col500" id="aprApps">
+                  <!-- April appointment details print here -->
+                    <tr class="highlight">
+                      <td id="aprName" class="colFixedL">lastname, first</td>
+                      <td id="aprServ" class="colFixedB">150.00</td>
+                      <td id="aprPro" class="colFixedB">547.00</td>
+                      <td id="aprTax" class="colFixedS">20.15</td>
+                      <td id="aprDisc" class="colFixedB">20.00</td>
+                      <td id="aprAppTotal" class="colFixedB">8120.00</td>
+                    </tr>
+                  </tbody>
+                </table> <!-- closes month appointments -->
+              </div> <!-- close overflow -->
+              <table class="table table-striped"> 
+                <tfoot>
+                  <tr>
+                    <th id="aprClients" class="colFixedL center">0 Clients</th>
+                    <th id="aprServTotal" class="colFixedB center">2310.00</th>
+                    <th id="aprProTotal" class="colFixedB center">2310.00</th>
+                    <th id="aprTaxTotal" class="colFixedS center">210.00</th>
+                    <th id="aprDiscTotal" class="colFixedB center">2310.00</th>
+                    <th class="colFixedB"></th>
+                  </tr>
+                </tfoot>
+              </table> <!-- closes month totals -->
+            </td> <!-- closes April column -->
+          </tr>
+          <!-- May - Jun -->
+          <tr>
+            <!-- May column -->
+            <td class="col500">
+              <table id="may" class="col500 table table-striped">
+                <thead>
+                  <tr><th class="center">May</th></tr>
+                  <tr><th class="center" id="mayTotal">Month Total: $2644.00</th></tr>
+                  <tr class="col500">
+                      <th class="colFixedL">Name</th>
+                      <th class="colFixedB">Services</th>
+                      <th class="colFixedB">Products</th>
+                      <th class="colFixedS">Tax</th>
+                      <th class="colFixedB">Discount</th>
+                      <th class="colFixedB">Total</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="overflowMonths"> <!-- scrolls excess apps -->
+                <table class="table table-striped">
+                  <tbody class="col500" id="mayApps">
+                  <!-- May appointment details print here -->
+                    <tr class="highlight">
+                      <td id="mayName" class="colFixedL">lastname, first</td>
+                      <td id="mayServ" class="colFixedB">150.00</td>
+                      <td id="mayPro" class="colFixedB">547.00</td>
+                      <td id="mayTax" class="colFixedS">20.15</td>
+                      <td id="mayDisc" class="colFixedB">20.00</td>
+                      <td id="mayAppTotal" class="colFixedB">8120.00</td>
+                    </tr>
+                  </tbody>
+                </table> <!-- closes month appointments -->
+              </div> <!-- close overflow -->
+              <table class="table table-striped"> 
+                <tfoot>
+                  <tr>
+                    <th id="mayClients" class="colFixedL center">0 Clients</th>
+                    <th id="mayServTotal" class="colFixedB center">2310.00</th>
+                    <th id="mayProTotal" class="colFixedB center">2310.00</th>
+                    <th id="mayTaxTotal" class="colFixedS center">210.00</th>
+                    <th id="mayDiscTotal" class="colFixedB center">2310.00</th>
+                    <th class="colFixedB"></th>
+                  </tr>
+                </tfoot>
+              </table> <!-- closes month totals -->
+            </td> <!-- closes May column -->
+            <!-- June column -->
+            <td class="col500">
+              <table id="june" class="col500 table table-striped">
+                <thead>
+                  <tr><th class="center">June</th></tr>
+                  <tr><th class="center" id="junTotal">Month Total: $2644.00</th></tr>
+                  <tr class="col500">
+                      <th class="colFixedL">Name</th>
+                      <th class="colFixedB">Services</th>
+                      <th class="colFixedB">Products</th>
+                      <th class="colFixedS">Tax</th>
+                      <th class="colFixedB">Discount</th>
+                      <th class="colFixedB">Total</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="overflowMonths"> <!-- scrolls excess apps -->
+                <table class="table table-striped">
+                  <tbody class="col500" id="junApps">
+                  <!-- jun appointment details print here -->
+                    <tr class="highlight">
+                      <td id="junName" class="colFixedL">lastname, first</td>
+                      <td id="junServ" class="colFixedB">150.00</td>
+                      <td id="junPro" class="colFixedB">547.00</td>
+                      <td id="junTax" class="colFixedS">20.15</td>
+                      <td id="junDisc" class="colFixedB">20.00</td>
+                      <td id="junAppTotal" class="colFixedB">8120.00</td>
+                    </tr>
+                  </tbody>
+                </table> <!-- closes month appointments -->
+              </div> <!-- close overflow -->
+              <table class="table table-striped"> 
+                <tfoot>
+                  <tr>
+                    <th id="junClients" class="colFixedL center">0 Clients</th>
+                    <th id="junServTotal" class="colFixedB center">2310.00</th>
+                    <th id="junProTotal" class="colFixedB center">2310.00</th>
+                    <th id="junTaxTotal" class="colFixedS center">210.00</th>
+                    <th id="junDiscTotal" class="colFixedB center">2310.00</th>
+                    <th class="colFixedB"></th>
+                  </tr>
+                </tfoot>
+              </table> <!-- closes month totals -->
+            </td> <!-- closes jun column -->
+          </tr>
 
-          </thead>
         </table>
-          <!-- end May - Aug -->
-          <!-- Sep - Dec -->
-        <table class="table table-striped">
-          <thead>
-            <th class="col200 center">July</th>
-            <th class="col200 center">August</th>
-            <th class="col200 center">September</th>
-            <th class="col200 center">October</th>
-            <th class="col200 center">November</th>
-            <th class="col200 center">December</th>
-          </thead>
-        </table>
-          <!-- end Sep - Dec -->
-        <!-- end monthly totals -->
-
-          <table id="reportTable" class="table table-striped" align="center">
-            <thead>
-              <tr>
-                <td>
-                  <th>Last Name, First Name</th>
-                </td>
-                <td>
-                  <th>Total Services</th>
-                </td>
-                <td>
-                  <th>$$$</th>
-                </td>
-                <td>
-                  <th>Total Products</th>
-                </td>
-                  <th>$$$</th>
-                <td>
-                  <th>Total Tax</th>
-                </td>
-                <td>
-                  <th>$$$</th>
-                </td>
-              </tr>
-            </thead>
-            <tr>
-              <td>
-              <p> </p>
-              </td>
-            </tr>
-          </table>
     </article>
 
 <!--

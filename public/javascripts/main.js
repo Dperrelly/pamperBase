@@ -23,6 +23,7 @@ function main(){
 		var minutes = Number(time.match(parseTimeRegex2)[1]);
 		var AMPM = time.match(parseTimeRegex3)[1];
 		if(AMPM == "PM" && hours<12) hours = hours+12;
+		if(!time) time = "12:00 PM";
 		if(AMPM == "AM" && hours==12) hours = hours-12;
 		var sHours = hours.toString();
 		var sMinutes = minutes.toString();
