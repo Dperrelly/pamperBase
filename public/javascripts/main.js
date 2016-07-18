@@ -32,6 +32,7 @@ function main(){
 	}
 
 	function twoNumberDecimal(number) {
+		if(number === "") return 0;
 	    return parseFloat(number).toFixed(2);
 	}
 
@@ -247,12 +248,13 @@ function main(){
 					if(value.length) servucts.push(value);
 				});
 			}
-			var servTotal = 0, proTotal = 0, taxTotal = 0, tax;
+			var servTotal = 0, proTotal = 0, taxTotal = 0, discTotal = 0, tax;
 			var apptKey = {};
 			appointments.forEach(function(appointment){
 				apptKey[appointment[0]] = appointment;
 			});
 			servucts.forEach(function(servuct){
+				discTotal += Number(servuct[5]);
 				if(servuct[3] === "Service"){
 					servTotal += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
@@ -264,8 +266,9 @@ function main(){
 			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
 			$('#taxTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
+			$('#discTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
 			$('#yearlyTotal').html(
-				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal));
+				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal));
 			loadPerson(currentPersonId);
 		}, function(e){
 			console.log('load servucts error');
@@ -677,11 +680,15 @@ function main(){
 	$('.money').blur(function(event){
 		$(this).val(twoNumberDecimal($(this).val()));
 	});
-
+	$('.person').click(function(){
+		currentPersonId = event.clientId;
+	    loadPerson(currentPersonId);
+	    $('#clientLink').trigger('click');
+	});
 	function createList() {
 		var columns = {
 		    valueNames: ['a', 'b', 'c', 'd'],
-		    item: '<ul class="row-content"><li class ="a" id="a"></li><li class="b" id="b"></li><li class="c" id="c"></li><li class="d" id="d"></li></ul>'
+		    item: '<ul class="row-content person"><li class="a" id="a"></li><li class="b" id="b"></li><li class="c" id="c"></li><li class="d" id="d"></li></ul>'
 	    };
 	    var values = [];
 		var recentd = null;
@@ -693,12 +700,16 @@ function main(){
 				  	now = now.getFullYear() + "-" + 
 				  	("0" + (now.getMonth() + 1)).slice(-2) + "-" + 
 				  	("0" + now.getDate()).slice(-2);
-					if(appointments[j][7] > now) recentd = appointments[j][7];
+					if(appointments[j][7] > now) {
+						dateObject = new Date(Date.parse(appointments[j][7]));
+						dateReadable = dateObject.toDateString();
+						recentd = dateReadable;
+					}
 			  	}
 			}
-			values.push({a: people[i][2],
-		       b: people[i][1],
-		       c: people[i][4],
+			values.push({a: people[i][2] || "",
+		       b: people[i][1] || "",
+		       c: people[i][4] || "",
 		       d: recentd,});
 			date = [];
 		}
