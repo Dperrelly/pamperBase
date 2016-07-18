@@ -680,15 +680,11 @@ function main(){
 	$('.money').blur(function(event){
 		$(this).val(twoNumberDecimal($(this).val()));
 	});
-	$('.person').click(function(){
-		currentPersonId = event.clientId;
-	    loadPerson(currentPersonId);
-	    $('#clientLink').trigger('click');
-	});
+
 	function createList() {
 		var columns = {
-		    valueNames: ['a', 'b', 'c', 'd'],
-		    item: '<ul class="row-content person"><li class="a" id="a"></li><li class="b" id="b"></li><li class="c" id="c"></li><li class="d" id="d"></li></ul>'
+		    valueNames: ['a', 'b', 'c', 'd', 'e'],
+		    item: '<ul class="row-content person"><li class="a" id="a"></li><li class="b" id="b"></li><li class="c" id="c"></li><li class="d" id="d"></li><li class="e" id="e"></li></ul><>'
 	    };
 	    var values = [];
 		var recentd = null;
@@ -710,10 +706,24 @@ function main(){
 			values.push({a: people[i][2] || "",
 		       b: people[i][1] || "",
 		       c: people[i][4] || "",
-		       d: recentd,});
+		       d: recentd,
+		       e: people[i][0],
+		    });
 			date = [];
 		}
 	    var searchable = new List('searchlist', columns, values);
+	    $('.person').click(function(){
+			console.log($(this).children('#e').html());
+			currentPersonId = $(this).children('#e').html();
+		    loadPerson(currentPersonId);
+		    $('#clientLink').trigger('click');
+		}).hover(function(){
+			$(this).children().css('background-color', '#e6ffe6');
+			$(this).children().css('cursor', 'pointer');
+		}, function(){
+			$(this).children().css('background-color', '#DBE8DC');
+			$(this).children().css('cursor', 'default');
+		});
 	}	
 
 	$('#addServuct').on('show', function() {

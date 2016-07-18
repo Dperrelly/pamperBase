@@ -41,6 +41,9 @@
   min-width: 200px !important;
   max-width: 200px !important;
   }
+#e{
+	display:none;
+}
 .row-header {
   background-color:#360;
   color:#FFF;
