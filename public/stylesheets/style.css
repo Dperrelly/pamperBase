@@ -127,21 +127,39 @@ border: 0;
 	}
 
 	.col200 {
-		overflow: hidden;
+		overflow: hidden !important;
 		text-overflow: ellipsis;
-		width:200px !important;
-		min-width: 150px !important;
-		max-width: 200px !important;
+		width:170px !important;
+		min-width: 130px !important;
+		max-width: 170px !important;
 	}
 
 	.col100 {
 		width:100px !important;
 		min-width: 60px !important;
 		max-width: 100px !important;
+		/*text-align: center !important;*/
 	}
 
+	#servtable, #protable #calculations{
+		width:280px !important;
+		max-width:280px !important;
+		min-width: 200px !important;
+	}
+
+	.overflowTable {
+	height: auto !important;
+	min-height: 0px !important;
+	max-height: 200px !important;
+	width:280px !important;
+	min-width: 200px !important;
+	max-width: 280px !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
+}
+
 	.tiny {
-	width: 50px !important;
+	width: 80px !important;
 	}
 
 	.labels {
@@ -196,7 +214,7 @@ border: 0;
 #notes{/*Resize note textarea only vertical*/
 	resize: vertical !important;
 	height: 5.25em;
-	width:400px;
+	width:280px;
 	max-height: 200px; }
 
 
@@ -211,6 +229,9 @@ border: 0;
 	max-height: 370px !important;
 	overflow-y: auto;
 }
+
+
+
 
 
 /*********************************************************************************/
