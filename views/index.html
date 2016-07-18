@@ -329,44 +329,62 @@
           </td>
         </tr>
         <tr>
-          <td>
-            <table class="table table-striped"> <!-- Services table -->
+          <td id="servtable">
+            <!-- Services table -->
+            <table class="table table-striped"> 
               <thead>
                 <tr>
                   <th class="col200">Service</th>
                   <th class="col100">Price</th>
                 </tr>
               </thead>
-              <tbody id="serviceBody">
-              </tbody>
+            </table>
+            <div class="overflowTable"> <!-- scrolls excess services -->
+              <table class="table table-striped">
+                <tbody id="serviceBody">
+                <!-- added services will print here -->
+                </tbody>
+              </table> 
+            </div>
+            <table class="table table-striped"> 
               <tfoot>
                 <tr>
                   <th id="numServices" class="col200">0 Services:</th>
                   <th id="servicesCost" class="col100">$0.00</th>
                 </tr>
               </tfoot>
-            </table> <!-- Closes services table -->
+            </table>
           </td>
-          <td>
-            <table class="table table-striped"> <!-- Products table-->
+          <!-- end services table -->
+          <td id="protable">
+          <!-- Products table-->
+            <table class="table table-striped"> 
               <thead>
                 <tr>
                   <th class="col200">Product</th>
                   <th class="col100">Price</th>
                 </tr>
               </thead>
-              <tbody id="productBody">
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th id="numProducts" class="col200">0 Products:</th>
-                  <th id="productsCost" class="col100">$0.00</th>
-                </tr>
-              </tfoot>
-            </table> <!-- Closes products table -->
+            </table>
+            <div class="overflowTable"> <!-- scrolls excess productss -->
+              <table class="table table-striped">
+                <tbody id="productBody">
+                <!-- added products will print here -->
+                </tbody>
+              </table>
+            </div>
+            <table class="table table-striped"> 
+                <tfoot>
+                  <tr>
+                    <th id="numProducts" class="col200">0 Products:</th>
+                    <th id="productsCost" class="col100">$0.00</th>
+                  </tr>
+                </tfoot>
+            </table>
           </td>
-          <td>
-          <table class="col200 table table-striped"> <!-- calculations table -->
+          <!-- end products table -->
+          <td id="calculations">
+          <table class="table table-striped"> <!-- calculations table -->
             <tr>
               <td class="col200">    
                 <span class="labels">Tax
@@ -381,31 +399,32 @@
               <td class="col200">
                 <span class="labels">Subtotal:</span>               
               </td>
-              <td>
-                $<span class="col100" id="subtotal">subtotal</span>
+              <td class="col100">
+                $<span id="subtotal">subtotal</span>
               </td>
             </tr>
             <tr>
               <td class="col200">
-                <span class="labels">Discount:</span> 
+                <span class="labels">Discounts:</span> 
               </td>
-              <td>
-                $<span class="col100 updateGrandTotal" id="discount" step="0.01">discount</span>
+              <td class="col100">
+                $<span class="updateGrandTotal" id="discount" step="0.01">discount</span>
               </td>
             </tr>
             <tr>
               <td class="col200">
                 <span class="labels">Tip:</span>
               </td>
-              <td>
-                <input class="smallinput updateGrandTotal" type="text" id="tip">
+              <td class="col100">
+                <span>$
+                <input class="tiny updateGrandTotal money" type="text" id="tip"></span>
               </td>
             </tr>
             <tr>
               <td class="col200">
                 <span class="labels">Grand Total:</span> 
               </td>
-              <td>
+              <td class="col100">
                 $<span class="smallinput" id="grandtotal">grandtotal</span>
               </td>
             </tr>

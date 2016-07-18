@@ -120,10 +120,10 @@ function main(){
 				subtotal += Number(servuct[4]);
 				discount += Number(servuct[5]);
 				if(servuct[3] === "Service"){
-					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
 					numServices++;
 				} else if(servuct[3] === "Product"){
-					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">'+ servuct[4] +'</td></tr>');
+					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
 					numProducts++;
 				}
 			}
@@ -699,7 +699,9 @@ function main(){
 			values.push({a: people[i][2],
 		       b: people[i][1],
 		       c: people[i][4],
-		       d: recentd,});
+		       d: recentd,
+		   	});
+
 			date = [];
 		}
 	    var searchable = new List('searchlist', columns, values);
