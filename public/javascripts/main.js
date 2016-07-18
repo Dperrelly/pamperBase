@@ -86,18 +86,23 @@ function main(){
 		var tip = $('#tip').val();
 		var discount = $('#discount').val();
 		var cost = 0;
+		var taxTotal = 0;
 		servucts.forEach(function(servuct){
 			if(servuct[1] === currentAppointmentId) {
 				cost = Number(servuct[4]);
 				if(servuct[3] === "Service") total += cost;
-				else total += (cost * (tax / 100 + 1));
-				console.log(total);
+				else {
+					total += (cost * (tax / 100 + 1));
+					taxTotal += cost * (tax / 100);
+				}
 			}
 		});
 		total += (tip - discount);
 		total = Math.round(total * 100) / 100;
 		total = total.toFixed(2);
-		$('#grandtotal').val("$" + total);
+		taxTotal = taxTotal.toFixed(2);
+		$('#grandtotal').html(total);
+		$('#taxtotal').html(taxTotal);
 	}
 
 	var setCurrentAppointmentId = function(event){
@@ -118,7 +123,7 @@ function main(){
 		$('#serviceBody').empty();
 		$('#productBody').empty();
 
-		var numServices = 0, numProducts = 0, subtotal = 0, discount = 0;
+		var numServices = 0, numProducts = 0, subtotal = 0, discount = 0, proTotal = 0, servTotal = 0;
 
 		servucts.forEach(function(servuct){
 			if(servuct[1] === currentAppointmentId){
@@ -127,14 +132,21 @@ function main(){
 				if(servuct[3] === "Service"){
 					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
 					numServices++;
+					servTotal += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
 					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
 					numProducts++;
+					proTotal += Number(servuct[4]);
 				}
 			}
 		});
-		$('#discount').val(discount);
-		$('#subtotal').val(subtotal);
+		$('#servicesCost').html('$' + twoNumberDecimal(servTotal));
+		$('#productsCost').html('$' + twoNumberDecimal(proTotal));
+		$('#numServices').html(numServices + ' Services:');
+		$('#numProducts').html(numProducts + ' Products:');
+		$('#discount').html(discount);
+		$('#subtotal').html(subtotal);
+		calculateGrandTotal();
 	};
 
 	function reloadStylesheets() {
