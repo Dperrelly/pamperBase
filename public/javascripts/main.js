@@ -266,7 +266,7 @@ function main(){
 			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
 			$('#taxTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
-			$('#discTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
+			$('#discTotal').html("Discount Total: $" + twoNumberDecimal(discTotal));
 			$('#yearlyTotal').html(
 				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal));
 			loadPerson(currentPersonId);

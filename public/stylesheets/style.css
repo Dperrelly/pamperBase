@@ -172,29 +172,18 @@ border: 0;
 .center{ /*Save Changes / Add New Appointment Buttons*/
  text-align:center !important;
 }
-.clientdelete{
-	 float:right;
-}
 
-.modalno{
+.floatR{
 	float:right;
 }
 
-.modalyes{
+.floatL{
 	float:left;
 }
 
 .divfooter{
 	padding-right:40px;
 	padding-left:40px;
-}
-
-#apptsave{
-	float:right;
-}
-
-#apptdelete{
-	float:left;
 }
 
 .highlight:hover{ /*Button hover*/

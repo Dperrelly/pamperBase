@@ -99,7 +99,7 @@
             -->
       <article id="client" class="panel">
         <header>
-          <div class="clientdelete">
+          <div class="floatR">
               <button type="button" class="button" id="deletebtn" data-toggle="modal" data-target="#delclientmodal">Delete Client</button>
           </div>
           <div class="clientcreate">
@@ -197,52 +197,114 @@
       <article id="report" class="panel">
         <header>
           <h2>Yearly Report</h2><br/>
-          <div>
+          <div> 
+          <!-- yearly totals -->
             <h2 class="center reportYear">2016</h2>
+            <h3 class="center" id="yearlyTotal"></h3>
             <table id="reportTable" class="table table-striped" align="center">
-            <thead>
-              <tr>
-               <td></td><th class="col200 center" id="yearlyTotal">Yearly Total: $15464</td><td></td>
-              </tr>
-              <tr>
-              <th class="col200 center" id="servTotal">Total Services: $800.57</td>
-              <th class="col200 center" id="proTotal">Total Products: $564.45</td>
-              <th class="col200 center" id="taxTotal">Total Tax: $60.30</td>
-              </tr>
+              <thead>
+                <tr>
+                <th class="col200 center" id="servTotal"></th>
+                <th class="col200 center" id="proTotal"></th>
+                <th class="col200 center" id="taxTotal"></th>
+                <th class="col200 center" id="discTotal"></th>
+                </tr>
               </thead>
             </table>
+         <!-- end yearly totals -->
           </div>
         </header>
-        <table id="reportTable" class="table table-striped" align="center">
+       <!--  monthly totals -->
+          <!-- Jan - Apr -->
+        <table class="table table-striped">
           <thead>
+            <th class=" center">January</th>
+            <th class=" center">February</th>
+            <th class="center">March</th>
+          </thead>
+        </table>
+        <div class="overflowTable"> <!-- scrolls excess services -->
+          <table class="table table-striped">
+            <tbody id="reportJan">
+            <tr>
+                <td>
+                  <th>LName</th>
+                </td>
+                <td>
+                  <th>Services</th>
+                </td>
+                <td>
+                  <th>$$$</th>
+                </td>
+                <td>
+                  <th>Products</th>
+                </td>
+                  <th>$$$</th>
+                <td>
+                  <th>Tax</th>
+                </td>
+                <td>
+                  <th>$$$</th>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <!-- end Jan - Apr -->
+          <!-- May - Aug -->
+        <table class="table table-striped">
+          <thead>
+            <th class="col200 center">April</th>
+            <th class="col200 center">May</th>
+            <th class="col200 center">June</th>
+
+          </thead>
+        </table>
+          <!-- end May - Aug -->
+          <!-- Sep - Dec -->
+        <table class="table table-striped">
+          <thead>
+            <th class="col200 center">July</th>
+            <th class="col200 center">August</th>
+            <th class="col200 center">September</th>
+            <th class="col200 center">October</th>
+            <th class="col200 center">November</th>
+            <th class="col200 center">December</th>
+          </thead>
+        </table>
+          <!-- end Sep - Dec -->
+        <!-- end monthly totals -->
+
+          <table id="reportTable" class="table table-striped" align="center">
+            <thead>
+              <tr>
+                <td>
+                  <th>Last Name, First Name</th>
+                </td>
+                <td>
+                  <th>Total Services</th>
+                </td>
+                <td>
+                  <th>$$$</th>
+                </td>
+                <td>
+                  <th>Total Products</th>
+                </td>
+                  <th>$$$</th>
+                <td>
+                  <th>Total Tax</th>
+                </td>
+                <td>
+                  <th>$$$</th>
+                </td>
+              </tr>
+            </thead>
             <tr>
               <td>
-                <th>Last Name, First Name</th>
-              </td>
-              <td>
-                <th>Total Services</th>
-              </td>
-              <td>
-                <th>$$$</th>
-              </td>
-              <td>
-                <th>Total Products</th>
-              </td>
-                <th>$$$</th>
-              <td>
-                <th>Total Tax</th>
-              </td>
-              <td>
-                <th>$$$</th>
+              <p> </p>
               </td>
             </tr>
-          </thead>
-          <tr>
-            <td>
-            <p> </p>
-            </td>
-          </tr>
-        </table>
+          </table>
     </article>
 
 <!--
@@ -277,8 +339,8 @@
       <p> Do you want to create a new client file?</p>
     </div>
   <div class="modal-footer">
-    <button type="button" class="button modalyes" id="newclientyes">Yes</button>
-    <button type="button" class="button modalno" id="newclientno" data-dismiss="modal">No</button>
+    <button type="button" class="button floatR" id="newclientyes">Yes</button>
+    <button type="button" class="button floatL" id="newclientno" data-dismiss="modal">No</button>
   </div>
 </div>
 
@@ -293,8 +355,8 @@
      <p> Are you sure you want to delete this client?</p>
    </div>
   <div class="modal-footer">
-   <button type="button" class="button modalyes" id="delclientyes">Yes</button>
-   <button type="button" class="button modalno" id="delclientno" data-dismiss="modal">No</button>
+   <button type="button" class="button floatR" id="delclientyes">Yes</button>
+   <button type="button" class="button floatL" id="delclientno" data-dismiss="modal">No</button>
   </div>
 </div>
 
@@ -433,9 +495,9 @@
       </table> <!--Closes servprotable-->
   </div> <!-- closes apptBody-->
   <div id="apptFooter" class="modal-footer">
-    <button type="button" class="button" id="apptdelete">Delete</button>
+    <button type="button" class="button floatL" id="apptdelete">Delete</button>
     <button type="button" class="button" id="apptcancel" data-dismiss="modal">Cancel</button>
-    <button type="button" class="button" id="apptsave">Save</button>
+    <button type="button" class="button floatR" id="apptsave">Save</button>
   </div>
     </form>
 </div> <!-- closes apptModal -->
