@@ -384,10 +384,10 @@
         </tr>
         <tr>
           <td class="center">
-            <button type="button" class="button" id="servadd">Add Services</button>
+            <button type="button" class="button" id="servadd">Add Service</button>
           </td>
           <td class="center">
-            <button type="button" class="button" id="proadd">Add Products</butotn>
+            <button type="button" class="button" id="proadd">Add Product</butotn>
           </td>
         </tr>
         <tr>
@@ -508,20 +508,20 @@
 <div id="addServuct" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3>Edit Servuct</h3>
+    <h3 id="servuctHeader">Edit Servuct</h3>
   </div>
   <div class="modal-body">
     <table class="table table-striped"> 
       <tr>
         <td> 
-          <label for="editservname">Servuct Name:</label> 
+          <label for="editservname" id="servuctLabel">Servuct Name:</label> 
           <input type="text" id="editservname">
         </td>
         <td rowspan="2" class="small">
           <label for="editservprice">Price:</label> 
-          <input type="text" id="editservprice">
+          <input class="money" type="text" id="editservprice">
           <label for="editservdiscount">Discount:</label> 
-          <input type="text" id="editservdiscount">
+          <input class="money" type="text" id="editservdiscount">
         </td>
       </tr>
     </table>

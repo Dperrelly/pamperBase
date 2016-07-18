@@ -7,6 +7,7 @@ function main(){
 	var currentPersonId = 'iql3hgup';
 	var currentAppointmentId = null;
 	var currentServuctId = '68w2dvp2.o00y66r';
+	var currentServuctType = "Service";
 	var people = [];
 	var appointments = [];
 	var servucts = [];
@@ -22,6 +23,7 @@ function main(){
 	});
 
 	function parseTime(time){
+		if(!time) time = "12:00 PM";
 		var hours = Number(time.match(parseTimeRegex1)[1]);
 		var minutes = Number(time.match(parseTimeRegex2)[1]);
 		var AMPM = time.match(parseTimeRegex3)[1];
@@ -84,7 +86,7 @@ function main(){
 		var total = 0;
 		var tax = $('#tax').val();
 		var tip = $('#tip').val();
-		var discount = $('#discount').val();
+		var discount = $('#discount').html();
 		var cost = 0;
 		var taxTotal = 0;
 		servucts.forEach(function(servuct){
@@ -108,7 +110,7 @@ function main(){
 	var setCurrentAppointmentId = function(event){
 		console.log("setting current appointment ID and fields");
 		newAppt = false;
-		currentAppointmentId = event.currentTarget.attributes.apptId.nodeValue;
+		if(event) currentAppointmentId = event.currentTarget.attributes.apptId.nodeValue;
 		appointments.forEach(function(appointment){
 			if(appointment[0] === currentAppointmentId){
 				$('#tax').val(appointment[2]);
@@ -129,12 +131,17 @@ function main(){
 			if(servuct[1] === currentAppointmentId){
 				subtotal += Number(servuct[4]);
 				discount += Number(servuct[5]);
+				var newNode;
 				if(servuct[3] === "Service"){
-					$('#serviceBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
+					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
+					$('#serviceBody').append(newNode);
+					newNode.click(loadService);
 					numServices++;
 					servTotal += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
-					$('#productBody').append('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
+					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
+					$('#productBody').append(newNode);
+					newNode.click(loadProduct);
 					numProducts++;
 					proTotal += Number(servuct[4]);
 				}
@@ -148,6 +155,36 @@ function main(){
 		$('#subtotal').html(subtotal);
 		calculateGrandTotal();
 	};
+
+	function loadService(event){
+		currentServuctType = "Service";
+		currentServuctId = event.currentTarget.attributes.servuctId.nodeValue;
+		console.log(currentServuctId);
+		$('#servuctHeader').html('Edit Service');
+		$('#servuctLabel').html('Service Name:');
+		servucts.forEach(function(servuct){
+			if(servuct[0] === currentServuctId){
+				$('#editservname').val(servuct[2]);
+				$('#editservprice').val(servuct[4]);
+				$('#editservdiscount').val(servuct[5]);
+			}
+		});
+	}
+
+	function loadProduct(event){
+		currentServuctType = "Product";
+		currentServuctId = event.currentTarget.attributes.servuctId.nodeValue;
+		console.log(currentServuctId);
+		$('#servuctHeader').html('Edit Product');
+		$('#servuctLabel').html('Product Name:');
+		servucts.forEach(function(servuct){
+			if(servuct[0] === currentServuctId){
+				$('#editservname').val(servuct[2]);
+				$('#editservprice').val(servuct[4]);
+				$('#editservdiscount').val(servuct[5]);
+			}
+		});
+	}
 
 	function reloadStylesheets() {
 	    var queryString = '?reload=' + new Date().getTime();
@@ -287,6 +324,7 @@ function main(){
 				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal));
 			loadPerson(currentPersonId);
 			loadInventory();
+			setCurrentAppointmentId();
 		}, function(e){
 			console.log('load servucts error');
 			console.log(e);
@@ -304,7 +342,6 @@ function main(){
 					if(value.length) inventory.push(value);
 				});
 			}
-			console.log(inventory);
 		}, function(e){
 			console.log('load inventory error');
 			console.log(e);
@@ -511,7 +548,7 @@ function main(){
 	function addServuct(servuct){
 		ss.values.get({
 		    spreadsheetId: servuctsId,
-		    range: 'A1:E',
+		    range: 'A1:F',
 		  }).then(function(response) {
 		  		var row = null;
 		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
@@ -519,14 +556,15 @@ function main(){
 		  		}
 		  		if(!row) row = response.result.values.length + 1;
 		  		console.log("here:", row, response.result.values);
-		  		var range = 'A' + row + ":E" + row;
-		  		var now = (Date.now() / 25).toString(36);
+		  		var range = 'A' + row + ":F" + row;
+		  		var now = (Date.now() / 4).toString(36);
 		  		var array = [[
 		  		now,
 		  		servuct.id,
 		  		servuct.name,
 		  		servuct.type,
 		  		servuct.cost,
+		  		servuct.discount
 		  		]];
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('add servuct success');
@@ -542,7 +580,7 @@ function main(){
 	function editServuct(id, array){
 		ss.values.get({
 		    spreadsheetId: servuctsId,
-		    range: 'A1:E',
+		    range: 'A1:F',
 		  }).then(function(response) {
 		  		var row = null;
 		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){
@@ -552,7 +590,7 @@ function main(){
 		  			console.log('id not found');
 		  			return;
 		  		}
-		  		var range = 'B' + row + ":E" + row;
+		  		var range = 'B' + row + ":F" + row;
 		  		console.log("updating:", id, range, array);
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('edit servuct success');
@@ -567,7 +605,7 @@ function main(){
 	function deleteServuct(id){
 		ss.values.get({
 		    spreadsheetId: servuctsId,
-		    range: 'A1:E',
+		    range: 'A1:F',
 		  }).then(function(response) {
 		  		var row = null;
 		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
@@ -577,8 +615,8 @@ function main(){
 		  			console.log('id not found');
 		  			return;
 		  		}
-		  		var range = 'A' + row + ":E" + row;
-		  		var array = [["", "", "", "", ""]];
+		  		var range = 'A' + row + ":F" + row;
+		  		var array = [["", "", "", "", "", ""]];
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('delete servuct success');
 				loadPeople();
@@ -671,23 +709,18 @@ function main(){
 		date: $('#servicedate').val(),
 		notes: $('#notes').val(),
 		};
-		if(newAppt){
-			addAppointment(appointment);
-			newAppt = false;
-		}else{
-			editAppointment(currentAppointmentId, [[
-				currentPersonId,
-				$('#tax').val(),
-				$('#tip').val(),
-				$('#discount').val(),
-				$('#grandtotal').val(),
-				$('#time').val(),
-				$('#servicedate').val(),
-				$('#notes').val(),
-				$('#cash').val(),
-				$('#credit').val(),
-				]]);
-		}
+		editAppointment(currentAppointmentId, [[
+			currentPersonId,
+			$('#tax').val(),
+			$('#tip').val(),
+			$('#discount').val(),
+			$('#grandtotal').val(),
+			$('#time').val(),
+			$('#servicedate').val(),
+			$('#notes').val(),
+			$('#cash').val(),
+			$('#credit').val(),
+			]]);
 		$('#apptModal').modal('hide');
 	});
 	
@@ -704,7 +737,18 @@ function main(){
 		$('#servicedate').val(0);
 		$('#notes').val("");
 		calculateGrandTotal();
-		console.log('current appt nulled');
+		var appointment = {
+			id: currentPersonId,
+			tax: $('#tax').val(),
+			tip: $('#tip').val(),
+			discount: $('#discount').val(),
+			total: $('#grandtotal').val(),
+			time: $('#time').val(),
+			date: $('#servicedate').val(),
+			notes: $('#notes').val(),
+			};
+		addAppointment(appointment);
+		console.log('new appt made');
 	});
 
 	$('#apptdelete').click(function(){
@@ -740,6 +784,54 @@ function main(){
 
 	$('#delclientyes').click(function(){
 		deletePerson(currentPersonId);
+	});
+
+	$('#servdelete').click(function(){
+		deleteServuct(currentServuctId);
+		$('#addServuct').modal('hide');
+	});
+
+	$('#servsave').click(function(){
+		var servuct = [[
+			currentAppointmentId,
+  			$('#editservname').val(),
+  			currentServuctType,
+  			$('#editservprice').val(),
+  			$('#editservdiscount').val(),
+		]];
+		if(currentServuctId) editServuct(currentServuctId, servuct);
+		else{
+			addServuct({
+				id: currentAppointmentId,
+				name: $('#editservname').val(),
+				type: currentServuctType,
+				cost: $('#editservprice').val(),
+				discount:$('#editservdiscount').val(),
+			});
+		}
+		$('#addServuct').modal('hide');
+	});
+
+	$('#servadd').click(function(){
+		currentServuctType = "Service";
+		currentServuctId = null;
+		$('#servuctHeader').html('New Service');
+		$('#servuctLabel').html('Service Name:');
+		$('#editservname').val("");
+		$('#editservprice').val(0.00);
+		$('#editservdiscount').val(0.00);
+		$('#addServuct').modal('show');
+	});
+
+	$('#proadd').click(function(){
+		currentServuctType = "Product";
+		currentServuctId = null;
+		$('#servuctHeader').html('New Product');
+		$('#servuctLabel').html('Product Name:');
+		$('#editservname').val("");
+		$('#editservprice').val(0.00);
+		$('#editservdiscount').val(0.00);
+		$('#addServuct').modal('show');
 	});
 
 	$('.updateGrandTotal').keyup(calculateGrandTotal);
