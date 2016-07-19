@@ -279,7 +279,7 @@ function main(){
 						else if(numServs) service += " + " + numServs + " others";
 						var total = appointment[5];
 						var notes = appointment[8] ? appointment[8] : "";
-						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight clearboth" data-toggle="modal" data-id="1" data-target="#apptModal"><td>'+ date +'</td><td>'+ service +'</td><td>'+ total +'</td><td>'+ notes +'</td></tr>');
+						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight clearboth" data-toggle="modal" data-id="1" data-target="#apptModal"><td>'+ date +'</td><td>'+ service +'</td><td>$'+ total +'</td><td>'+ notes +'</td></tr>');
 						$('#appointments').append(newNode);
 						newNode.click(setCurrentAppointmentId);
 					}
@@ -312,6 +312,7 @@ function main(){
 					servTotal += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
 					proTotal += Number(servuct[4]);
+					console.log(servuct, apptKey);
 					tax = Number(apptKey[servuct[1]][2]) / 100;
 					taxTotal += servuct[4] * tax;
 				}
@@ -513,6 +514,9 @@ function main(){
 		  		var array = [["", "", "", "", "", "", "", "", "", "", ""]];
 			  	updateSS(appointmentsId, range, array).then(function(response){
 				console.log('delete appointment success');
+				servucts.forEach(function(servuct){
+					if(servuct[1] === id) deleteServuct(servuct[0]);
+				});
 				loadPeople();
 			});
 		  }, function(e) {
@@ -703,8 +707,8 @@ function main(){
 		id: currentPersonId,
 		tax: $('#tax').val(),
 		tip: $('#tip').val(),
-		discount: $('#discount').val(),
-		total: $('#grandtotal').val(),
+		discount: $('#discount').html(),
+		total: $('#grandtotal').html(),
 		time: $('#time').val(),
 		date: $('#servicedate').val(),
 		notes: $('#notes').val(),
@@ -713,8 +717,8 @@ function main(){
 			currentPersonId,
 			$('#tax').val(),
 			$('#tip').val(),
-			$('#discount').val(),
-			$('#grandtotal').val(),
+			$('#discount').html(),
+			$('#grandtotal').html(),
 			$('#time').val(),
 			$('#servicedate').val(),
 			$('#notes').val(),
@@ -728,6 +732,10 @@ function main(){
 		newAppt = true;
 		var now = (Date.now() / 2).toString(36);
 		currentAppointmentId = now;
+		$('#servicesCost').html('$' + 0);
+		$('#productsCost').html('$' + 0);
+		$('#numServices').html('0 Services:');
+		$('#numProducts').html('0 Products:');
 		$('#serviceBody').empty();
 		$('#productBody').empty();
 		$('#tax').val(8);
