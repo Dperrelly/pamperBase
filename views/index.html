@@ -247,71 +247,6 @@
                       <td id="janDisc" class="colFixedB">20.00</td>
                       <td id="janAppTotal" class="colFixedB">8120.00</td>
                     </tr>
-                    <tr class="highlight">
-                      <td id="janName" class="colFixedL">lastname, first</td>
-                      <td id="janServ" class="colFixedB">150.00</td>
-                      <td id="janPro" class="colFixedB">547.00</td>
-                      <td id="janTax" class="colFixedS">20.15</td>
-                      <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
-                    </tr>
-                    <tr class="highlight">
-                      <td id="janName" class="colFixedL">lastname, first</td>
-                      <td id="janServ" class="colFixedB">150.00</td>
-                      <td id="janPro" class="colFixedB">547.00</td>
-                      <td id="janTax" class="colFixedS">20.15</td>
-                      <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
-                    </tr>
-                    <tr class="highlight">
-                      <td id="janName" class="colFixedL">lastname, first</td>
-                      <td id="janServ" class="colFixedB">150.00</td>
-                      <td id="janPro" class="colFixedB">547.00</td>
-                      <td id="janTax" class="colFixedS">20.15</td>
-                      <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
-                    </tr>
-                    <tr class="highlight">
-                      <td id="janName" class="colFixedL">lastname, first</td>
-                      <td id="janServ" class="colFixedB">150.00</td>
-                      <td id="janPro" class="colFixedB">547.00</td>
-                      <td id="janTax" class="colFixedS">20.15</td>
-                      <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
-                    </tr>
-                    <tr class="highlight">
-                      <td id="janName" class="colFixedL">lastname, first</td>
-                      <td id="janServ" class="colFixedB">150.00</td>
-                      <td id="janPro" class="colFixedB">547.00</td>
-                      <td id="janTax" class="colFixedS">20.15</td>
-                      <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
-                    </tr>
-                    <tr class="highlight">
-                      <td id="janName" class="colFixedL">lastname, first</td>
-                      <td id="janServ" class="colFixedB">150.00</td>
-                      <td id="janPro" class="colFixedB">547.00</td>
-                      <td id="janTax" class="colFixedS">20.15</td>
-                      <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
-                    </tr>
-                    <tr class="highlight">
-                      <td id="janName" class="colFixedL">lastname, first</td>
-                      <td id="janServ" class="colFixedB">150.00</td>
-                      <td id="janPro" class="colFixedB">547.00</td>
-                      <td id="janTax" class="colFixedS">20.15</td>
-                      <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
-                    </tr>
-                    <tr class="highlight">
-                      <td id="janName" class="colFixedL">lastname, first</td>
-                      <td id="janServ" class="colFixedB">150.00</td>
-                      <td id="janPro" class="colFixedB">547.00</td>
-                      <td id="janTax" class="colFixedS">20.15</td>
-                      <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
-                    </tr>
-                    
                   </tbody>
                 </table> <!-- closes month appointments -->
               </div> <!-- close overflow -->
@@ -973,6 +908,14 @@
           <td id="calculations">
           <table class="table table-striped"> <!-- calculations table -->
             <tr>
+              <td class="col200">
+                <span class="labels">Subtotal:</span>               
+              </td>
+              <td class="col100">
+                <span id="subtotal" class="money">subtotal</span>
+              </td>
+            </tr>
+            <tr>
               <td class="col200">    
                 <span class="labels">Tax
                 <input class="tiny updateGrandTotal" type="text" id="tax">
@@ -984,18 +927,10 @@
             </tr>
             <tr>
               <td class="col200">
-                <span class="labels">Subtotal:</span>               
-              </td>
-              <td class="col100">
-                $<span id="subtotal">subtotal</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="col200">
                 <span class="labels">Discounts:</span> 
               </td>
               <td class="col100">
-                $<span class="updateGrandTotal" id="discount" step="0.01">discount</span>
+                <span class="updateGrandTotal money" id="discount" step="0.01">discount</span>
               </td>
             </tr>
             <tr>
