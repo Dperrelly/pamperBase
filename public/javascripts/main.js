@@ -111,17 +111,19 @@ function main(){
 	var setCurrentAppointmentId = function(event){
 		console.log("setting current appointment ID and fields");
 		newAppt = false;
-		if(event) currentAppointmentId = event.currentTarget.attributes.apptId.nodeValue;
-		appointments.forEach(function(appointment){
-			if(appointment[0] === currentAppointmentId){
-				$('#tax').val(appointment[2]);
-				$('#tip').val(appointment[3]);
-				$('#grandtotal').val(appointment[5]);
-				$('#time').val(appointment[6]);
-				$('#servicedate').val(appointment[7]);
-				$('#notes').val(appointment[8]);
-			}
-		});
+		if(event) {
+			currentAppointmentId = event.currentTarget.attributes.apptId.nodeValue;
+			appointments.forEach(function(appointment){
+				if(appointment[0] === currentAppointmentId){
+					$('#tax').val(appointment[2]);
+					$('#tip').val(appointment[3]);
+					$('#grandtotal').val(appointment[5]);
+					$('#time').val(appointment[6]);
+					$('#servicedate').val(appointment[7]);
+					$('#notes').val(appointment[8]);
+				}
+			});
+		}
 
 		$('#serviceBody').empty();
 		$('#productBody').empty();
@@ -709,7 +711,7 @@ function main(){
 		tax: $('#tax').val(),
 		tip: $('#tip').val(),
 		discount: $('#discount').html(),
-		total: $('#grandtotal').html(),
+		total: $('#grandtotal').html() || '0.00',
 		time: $('#time').val(),
 		date: $('#servicedate').val(),
 		notes: $('#notes').val(),
@@ -719,7 +721,7 @@ function main(){
 			$('#tax').val(),
 			$('#tip').val(),
 			$('#discount').html(),
-			$('#grandtotal').html(),
+			$('#grandtotal').html() || '0.00',
 			$('#time').val(),
 			$('#servicedate').val(),
 			$('#notes').val(),
