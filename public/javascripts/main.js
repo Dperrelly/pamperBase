@@ -87,7 +87,8 @@ function main(){
 		var total = 0;
 		var tax = $('#tax').val();
 		var tip = $('#tip').val();
-		var discount = $('#discount').html();
+		var discount = $('#discount').html().substr(1);
+		discount = Number(discount);
 		var cost = 0;
 		var taxTotal = 0;
 		servucts.forEach(function(servuct){
@@ -154,8 +155,8 @@ function main(){
 		$('#productsCost').html('$' + twoNumberDecimal(proTotal));
 		$('#numServices').html(numServices + ' Services:');
 		$('#numProducts').html(numProducts + ' Products:');
-		$('#discount').html(discount);
-		$('#subtotal').html(subtotal);
+		$('#discount').html("$" + discount.toFixed(2));
+		$('#subtotal').html(subtotal.toFixed(2));
 		calculateGrandTotal();
 	};
 
