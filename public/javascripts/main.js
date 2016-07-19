@@ -847,6 +847,7 @@ function main(){
 
 	$('.updateGrandTotal').keyup(calculateGrandTotal);
 	$('.money').blur(function(event){
+		$(this).html(twoNumberDecimal($(this).html()));
 		$(this).val(twoNumberDecimal($(this).val()));
 	});
 
