@@ -167,8 +167,8 @@ border: 0;
 /*Appointment Modal*/
 #apptModal {
 	margin:0 auto !important;
-	width: 60vw !important;
-	max-width: 60vw !important;
+	width: 80vw !important;
+	max-width: 80vw !important;
 	min-width: 900px !important;
 	top:7%;
 	left:50% !important;
@@ -271,6 +271,12 @@ border: 0;
 	float: left;
 	}
 
+	.tablepadding {
+		padding-left:20vw !important;
+	}
+
+	
+
 	.overflowTable {
 		height: auto !important;
 		min-height: 0px !important;
@@ -342,48 +348,20 @@ border: 0;
 	overflow-y: auto;
 }
 
-#serviceGroup {
-	width: 20vw !important;
-	max-height: 50vh !important;
-	margin-left:15% !important;
-}
-
-#productGroup {
-	width: 23vw !important;
-	max-height: 50vh !important;
-	margin-left:10% !important;
-}
-
-	.overflowServucts{
-		height: auto !important;
-		min-height: 0px !important;
-		max-height: 50vh !important;
-		overflow-y: auto !important;
-	}
-#serviceGroup input[type="textbox"], #productGroup input[type="textbox"]{
-border: 0;
-			background: #f0f0f0;
-			font-size: 18px;
-			width: 90%;
-			height: 2.2em;
-			font-weight: bold;
-}
-
-	.col250 {
-		width:300px !important;
-		min-width: 200px !important;
-		max-width: 300px !important;
-		padding-left: 20px !important;
-		/*text-align: center !important;*/
-	}
-
+/*Inventory Panel*/
 #productTable {
 	width: 500px !important;
 	max-width: 500px !important;
 	max-height: 70vh !important;
 	border-style: solid;
     border-right: thick solid #CCCCCC;
+    padding-right: 40px !important;
+}
 
+#serviceTable {
+	width: 400px !important;
+	max-width: 400px !important;
+	padding-left: 40px !important;
 }
 
 .servuctList {
@@ -395,15 +373,47 @@ border: 0;
 .colServuct {
 		overflow: hidden !important;
 		text-overflow: ellipsis;
-		width:200px !important;
+		width:250px !important;
 		min-width: 150px !important;
-		max-width: 200px !important;
+		max-width: 250px !important;
 	}
 
-#serviceTable {
-	width: 400px !important;
-	max-width: 400px !important;
-}
+		/*Inventory Modal*/
+		#serviceGroup {
+			width: 20vw !important;
+			max-height: 50vh !important;
+			margin-left:15% !important;
+		}
+
+		#productGroup {
+			width: 23vw !important;
+			max-height: 50vh !important;
+			margin-left:10% !important;
+		}
+
+			.overflowServucts{
+				height: auto !important;
+				min-height: 0px !important;
+				max-height: 50vh !important;
+				overflow-y: auto !important;
+			}
+		#serviceGroup input[type="textbox"], #productGroup input[type="textbox"]{
+			border: 0;
+			background: #f0f0f0;
+			font-size: 18px;
+			width: 90%;
+			height: 2.2em;
+			font-weight: bold;
+		}
+
+		.col250 {
+			width:300px !important;
+			min-width: 200px !important;
+			max-width: 300px !important;
+			padding-left: 20px !important;
+			/*text-align: center !important;*/
+		}
+
 
 
 

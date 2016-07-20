@@ -353,10 +353,10 @@ function main(){
 			inventory.forEach(function(item){
 				var newNode;
 				if(item[1] === "Service"){
-					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td></td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td></tr>');
+					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td></tr>');
 					$('#services').append(newNode);
 				}else{
-					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td>$' + twoNumberDecimal(item[2]) + '</td><td class="col200">' + item[1] + '</td></tr>');
+					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td><td class="col200">' + item[1] + '</td></tr>');
 					$('#products').append(newNode);
 				}
 			});

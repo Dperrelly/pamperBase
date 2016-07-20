@@ -811,7 +811,7 @@
             <table class="table">
               <thead>
                 <th class="colServuct">Service</th>
-                <th>Price</th>
+                <th class="col200">Price</th>
               </thead>
             </table>
             <div class="servuctList">
@@ -949,9 +949,9 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     <h3>Appointment</h3>
   </div>
-  <div id="apptBody" class="modal-body">
+  <div id="apptBody" class="modal-body" align="center">
     <form>
-      <table id="servprotable" class="table table-striped" align="center">
+      <table id="servprotable" class="table table-striped">
         <tr>
           <td>
             <label for="servicedate">Date of Service:</label>  
@@ -1218,8 +1218,13 @@
   </div>
 </div> <!-- closes addServuct modal -->
 
-
-    <!-- <table class="table table-striped"> 
+<div id="editServuctModal" class="modal hide fade" data-focus-on="input:first">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3>Edit Servuct</h3>
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped"> 
       <tr>
         <td> 
           <label for="editservname" id="servuctLabel">Servuct Name:</label> 
@@ -1232,7 +1237,9 @@
           <input class="money" type="text" id="editservdiscount">
         </td>
       </tr>
-    </table> -->
+    </table>
+  </div>
+</div>
   
 
 
