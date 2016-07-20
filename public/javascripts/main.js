@@ -353,7 +353,7 @@ function main(){
 			inventory.forEach(function(item){
 				var newNode;
 				if(item[1] === "Service"){
-					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td></td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td></tr>');
+					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td></tr>');
 					$('#services').append(newNode);
 				}else{
 					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td>$' + twoNumberDecimal(item[2]) + '</td><td class="col200">' + item[1] + '</td></tr>');
@@ -657,7 +657,6 @@ function main(){
 		  	items.forEach(function(item){
 		  		var row = null;
 		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){	
-		  			console.log((i+1).toString());	
 		  			if (!response.result.values[i].length && !takenRows[(i+1).toString()]) {
 		  				row = i + 1;
 		  				takenRows[(i+1).toString()] = true;
@@ -928,7 +927,8 @@ function main(){
 	$('#saveProduct').click(function(){
 		$('#addProModal').modal('hide');
 		var items = [];
-		for(var i = 1; i < $('#productGroup').children().length; i++){
+		var length = $('#productGroup').children().length;
+		for(var i = 1; i < length; i++){
 			var name = $('#product' + i).val(), 
 			quantity = $('#proQuantity' + i).val(), 
 			price = $('#proPrice' + i).val();
@@ -939,12 +939,19 @@ function main(){
 			});
 		}
 		addInventory(items);
+		$('#product1').val("");
+	    $('#proPrice1').val("");
+	    $('#proQuantity1').val("");
+	    for(i = 2; i < length; i++){
+	    	$("#productDiv" + i).remove();
+	    }
 	});
 
 	$('#saveService').click(function(){
 		$('#addServModal').modal('hide');
 		var items = [];
-		for(var i = 1; i < $('#serviceGroup').children().length; i++){
+		var length = $('#serviceGroup').children().length;
+		for(var i = 1; i < length; i++){
 			var name = $('#service' + i).val(), 
 			quantity = "Service", 
 			price = $('#servPrice' + i).val();
@@ -955,6 +962,11 @@ function main(){
 			});
 		}
 		addInventory(items);
+		$('#service1').val("");
+     	$('#servPrice1').val("");
+     	for(i = 2; i < length; i++){
+        	$("#serviceDiv" + i).remove();
+      	}
 	});
 
 	$('.updateGrandTotal').keyup(calculateGrandTotal);
