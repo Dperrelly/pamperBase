@@ -346,6 +346,20 @@ function main(){
 					if(value.length) inventory.push(value);
 				});
 			}
+
+			$('#services').empty();
+			$('#products').empty();
+
+			inventory.forEach(function(item){
+				var newNode;
+				if(item[1] === "Service"){
+					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td></td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td></tr>');
+					$('#services').append(newNode);
+				}else{
+					newNode = $('<tr class="highlight"><td class="colServuct">' + item[0] + '</td><td>$' + twoNumberDecimal(item[2]) + '</td><td class="col200">' + item[1] + '</td></tr>');
+					$('#products').append(newNode);
+				}
+			});
 		}, function(e){
 			console.log('load inventory error');
 			console.log(e);
@@ -634,28 +648,94 @@ function main(){
 		  });
 	}
 
-	function editInventory(product, array){
+	function addInventory(items){
 		ss.values.get({
 		    spreadsheetId: inventoryId,
-		    range: 'A1:E',
+		    range: 'A1:C',
+		  }).then(function(response) {
+		  	var takenRows = {};
+		  	items.forEach(function(item){
+		  		var row = null;
+		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){	
+		  			console.log((i+1).toString());	
+		  			if (!response.result.values[i].length && !takenRows[(i+1).toString()]) {
+		  				row = i + 1;
+		  				takenRows[(i+1).toString()] = true;
+		  			}
+		  		}
+		  		i = 1;
+		  		while(!row) { 
+		  			if(!takenRows[(response.result.values.length + i).toString()]){
+		  				row = response.result.values.length + i;
+		  				takenRows[(response.result.values.length + i).toString()] = true;
+		  			}
+		  			i++;
+		  		}
+		  		var range = 'A' + row + ":C" + row;
+		  		var array = [[
+		  		item.name,
+		  		item.quantity,
+		  		item.price
+		  		]];
+				console.log(inventoryId, range, array);
+			  	updateSS(inventoryId, range, array).then(function(response){
+					loadInventory();
+				});
+			  });
+		  }, function(e) {
+		  	console.log(e);
+		    console.log('add inventory error');
+		  });
+	}
+
+	function editInventory(itemName, array){
+		ss.values.get({
+		    spreadsheetId: inventoryId,
+		    range: 'A1:C',
 		  }).then(function(response) {
 		  		var row = null;
 		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){
-		  			if (response.result.values[i][0] === product) row = i + 1;
+		  			if (response.result.values[i][0] === itemName) row = i + 1;
 		  		}
 		  		if(!row) {
-		  			console.log('product not found');
+		  			console.log('itemName not found');
 		  			return;
 		  		}
-		  		var range = 'A' + row + ":E" + row;
-		  		console.log("updating:", product, range, array);
+		  		var range = 'A' + row + ":C" + row;
+		  		console.log("updating:", itemName, range, array);
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('edit inventory success');
-				loadPeople();
+				loadInventory();
 			});
 		  }, function(e) {
 		  	console.log(e);
 		    console.log('edit inventory error');
+		  });
+	}
+
+	function deleteInventory(itemName){
+		ss.values.get({
+		    spreadsheetId: inventoryId,
+		    range: 'A1:C',
+		  }).then(function(response) {
+		  		var row = null;
+		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){
+		  			if (response.result.values[i][0] === itemName) row = i + 1;
+		  		}
+		  		if(!row) {
+		  			console.log('item name not found');
+		  			return;
+		  		}
+		  		var range = 'A' + row + ":C" + row;
+		  		var array = [["", "", ""]];
+		  		console.log("deleting:", itemName, range, array);
+			  	updateSS(servuctsId, range, array).then(function(response){
+				console.log('edit inventory success');
+				loadInventory();
+			});
+		  }, function(e) {
+		  	console.log(e);
+		    console.log('delete inventory error');
 		  });
 	}
 
@@ -843,6 +923,38 @@ function main(){
 		$('#editservprice').val(0.00);
 		$('#editservdiscount').val(0.00);
 		$('#addServuct').modal('show');
+	});
+
+	$('#saveProduct').click(function(){
+		$('#addProModal').modal('hide');
+		var items = [];
+		for(var i = 1; i < $('#productGroup').children().length; i++){
+			var name = $('#product' + i).val(), 
+			quantity = $('#proQuantity' + i).val(), 
+			price = $('#proPrice' + i).val();
+			if(name && quantity && price)items.push({
+				name: name,
+				quantity: quantity,
+				price: price
+			});
+		}
+		addInventory(items);
+	});
+
+	$('#saveService').click(function(){
+		$('#addServModal').modal('hide');
+		var items = [];
+		for(var i = 1; i < $('#serviceGroup').children().length; i++){
+			var name = $('#service' + i).val(), 
+			quantity = "Service", 
+			price = $('#servPrice' + i).val();
+			if(name && price) items.push({
+				name: name,
+				quantity: quantity,
+				price: price
+			});
+		}
+		addInventory(items);
 	});
 
 	$('.updateGrandTotal').keyup(calculateGrandTotal);
