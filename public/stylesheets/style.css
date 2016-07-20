@@ -18,6 +18,18 @@
     font-style: normal;
 }
 
+@font-face
+ {
+ 	font-family: 'LaurenScript';
+ 	src: url('fonts/LaurenScript.eot');
+ 	src: url('fonts/LaurenScript.eot?#iefix') format('embedded-opentype'),
+   	 	 url('fonts/LaurenScript.woff') format('woff'),
+   	 	 url('fonts/LaurenScript.ttf') format("truetype"),
+   	 	 url('fonts/LaurenScript.svg#LaurenScript') format('svg');
+    font-weight: normal;
+    font-style: normal;
+ }
+
 .fc-event {
     font-size: .5em;
 }
@@ -50,6 +62,13 @@
 
 .wrapper {
   @include flexbox();
+}
+
+#title {
+	margin-top:3%;
+			font-family: "LaurenScript";
+			font-size:50px;
+			font-style: italic;
 }
 
 .item {
@@ -185,19 +204,22 @@ border: 0;
 	.height900{
 		overflow-y: auto !important;
 		height:80vh !important;
+		min-height: 1650px !important;
 		max-height:80vh !important;
+		max-width: 75vw;
 		width:75vw;
+		min-width: 70vw;
 		margin-top: 50px;
 }
 	.col500 {
-		overflow-x: visible !important;
+		overflow-x: show !important;
 		/*text-overflow: ellipsis;*/
-		width:33vw !important;
-		min-width: 450px !important;
-		max-width: 33vw !important;
+		width:35vw !important;
+		min-width: 630px !important;
+		max-width: 35vw !important;
 /*		padding-right: 50px !important;*/
 		float:left;
-		margin-right: 20px !important;
+	/*margin-right: 20px !important;*/
 	}
 
 	.colFixedL {
@@ -359,6 +381,8 @@ border: 0;
 	width: 500px !important;
 	max-width: 500px !important;
 	max-height: 70vh !important;
+	border-style: solid;
+    border-right: thick solid #CCCCCC;
 
 }
 
@@ -371,9 +395,9 @@ border: 0;
 .colServuct {
 		overflow: hidden !important;
 		text-overflow: ellipsis;
-		width:300px !important;
-		min-width: 200px !important;
-		max-width: 300px !important;
+		width:200px !important;
+		min-width: 150px !important;
+		max-width: 200px !important;
 	}
 
 #serviceTable {
@@ -381,6 +405,24 @@ border: 0;
 	max-width: 400px !important;
 }
 
+
+
+.newList {
+max-height: 65vh !important;
+}
+
+#servModal {
+	width: 45vw !important;
+}
+
+.namecol {
+	width:300px !important;
+	max-width:300px !important;
+}
+
+input[type=checkbox] {
+	width:25px !important; height:25px !important;
+}
 
 /*********************************************************************************/
 /* Basic                                                                         */
@@ -835,8 +877,8 @@ border: 0;
 
 	#main
 	{
-		width: 70vw !important;
-		max-width: 70vw !important;
+		width: 80vw !important;
+		max-width: 80vw !important;
 		min-width: 900px !important;
 		left:50% !important;
 		top: -120px;
@@ -848,9 +890,12 @@ border: 0;
 	}
 
 	#report {
-		width: 75vw !important;
-		max-width: 75vw !important;
+		width: 80vw !important;
+		max-width: 80vw !important;
 		min-width: 900px !important;
+		height: 90vh !important;
+		max-height: 90vh !important;
+		min-height: 2000px !important;
 		top: -25px;
 	}
 
@@ -860,12 +905,12 @@ border: 0;
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 70vw !important;
-		max-width: 70vw !important;
+		width: 80vw !important;
+		max-width: 80vw !important;
 		min-width: 900px !important;
-		height: 120vh !important;
-		max-height: 120vh !important;
-		min-height: 1000px !important;
+		height: 90vh !important;
+		max-height: 90vh !important;
+		min-height: 1100px !important;
 		left:50% !important;
 		transform: translateX(-50%) !important;
 	}
