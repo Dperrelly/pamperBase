@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     var pcounter = 2;
     var scounter = 2;
     
@@ -57,10 +56,18 @@ $("#removeService").click(function () {
     
      $("#getButtonValue").click(function () {
     
-  var msg = '';
-  for(i=1; i<pcounter; i++){
-      msg += "\n Textbox #" + i + " : " + $('#product' + i).val();
-  }
+        var msg = '';
+        for(i=1; i<pcounter; i++){
+            msg += "\n Textbox #" + i + " : " + $('#product' + i).val();
+        }
         alert(msg);
      });
-  });
+
+    $('#saveProduct').click(function(){
+      pcounter = 2;
+    });
+
+    $('#saveService').click(function(){
+      scounter = 2;
+    });
+});
