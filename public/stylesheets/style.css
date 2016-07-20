@@ -148,9 +148,9 @@ border: 0;
 /*Appointment Modal*/
 #apptModal {
 	margin:0 auto !important;
-	width: 920px !important;
-	max-width: 920px !important;
-	min-width: 600px !important;
+	width: 60vw !important;
+	max-width: 60vw !important;
+	min-width: 900px !important;
 	top:7%;
 	left:50% !important;
 	transform: translateX(-50%);
@@ -159,9 +159,9 @@ border: 0;
 	text-align:center !important;
 	min-height: 360px !important;
 	height: 500px !important;
-	max-height:70vh !important;
-	overflow-x:hidden;
-
+	max-height:71vh !important;
+	overflow-y:hidden;
+	overflow-x:auto;
 	}
 
 	.smallinput {
@@ -235,10 +235,18 @@ border: 0;
 		/*text-align: center !important;*/
 	}
 
-	#servtable, #protable #calculations{
+	#servtable, #protable{
 		width:280px !important;
 		max-width:280px !important;
 		min-width: 200px !important;
+	}
+
+	#notes{
+	resize: none !important;
+	height: 115px;
+	width:510px;
+	max-height: 115px; 
+	float: left;
 	}
 
 	.overflowTable {
@@ -300,17 +308,6 @@ border: 0;
 	width: 140px !important;
 }
 
-/*form input.button {
-
-}
-*/
-#notes{/*Resize note textarea only vertical*/
-	resize: vertical !important;
-	height: 5.25em;
-	width:280px;
-	max-height: 200px; }
-
-
 /*Reports*/
 .reportYear {
 	height:30px;
@@ -323,8 +320,66 @@ border: 0;
 	overflow-y: auto;
 }
 
+#serviceGroup {
+	width: 20vw !important;
+	max-height: 50vh !important;
+	margin-left:15% !important;
+}
 
+#productGroup {
+	width: 23vw !important;
+	max-height: 50vh !important;
+	margin-left:10% !important;
+}
 
+	.overflowServucts{
+		height: auto !important;
+		min-height: 0px !important;
+		max-height: 50vh !important;
+		overflow-y: auto !important;
+	}
+#serviceGroup input[type="textbox"], #productGroup input[type="textbox"]{
+border: 0;
+			background: #f0f0f0;
+			font-size: 18px;
+			width: 90%;
+			height: 2.2em;
+			font-weight: bold;
+}
+
+	.col250 {
+		width:300px !important;
+		min-width: 200px !important;
+		max-width: 300px !important;
+		padding-left: 20px !important;
+		/*text-align: center !important;*/
+	}
+
+#productTable {
+	width: 500px !important;
+	max-width: 500px !important;
+	max-height: 70vh !important;
+
+}
+
+.servuctList {
+	min-height: 680px !important;
+	max-height: 80vh !important;
+	overflow-y: auto !important;
+}
+
+.colServuct {
+		overflow: hidden !important;
+		text-overflow: ellipsis;
+		width:300px !important;
+		min-width: 200px !important;
+		max-width: 300px !important;
+	}
+
+#serviceTable {
+	width: 400px !important;
+	max-width: 400px !important;
+}
 
 
 /*********************************************************************************/
