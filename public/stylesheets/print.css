@@ -1,0 +1,35 @@
+body {
+	font-family: monaco, monospace;
+}
+
+h3{
+	text-decoration: underline;
+	font-style: italic
+}
+
+ul {
+	padding: 0;
+	list-style-position: inside;
+}
+
+.list{
+	vertical-align: top;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.price{
+	text-align: right;
+}
+
+.price-list{
+	list-style-type: none;
+}
+
+.subtotal{
+	font-weight: bold;
+}
+
+.nameList{
+	text-align: left;
+}

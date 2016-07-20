@@ -156,7 +156,7 @@ function main(){
 		$('#numServices').html(numServices + ' Services:');
 		$('#numProducts').html(numProducts + ' Products:');
 		$('#discount').html("$" + discount.toFixed(2));
-		$('#subtotal').html(subtotal.toFixed(2));
+		$('#subtotal').html("$" + subtotal.toFixed(2));
 		calculateGrandTotal();
 	};
 
@@ -316,7 +316,6 @@ function main(){
 					servTotal += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
 					proTotal += Number(servuct[4]);
-					console.log(servuct, apptKey);
 					tax = Number(apptKey[servuct[1]][2]) / 100;
 					taxTotal += servuct[4] * tax;
 				}
@@ -753,8 +752,8 @@ function main(){
 			id: currentPersonId,
 			tax: $('#tax').val(),
 			tip: $('#tip').val(),
-			discount: $('#discount').val(),
-			total: $('#grandtotal').val(),
+			discount: '$0.00',
+			total: '0.00',
 			time: $('#time').val(),
 			date: $('#servicedate').val(),
 			notes: $('#notes').val(),

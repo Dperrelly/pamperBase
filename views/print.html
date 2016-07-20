@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>pamperPrint</title>
+<meta charset="utf-8">
+<script type="text/javascript" src="/javascripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/javascripts/print.js"></script>
+<script type="text/javascript" src="/javascripts/oauth.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+<link href="/stylesheets/print.css" rel="stylesheet">
+</script>
+
+</head>
+<body>
+<div id="authorize-div" style="display: none">
+    <span>Authorize access to Google Sheets API</span>
+      <!--Button for the user to click to initiate auth sequence -->
+    <button id="authorize-button" onclick="handleAuthClick(event)">
+      Authorize
+    </button>
+</div>
+<h3>Pamper Print</h3>
+<h4 id="name">First Last</h4>
+<span id="date">Date</span><span id="time">Time</span>
+<div id="lists">
+	<div id="services" class="list nameList">
+		<h4>Service(s)</h4>
+		<ul id="serviceList">
+		<!-- Services -->
+		</ul>
+	</div>
+	<div id="servicePrice" class="list price">
+		<h5>Price</h5>
+		<ul id="servicePriceList" class="price-list">
+		<!-- Service Prices -->
+		</ul>
+	</div>
+</div>
+<div id="products" class="list nameList">
+	<h4>Product(s)</h4>
+	<ul id="productList">
+	<!-- Products -->
+	</ul>
+</div>
+<div id="productPrice" class="list price">
+	<h5>Price</h5>
+	<ul id="productPriceList" class="price-list">
+		<!-- Product Prices -->
+	</ul>
+</div>
+<div id="tax" class="list price">
+	<h5 id="taxPercent">Tax</h5>
+	<ul id="taxList" class="price-list">
+		<!-- Tax -->
+	</ul>
+</div>
+<p id="tip" >Tip: </p>
+<p id="total" class="subtotal">Total: </p>
+<span id="paid">Paid:$0.00 </span><span id="cashcredit">($0.00 cash, $0.00 credit)</span>
+<p id="owed"></p>
+<p id="notes">Notes: </p>
+</body>
+</html>
