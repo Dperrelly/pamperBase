@@ -290,6 +290,10 @@ function main(){
 						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight" data-toggle="modal" data-target="#apptModal"><td class="200">'+ date +'</td><td class="250">'+ service +'</td><td class="small">$'+ total +'</td><td class="200">'+ notes +
 										'</td><td class="col100 center print"><a id="print" class="icon icon-print"></a></td></tr>');
 						$('#appointments').append(newNode);
+						newNode.children(".print").click(function(event){
+							var ID = newNode.attr('apptId');
+							window.open("/print/" + ID, '_blank');
+						});
 						newNode.click(setCurrentAppointmentId);
 					}
 				});

@@ -2,6 +2,10 @@ body {
 	font-family: monaco, monospace;
 }
 
+#hider {
+	display: none;
+}
+
 h3{
 	text-decoration: underline;
 	font-style: italic
