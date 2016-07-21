@@ -325,10 +325,14 @@ border: 0;
 		cursor: pointer; cursor: hand; 
 	}
 
-.print:hover{ /*Print hover*/
+.print:hover { /*Print hover*/
 		background-color: #91DBE3;
 		cursor: pointer; cursor: hand; 
 	}
+	
+.print {
+	vertical-align: middle !important;
+}
 
 .small {
 	margin: 5px;

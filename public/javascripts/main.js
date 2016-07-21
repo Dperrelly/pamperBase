@@ -285,7 +285,7 @@ function main(){
 						else if(numServs) service += " + " + numServs + " others";
 						var total = appointment[5];
 						var notes = appointment[8] ? appointment[8] : "";
-						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight" data-toggle="modal" data-target="#apptModal"><td class="200">'+ date +'</td><td class="250">'+ service +'</td><td class="small">$'+ total +'</td><td class="200">'+ notes +
+						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight" data-toggle="modal" data-target="#apptModal"><td class="col200">'+ date +'</td><td class="col250">'+ service +'</td><td class="small">$'+ total +'</td><td class="col200">'+ notes +
 										'</td><td class="col100 center print"><a id="print" class="icon icon-print"></a></td></tr>');
 						$('#appointments').append(newNode);
 						newNode.click(setCurrentAppointmentId);
