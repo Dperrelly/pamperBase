@@ -67,6 +67,11 @@
     backdrop: "static",
     show:false,
     });
+    $('#addProduct').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false,
+    });
   });
 </script>
 
@@ -1142,15 +1147,15 @@
               <label class="namecol"><input type="checkbox" id="servname1"/> Servuasfdt 1asdfafaf </label>
             </td><td class="center" id="servprice1">$211.05
             </td><td class="center">$
-              <input class="tiny money" type="text" id="servdisc1"></span><br/><br/>
+              <input class="tiny money" type="text" id="servdisc1"><br/><br/>
             </td></tr>
 
             <tr><td>
               <label><input type="checkbox" id="sother"/> Other </label>
-              <input class="namecol center" type="text" id="sothername"></span><br/><br/>
+              <input class="namecol center" type="text" id="sothername"><br/><br/>
             </td><td class="center" id="sotherprice">$211.05
             </td><td class="center">$
-              <input class="tiny money" type="text" id="sotherdisc"></span><br/><br/>
+              <input class="tiny money" type="text" id="sotherdisc"><br/><br/>
             </td></tr>
 
           </tbody>
@@ -1161,7 +1166,6 @@
   <div class="modal-footer">
     <table class="table table-striped">
       <tr>
-        <button type="button" class="button small center" id="servdelete">Delete</button>
         <button type="button" class="button small center" id="servcancel" data-dismiss="modal">Cancel</button>
         <button type="button" class="button small center" id="servsave">Save</button>
       </tr>
@@ -1191,18 +1195,18 @@
             <tr><td class="namecol">
               <label class="namecol"><input type="checkbox" id="proname1"/> Product 1asdadf asdffafaf </label>
             </td><td>
-              <input class="tiny center" type="text" id="proquant1"></span>
+              <input class="tiny center" type="text" id="proquant1">
             </td><td class="center" id="proprice1">$211.05
             </td><td class="center">$
-              <input class="tiny money" type="text" id="prodisc1"></span><br/><br/>
+              <input class="tiny money" type="text" id="prodisc1"><br/><br/>
             </td></tr>
 
             <tr><td>
               <label><input type="checkbox" id="pother"/> Other </label>
-              <input class="namecol center" type="text" id="pothername"></span><br/><br/>
+              <input class="namecol center" type="text" id="pothername"><br/><br/>
             </td><td class="center" id="potherprice">$211.05
             </td><td class="center">$
-              <input class="tiny money" type="text" id="potherdisc"></span><br/><br/>
+              <input class="tiny money" type="text" id="potherdisc"><br/><br/>
             </td></tr>
 
           </tbody>
@@ -1213,7 +1217,6 @@
   <div class="modal-footer">
     <table class="table table-striped">
       <tr>
-        <button type="button" class="button small center" id="prodelete">Delete</button>
         <button type="button" class="button small center" id="procancel" data-dismiss="modal">Cancel</button>
         <button type="button" class="button small center" id="prosave">Save</button>
       </tr>
@@ -1245,7 +1248,7 @@
   <div class="modal-footer">
     <table class="table table-striped">
       <tr>
-        <button type="button" class="button small center" id="editServuctDel">Delete</button>
+        <button type="button" class="button small center" id="servuctDelete">Delete</button>
         <button type="button" class="button small center" id="editServuctCancel" data-dismiss="modal">Cancel</button>
         <button type="button" class="button small center" id="editServuctSave">Save</button>
       </tr>
