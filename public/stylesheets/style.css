@@ -329,7 +329,7 @@ border: 0;
 		background-color: #91DBE3;
 		cursor: pointer; cursor: hand; 
 	}
-	
+
 .print {
 	vertical-align: middle !important;
 }
@@ -424,8 +424,8 @@ border: 0;
 max-height: 65vh !important;
 }
 
-#servModal {
-	width: 45vw !important;
+#addProduct {
+	width: 46vw !important;
 }
 
 .namecol {

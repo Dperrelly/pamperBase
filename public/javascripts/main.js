@@ -929,7 +929,7 @@ function main(){
 		$('#editservname').val("");
 		$('#editservprice').val(0.00);
 		$('#editservdiscount').val(0.00);
-		$('#addServuct').modal('show');
+		$('#addProduct').modal('show');
 	});
 
 	$('#saveProduct').click(function(){
@@ -1032,8 +1032,8 @@ function main(){
 	$('#addServuct').on('show', function() {
   		$('#apptModal').unbind();
 	});
-	// $('#proModal').on('show', function() {
- //  		$('#apptModal').unbind();
-	// });
+	$('#addProduct').on('show', function() {
+  		$('#apptModal').unbind();
+	});
 }
 
