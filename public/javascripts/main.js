@@ -105,6 +105,8 @@ function main(){
 		total = Math.round(total * 100) / 100;
 		total = total.toFixed(2);
 		taxTotal = taxTotal.toFixed(2);
+		var due = twoNumberDecimal(total - (Number($('#cash').val()) + Number($('#card').val())));
+		$('#due').text(due);
 		$('#grandtotal').html(total);
 		$('#taxtotal').html(taxTotal);
 	}
@@ -481,7 +483,7 @@ function main(){
 	function addAppointment(appt){
 		ss.values.get({
 		    spreadsheetId: appointmentsId,
-		    range: 'A1:I',
+		    range: 'A1:K',
 		  }).then(function(response) {
 		  		var row = null;
 		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
@@ -785,16 +787,6 @@ function main(){
 	//deletePerson('iql3h8vd');
 
 	$('#apptsave').click(function(){
-		var appointment = {
-		id: currentPersonId,
-		tax: $('#tax').val(),
-		tip: $('#tip').val(),
-		discount: $('#discount').html(),
-		total: $('#grandtotal').html() || '0.00',
-		time: $('#time').val(),
-		date: $('#servicedate').val(),
-		notes: $('#notes').val(),
-		};
 		editAppointment(currentAppointmentId, [[
 			currentPersonId,
 			$('#tax').val(),
@@ -826,6 +818,8 @@ function main(){
 		$('#time').val("");
 		$('#servicedate').val(0);
 		$('#notes').val("");
+		$('#cash').val("0.00");
+		$('#card').val("0.00");
 		calculateGrandTotal();
 		var appointment = {
 			id: currentPersonId,
@@ -836,6 +830,8 @@ function main(){
 			time: $('#time').val(),
 			date: $('#servicedate').val(),
 			notes: $('#notes').val(),
+			cash: $('#cash').val(),
+			credit: $('#card').val()
 			};
 		addAppointment(appointment);
 		console.log('new appt made');
