@@ -112,9 +112,10 @@ function main(){
 	}
 
 	var setCurrentAppointmentId = function(event){
-		console.log("setting current appointment ID and fields");
 		newAppt = false;
 		if(event) {
+			// $('#apptModal').show();
+			// if(event.target.nodeName === "A" || $(event.target).attr('id') === "printArea") return;
 			currentAppointmentId = event.currentTarget.attributes.apptId.nodeValue;
 			appointments.forEach(function(appointment){
 				if(appointment[0] === currentAppointmentId){
@@ -288,7 +289,7 @@ function main(){
 						var total = appointment[5];
 						var notes = appointment[8] ? appointment[8] : "";
 						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight" data-toggle="modal" data-target="#apptModal"><td class="200">'+ date +'</td><td class="250">'+ service +'</td><td class="small">$'+ total +'</td><td class="200">'+ notes +
-										'</td><td class="col100 center print"><a id="print" class="icon icon-print"></a></td></tr>');
+										'</td><td id="printArea" class="col100 center print"><a id="print" class="icon icon-print"></a></td></tr>');
 						$('#appointments').append(newNode);
 						newNode.children(".print").click(function(event){
 							var ID = newNode.attr('apptId');
