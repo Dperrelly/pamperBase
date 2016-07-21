@@ -142,13 +142,13 @@ function main(){
 				discount += Number(servuct[5]);
 				var newNode;
 				if(servuct[3] === "Service"){
-					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
+					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#editServuctModal" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
 					$('#serviceBody').append(newNode);
 					newNode.click(loadService);
 					numServices++;
 					servTotal += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
-					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
+					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#editServuctModal" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
 					$('#productBody').append(newNode);
 					newNode.click(loadProduct);
 					numProducts++;
@@ -884,7 +884,7 @@ function main(){
 		deletePerson(currentPersonId);
 	});
 
-	$('#servdelete').click(function(){
+	$('#servuctDelete').click(function(){
 		deleteServuct(currentServuctId);
 		$('#addServuct').modal('hide');
 	});
@@ -929,7 +929,7 @@ function main(){
 		$('#editservname').val("");
 		$('#editservprice').val(0.00);
 		$('#editservdiscount').val(0.00);
-		$('#addServuct').modal('show');
+		$('#addProduct').modal('show');
 	});
 
 	$('#saveProduct').click(function(){
