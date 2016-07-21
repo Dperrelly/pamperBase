@@ -124,6 +124,8 @@ function main(){
 					$('#time').val(appointment[6]);
 					$('#servicedate').val(appointment[7]);
 					$('#notes').val(appointment[8]);
+					$('#cash').val(appointment[9]);
+					$('#card').val(appointment[10]);
 				}
 			});
 		}
@@ -288,6 +290,10 @@ function main(){
 						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight" data-toggle="modal" data-target="#apptModal"><td class="col200">'+ date +'</td><td class="col250">'+ service +'</td><td class="small">$'+ total +'</td><td class="col200">'+ notes +
 										'</td><td class="col100 center print"><a id="print" class="icon icon-print"></a></td></tr>');
 						$('#appointments').append(newNode);
+						newNode.children(".print").click(function(event){
+							var ID = newNode.attr('apptId');
+							window.open("/print/" + ID, '_blank');
+						});
 						newNode.click(setCurrentAppointmentId);
 					}
 				});

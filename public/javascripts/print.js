@@ -8,6 +8,11 @@ function main(){
 	var person = [];
 	var services = [];
 	var products = [];
+	var done = {
+		person: false,
+		servucts: false,
+		done: false
+	};
 	var total = 0;
 
 	function twoNumberDecimal(number) {
@@ -51,6 +56,13 @@ function main(){
 					});
 				}
 				$("#name").text(person[1] + " " + person[2]);
+				done.person = true;
+				if(done.person && done.servucts && !done.done){
+					done.done = true;
+					$('#cat').hide();
+					$('#hider').show();
+					window.print();
+				}
 			}, function(e){
 				console.log('load person error');
 				console.log(e);
@@ -113,6 +125,13 @@ function main(){
 				$('#tip').text("Tip: $" + twoNumberDecimal(appointment[3]));
 				$('#total').text("Total: $" + twoNumberDecimal(total));
 				$('#owed').text("Owed: $" + ( twoNumberDecimal(total) - (twoNumberDecimal((Number(appointment[9]) + Number(appointment[10]))))));
+				done.servucts = true;
+				if(done.person && done.servucts && !done.done){
+					done.done = true;
+					$('#cat').hide();
+					$('#hider').show();
+					window.print();
+				}
 			}, function(e){
 				console.log('load servucts error');
 				console.log(e);
