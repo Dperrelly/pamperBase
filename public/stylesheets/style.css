@@ -325,6 +325,11 @@ border: 0;
 		cursor: pointer; cursor: hand; 
 	}
 
+.print:hover{ /*Print hover*/
+		background-color: #91DBE3;
+		cursor: pointer; cursor: hand; 
+	}
+
 .small {
 	margin: 5px;
 	width: 140px !important;
@@ -836,6 +841,8 @@ input[type=checkbox] {
 	.icon-calendar:before		{ content: '\E15e'; }
 	.icon-memo:before			{ content: '\E08d'; }
 	.icon-drawer:before			{ content: '\E028'; }
+	.icon-print:before			{ content: '\E10a'; font-size: 30px !important;}
+
 
 	.icon-dribbble:before		{ content: '\E03f'; }
 	.icon-facebook:before		{ content: '\E047'; }
