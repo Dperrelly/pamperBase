@@ -849,6 +849,10 @@ function main(){
 		$('#apptModal').modal('hide');
 	});
 
+	$('#apptcancel').click(function(){
+		$('#apptModal').modal('hide');
+	});
+
 	$('#save-client').click(function(){
 		var client = [[
 			currentPersonId,

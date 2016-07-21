@@ -124,7 +124,7 @@ function main(){
 
 				$('#tip').text("Tip: $" + twoNumberDecimal(appointment[3]));
 				$('#total').text("Total: $" + twoNumberDecimal(total));
-				$('#owed').text("Owed: $" + ( twoNumberDecimal(total) - (twoNumberDecimal((Number(appointment[9]) + Number(appointment[10]))))));
+				$('#owed').text("Owed: $" + twoNumberDecimal(twoNumberDecimal(total) - (twoNumberDecimal((Number(appointment[9]) + Number(appointment[10]))))));
 				done.servucts = true;
 				if(done.person && done.servucts && !done.done){
 					done.done = true;
