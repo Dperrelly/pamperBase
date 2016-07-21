@@ -124,6 +124,8 @@ function main(){
 					$('#time').val(appointment[6]);
 					$('#servicedate').val(appointment[7]);
 					$('#notes').val(appointment[8]);
+					$('#cash').val(appointment[9]);
+					$('#card').val(appointment[10]);
 				}
 			});
 		}
