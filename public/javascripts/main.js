@@ -1032,8 +1032,8 @@ function main(){
 	$('#addServuct').on('show', function() {
   		$('#apptModal').unbind();
 	});
-	// $('#proModal').on('show', function() {
- //  		$('#apptModal').unbind();
-	// });
+	$('#addProduct').on('show', function() {
+  		$('#apptModal').unbind();
+	});
 }
 
