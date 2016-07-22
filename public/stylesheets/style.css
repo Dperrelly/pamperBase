@@ -60,8 +60,18 @@
   order: $val;
 }
 
+#cat {
+  position: absolute; /* or absolute */
+  top: 25%;
+  left: 35%;
+}
+
 .wrapper {
   @include flexbox();
+}
+
+#wrapper {
+	display:none;
 }
 
 #title {

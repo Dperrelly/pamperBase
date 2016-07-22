@@ -170,8 +170,8 @@ _5grid.ready(function() {
 				_window
 					.trigger('resize');
 
-				_wrapper
-					.fadeTo(400, 1.0);
+				// _wrapper
+				// 	.fadeTo(400, 1.0);
 		}
 	
 }, true);

@@ -1,3 +1,4 @@
+$('#wrapper').hide();
 function main(){
 	var ss = gapi.client.sheets.spreadsheets;
 	var appointmentsId = "1g_RV4hpbn-dJ5GsfyHHOZ6a3FxHecevTmts84kN2jp8";
@@ -68,19 +69,22 @@ function main(){
 			});
 		});
 		$('#calendar').fullCalendar({
-	            events: events,
-	            height: 800,
-	            contentHeight: 800,
-	            eventClick: function(event) {
-	            	currentPersonId = event.clientId;
-	            	loadPerson(currentPersonId);
-	            	$('#clientLink').trigger('click');
-			    },
-			    eventRender: function(event, element) {
-			      if (event.past)
-			        element.addClass("past");
-			    },
+            events: events,
+            height: 800,
+            contentHeight: 800,
+            eventClick: function(event) {
+            	currentPersonId = event.clientId;
+            	loadPerson(currentPersonId);
+            	$('#clientLink').trigger('click');
+		    },
+		    eventRender: function(event, element) {
+		      if (event.past)
+		        element.addClass("past");
+		    }
 	    });
+	    $('#cat').hide();
+		$('#wrapper').fadeTo(400, 1.0);
+	    $('#calendar').fullCalendar('render');
 	};
 
 	function calculateGrandTotal(){
@@ -929,7 +933,7 @@ function main(){
 		$('#editservname').val("");
 		$('#editservprice').val(0.00);
 		$('#editservdiscount').val(0.00);
-		$('#addProduct').modal('show');
+			$('#addProduct').modal('show');
 	});
 
 	$('#saveProduct').click(function(){
