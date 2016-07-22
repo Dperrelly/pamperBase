@@ -1161,8 +1161,8 @@
   <div class="modal-footer">
     <table class="table table-striped">
       <tr>
-        <button type="button" class="button small center" id="servcancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="button small center" id="servsave">Save</button>
+        <button type="button" class="button small floatL" id="servcancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="button small floatR" id="servsave">Save</button>
       </tr>
     </table>
   </div>
@@ -1178,16 +1178,31 @@
     <form>
       <fieldset>
         <table class="table">
-          <thead>
+          <!-- <thead>
             <th class="namecol">Name</th>
             <th class="center">Quantity</th> 
             <th class="center">Price</th>
             <th class="center">Discount</th>
-          </thead>
+          </thead> -->
 
           <tbody id="newList">
             <!-- Product  -->
-            <tr><td class="namecol">
+
+            <div class="table" id="searchproductlist">
+          <input class="search" placeholder="Search" /><br/><br/>
+            <div class="data">
+              <ul class="row-header">
+                <li>Name</li>
+                <li>Quantity Remaining</li>
+                <li>Price</li>
+              </ul>
+              <div class="list" id="listproduct">
+              <!--search list will print here-->
+              </div>
+            </div>
+        </div>
+
+            <!-- <tr><td class="namecol">
               <label class="namecol"><input type="checkbox" id="proname1"/> Product 1asdadf asdffafaf </label>
             </td><td>
               <input class="tiny center" type="text" id="proquant1">
@@ -1204,7 +1219,7 @@
             </td><td class="center" id="potherprice">$211.05
             </td><td class="col200 center">$
               <input class="tiny money" type="text" id="potherdisc"><br/><br/>
-            </td></tr>
+            </td></tr> -->
 
           </tbody>
         </table>
@@ -1214,8 +1229,8 @@
   <div class="modal-footer">
     <table class="table table-striped">
       <tr>
-        <button type="button" class="button small center" id="procancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="button small center" id="prosave">Save</button>
+        <button type="button" class="button small floatL" id="procancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="button small floatR" id="prosave">Save</button>
       </tr>
     </table>
   </div>

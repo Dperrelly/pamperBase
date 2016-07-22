@@ -242,7 +242,6 @@ function main(){
 			calendarSetup();
 			createList();
 			loadServucts();
-
 		}, function(e){
 			console.log('load appointments error');
 			console.log(e);
@@ -930,6 +929,7 @@ function main(){
 		$('#editservprice').val(0.00);
 		$('#editservdiscount').val(0.00);
 		$('#addProduct').modal('show');
+		createProductList();
 	});
 
 	$('#saveProduct').click(function(){
@@ -983,6 +983,8 @@ function main(){
 		$(this).val(twoNumberDecimal($(this).val()));
 	});
 
+
+// People search 
 	function createList() {
 		$('#listpeople').empty();
 		var columns = {
@@ -1029,11 +1031,41 @@ function main(){
 		});
 	}	
 
+// Double modal
 	$('#addServuct').on('show', function() {
   		$('#apptModal').unbind();
 	});
 	$('#addProduct').on('show', function() {
   		$('#apptModal').unbind();
 	});
+
+
+	function createProductList() {
+		$('#listproduct').empty();
+		var productArray = [];
+		inventory.forEach(function(servuct){
+			if(servuct[1] !== "Service"){
+				productArray.push(servuct);
+			}
+		});
+		console.log(productArray);
+
+		var columns = {
+		    valueNames: ['pname', 'pquantity', 'pprice'],
+		    item: '<ul class="row-content"><li class="pname" id="pname"></li><li class="pquantity" id="pquantity"></li><li class="pprice" id="pprice"></li></ul>'
+		};
+	    var values = [];
+
+	    for(var i = 0; i < productArray.length ; i++){
+			values.push({pname: productArray[i][0] || "",
+		       pquantity: productArray[i][1] || "",
+		       pprice: productArray[i][2] || "",
+		    });
+		}
+		console.log(values);
+			var searchProducts = new List('searchproductlist', columns, values);
+	
+	}
+
 }
 
