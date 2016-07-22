@@ -67,11 +67,6 @@
     backdrop: "static",
     show:false,
     });
-    $('#addProduct').modal({
-    keyboard: true,
-    backdrop: "static",
-    show:false,
-    });
   });
 </script>
 
@@ -877,7 +872,7 @@
       </td>
   </table>
   <div class="modal-footer center">
-    <button type="button" class="button floatR" id="addProduct">Add More</button>
+    <button type="button" class="button floatR" id="addMoreProduct">Add More</button>
     <button type="button" class="button floatL" id="removeProduct">Less</button>
     <br/><br/><br/>
     <button type="button" class="button floatL" data-dismiss="modal">Cancel</button>
@@ -1178,7 +1173,7 @@
 <div id="addProduct" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3 id="productHeader">New Servuct</h3>
+    <h3 id="productHeader">New Product</h3>
   </div>
   <div class="modal-body newList">
     <form>
@@ -1198,15 +1193,17 @@
             </td><td>
               <input class="tiny center" type="text" id="proquant1">
             </td><td class="center" id="proprice1">$211.05
-            </td><td class="center">$
+            </td><td class="col200 center">$
               <input class="tiny money" type="text" id="prodisc1"><br/><br/>
             </td></tr>
 
             <tr><td>
               <label><input type="checkbox" id="pother"/> Other </label>
               <input class="namecol center" type="text" id="pothername"><br/><br/>
+              </td><td>
+              <input class="tiny center" type="text" id="potherquant1">
             </td><td class="center" id="potherprice">$211.05
-            </td><td class="center">$
+            </td><td class="col200 center">$
               <input class="tiny money" type="text" id="potherdisc"><br/><br/>
             </td></tr>
 

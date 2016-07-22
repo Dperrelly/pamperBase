@@ -933,7 +933,8 @@ function main(){
 		$('#editservname').val("");
 		$('#editservprice').val(0.00);
 		$('#editservdiscount').val(0.00);
-			$('#addProduct').modal('show');
+		$('#addProduct').modal('show');
+
 	});
 
 	$('#saveProduct').click(function(){
