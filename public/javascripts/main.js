@@ -1,3 +1,4 @@
+$('#wrapper').hide();
 function main(){
 	var ss = gapi.client.sheets.spreadsheets;
 	var appointmentsId = "1g_RV4hpbn-dJ5GsfyHHOZ6a3FxHecevTmts84kN2jp8";
@@ -68,19 +69,22 @@ function main(){
 			});
 		});
 		$('#calendar').fullCalendar({
-	            events: events,
-	            height: 800,
-	            contentHeight: 800,
-	            eventClick: function(event) {
-	            	currentPersonId = event.clientId;
-	            	loadPerson(currentPersonId);
-	            	$('#clientLink').trigger('click');
-			    },
-			    eventRender: function(event, element) {
-			      if (event.past)
-			        element.addClass("past");
-			    },
+            events: events,
+            height: 800,
+            contentHeight: 800,
+            eventClick: function(event) {
+            	currentPersonId = event.clientId;
+            	loadPerson(currentPersonId);
+            	$('#clientLink').trigger('click');
+		    },
+		    eventRender: function(event, element) {
+		      if (event.past)
+		        element.addClass("past");
+		    }
 	    });
+	    $('#cat').hide();
+		$('#wrapper').fadeTo(400, 1.0);
+	    $('#calendar').fullCalendar('render');
 	};
 
 	function calculateGrandTotal(){
@@ -142,13 +146,13 @@ function main(){
 				discount += Number(servuct[5]);
 				var newNode;
 				if(servuct[3] === "Service"){
-					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
+					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#editServuctModal" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
 					$('#serviceBody').append(newNode);
 					newNode.click(loadService);
 					numServices++;
 					servTotal += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
-					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#addServuct" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
+					newNode = $('<tr class="highlight clearboth" data-toggle="modal" href="#editServuctModal" servuctId="' + servuct[0] + '"><td class="col200">'+ servuct[2] +'</td><td class="col100">$'+ servuct[4] +'</td></tr>');
 					$('#productBody').append(newNode);
 					newNode.click(loadProduct);
 					numProducts++;
@@ -883,12 +887,12 @@ function main(){
 		deletePerson(currentPersonId);
 	});
 
-	$('#servdelete').click(function(){
+	$('#servuctDelete').click(function(){
 		deleteServuct(currentServuctId);
-		$('#addServuct').modal('hide');
+		$('#editServuctModal').modal('hide');
 	});
 
-	$('#servsave').click(function(){
+	$('#editServuctSave').click(function(){
 		var servuct = [[
 			currentAppointmentId,
   			$('#editservname').val(),
@@ -906,7 +910,7 @@ function main(){
 				discount:$('#editservdiscount').val(),
 			});
 		}
-		$('#addServuct').modal('hide');
+		$('#editServuctModal').modal('hide');
 	});
 
 	$('#servadd').click(function(){
@@ -1052,7 +1056,7 @@ function main(){
 
 		var columns = {
 		    valueNames: ['pname', 'pquantity', 'pprice'],
-		    item: '<ul class="row-content"><li class="pname" id="pname"></li><li class="pquantity" id="pquantity"></li><li class="pprice" id="pprice"></li></ul>'
+		    item: '<ul class="row-content"><li class="pname" id="pname"></li><li class="pquantity center" id="pquantity"></li><li class="pprice" id="pprice"></li></ul>'
 		};
 	    var values = [];
 

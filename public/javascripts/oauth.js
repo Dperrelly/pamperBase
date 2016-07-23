@@ -34,6 +34,7 @@ function handleAuthResult(authResult) {
     authorizeDiv.style.display = 'inline';
     $('#cat').hide();
     $('#hider').hide();
+    $('#wrapper').hide();
   }
 }
 
