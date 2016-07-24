@@ -228,7 +228,7 @@ function main(){
 	function loadAppointments(){
 		ss.values.get({
 			spreadsheetId: appointmentsId,
-			range: 'A2:I'
+			range: 'A2:K'
 		}).then(function(res){
 			appointments = [];
 			if(res.result.values && res.result.values.length){
@@ -308,6 +308,16 @@ function main(){
 		  });
 	};
 
+	function getName(id){
+		var name;
+		people.forEach(function(person){
+				if(person[0] === id){
+					name =  (person[2] + ', ' + person[1]);
+					}
+				});
+		return name;
+	}
+
 	function loadServucts(){
 		ss.values.get({
 			spreadsheetId: servuctsId,
@@ -319,27 +329,62 @@ function main(){
 					if(value.length) servucts.push(value);
 				});
 			}
-			var servTotal = 0, proTotal = 0, taxTotal = 0, discTotal = 0, tax;
+			var servTotal = 0, proTotal = 0, taxTotal = 0, discTotal = 0, dueTotal = 0, tax;
 			var apptKey = {};
+			// 11 = service total, 12 = product total, 13 = tax, 4 = discount, 5 = total, 5 - (9 + 10) = due
 			appointments.forEach(function(appointment){
 				apptKey[appointment[0]] = appointment;
+				apptKey[appointment[0]][11] = 0;
+				apptKey[appointment[0]][12] = 0;
+				apptKey[appointment[0]][13] = 0;
+				apptKey[appointment[0]][14] = (Number(appointment[5]) - (Number(appointment[9]) + Number(appointment[10])) - Number(appointment[3]));
+				dueTotal += apptKey[appointment[0]][14];
 			});
 			servucts.forEach(function(servuct){
 				discTotal += Number(servuct[5]);
 				if(servuct[3] === "Service"){
 					servTotal += Number(servuct[4]);
+					apptKey[servuct[1]][11] += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
 					proTotal += Number(servuct[4]);
+					apptKey[servuct[1]][12] += Number(servuct[4]);
 					tax = Number(apptKey[servuct[1]][2]) / 100;
+					apptKey[servuct[1]][13] += servuct[4] * tax;
 					taxTotal += servuct[4] * tax;
 				}
 			});
+			var monthMap = {
+				1: 'jan',
+				2: 'feb',
+				3: 'mar',
+				4: 'apr',
+				5: 'may',
+				6: 'jun',
+				7: 'jul',
+				8: 'aug',
+				9: 'sep',
+				10: 'oct',
+				11: 'nov',
+				12: 'dec',
+			};
+			for(var i in apptKey){
+				var appt = apptKey[i];
+				appt[5] -= appt[3];
+				var lastFirst = getName(appt[1]);
+				var monthNum = parseInt(appt[7].substr(5,2));
+				var month = monthMap[monthNum];
+				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
+				var apptNode = $('<tr class="highlight"><td class="' + month + 'Name" class="colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv" class="colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro" class="colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax" class="colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc" class="colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due" class="colFixedB">' + twoNumberDecimal(appt[14]) + '</td><td class="' + month + 'AppTotal" class="colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
+				var mommaNode = $('#' + month + 'Apps');
+				mommaNode.append(apptNode);
+			}
 			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
 			$('#taxTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
 			$('#discTotal').html("Discount Total: $" + twoNumberDecimal(discTotal));
+			$('#totalDue').html("Amount Due: $" + twoNumberDecimal(dueTotal));
 			$('#yearlyTotal').html(
-				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal));
+				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal - dueTotal));
 			loadPerson(currentPersonId);
 			loadInventory();
 			setCurrentAppointmentId();
@@ -383,7 +428,7 @@ function main(){
 	loadPeople();	
 
 	function updateSS(id, range, array){
-		return ss.values.update({valueInputOption: 'RAW', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
+		return ss.values.update({valueInputOption: 'USER_ENTERED', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
 		}, function(e){
 			console.log('update error');
 			console.log(e);
@@ -809,7 +854,7 @@ function main(){
 			$('#servicedate').val(),
 			$('#notes').val(),
 			$('#cash').val(),
-			$('#credit').val(),
+			$('#card').val(),
 			]]);
 		$('#apptModal').modal('hide');
 	});
