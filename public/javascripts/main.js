@@ -7,6 +7,7 @@ function main(){
 	var inventoryId = '18y6mvDC7vVcNISpyU7_Xuq_NSxVUcv8ZMhyz-xkHaLU';
 	var currentServuctName = "";
 	var currentPersonId = 'iql3hgup';
+	var updateAppt = false;
 	var currentAppointmentId = null;
 	var currentServuctId = null;
 	var currentServuctType = null;
@@ -24,6 +25,14 @@ function main(){
 	    timeFormat: 'h:mm p',
 	    dropdown: false,
 	});
+
+	function Number(str){
+		if(typeof str === "string"){
+			var numberNoCommas = str.replace(/,/g, '');
+    		return parseFloat(numberNoCommas);
+		} else 
+		if(typeof str === "number") return str;
+	}
 
 	function parseTime(time){
 		if(!time) time = "12:00 PM";
@@ -138,13 +147,13 @@ function main(){
 			appointments.forEach(function(appointment){
 				if(appointment[0] === currentAppointmentId){
 					$('#tax').val(appointment[2]);
-					$('#tip').val(appointment[3]);
-					$('#grandtotal').val(appointment[5]);
+					$('#tip').val(twoNumberDecimal(appointment[3]));
+					$('#grandtotal').val(twoNumberDecimal(appointment[5]));
 					$('#time').val(appointment[6]);
 					$('#servicedate').val(appointment[7]);
 					$('#notes').val(appointment[8]);
-					$('#cash').val(appointment[9]);
-					$('#card').val(appointment[10]);
+					$('#cash').val(twoNumberDecimal(appointment[9]));
+					$('#card').val(twoNumberDecimal(appointment[10]));
 				}
 			});
 		}
@@ -390,7 +399,7 @@ function main(){
 				var monthNum = parseInt(appt[7].substr(5,2));
 				var month = monthMap[monthNum];
 				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
-				var apptNode = $('<tr class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(appt[14]) + '</td><td class="' + month + 'AppTotal colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
+				var apptNode = $('<tr class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(Number(appt[5]) - made) + '</td><td class="' + month + 'AppTotal colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
 				var mommaNode = $('#' + month + 'Apps');
 				mommaNode.append(apptNode);
 			}
@@ -435,6 +444,10 @@ function main(){
 					$('#products').append(newNode);
 				}
 			});
+			if(updateAppt){
+				updateAppt = false;
+				saveCurrentAppt();
+			}
 		}, function(e){
 			console.log('load inventory error');
 			console.log(e);
@@ -926,8 +939,7 @@ function main(){
 	//addPerson(sophie);
 	//addAppointment(sophiesBackMassage);
 	//deletePerson('iql3h8vd');
-
-	$('#apptsave').click(function(){
+	function saveCurrentAppt(){
 		editAppointment(currentAppointmentId, [[
 			currentPersonId,
 			$('#tax').val(),
@@ -940,6 +952,11 @@ function main(){
 			$('#cash').val(),
 			$('#card').val(),
 			]]);
+		loadPeople();
+	}
+
+	$('#apptsave').click(function(){
+		saveCurrentAppt();
 		$('#apptModal').modal('hide');
 	});
 	
@@ -1020,10 +1037,12 @@ function main(){
 	$('#servuctDelete').click(function(){
 		if(currentServuctType === "Product") increaseQuantity(currentServuctName);
 		deleteServuct(currentServuctId);
+		updateAppt = true;
 		$('#editServuctModal').modal('hide');
 	});
 
 	$('#editServuctSave').click(function(){
+		updateAppt = true;
 		var servuct = [[
 			currentAppointmentId,
   			$('#editservname').val(),
@@ -1072,6 +1091,7 @@ function main(){
 	});
 
 	$('#servsave').click(function(){
+		updateAppt = true;
 		var servuct = [[
 			currentAppointmentId,
   			selectedServuct[0],
@@ -1094,6 +1114,7 @@ function main(){
 	});
 
 	$('#prosave').click(function(){
+		updateAppt = true;
 		var servuct = [[
 			currentAppointmentId,
   			selectedServuct[0],
