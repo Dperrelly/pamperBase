@@ -169,10 +169,11 @@
         <table class="table table-striped"> 
           <thead>
             <tr>
-              <th class="col200">Date</th>
-              <th class="col250">Service(s)</th>
-              <th class="small">Total</th>
-              <th class="col200">Notes</th>
+              <th class="col100">Date</th>
+              <th class="col100 center">Service(s)</th>
+              <th class="small center">Total Paid</th>
+              <th class="col100 center">Amount Due</th>
+              <th class="col200 center">Notes</th>
               <th class="tiny">Print</th>
             </tr>
           </thead>
@@ -200,9 +201,9 @@
                 <li>Last Name</li>
                 <li>First Name</li>
                 <li>Telephone</li>
-                <li>Current Appointment</li>
+                <li>Next Appointment</li>
               </ul>
-              <div class="list" id="listpeople">
+              <div class="list overflow" id="listpeople">
               <!--search list will print here-->
               </div>
             </div>
@@ -1133,35 +1134,21 @@
   </div>
   <div class="modal-body newList">
     <form>
-      <fieldset>
-        <table class="table">
-          <thead>
-            <th class="namecol">Name</th>
-            <th class="center">Price</th>
-            <th class="center">Discount</th>
-          </thead>
-
-          <tbody id="newList">
-
-            <!-- Service -->
-            <tr><td class="namecol">
-              <label class="namecol"><input type="checkbox" id="servname1"/> Servuasfdt 1asdfafaf </label>
-            </td><td class="center" id="servprice1">$211.05
-            </td><td class="center">$
-              <input class="tiny money" type="text" id="servdisc1"><br/><br/>
-            </td></tr>
-
-            <tr><td>
-              <label><input type="checkbox" id="sother"/> Other </label>
-              <input class="namecol center" type="text" id="sothername"><br/><br/>
-            </td><td class="center" id="sotherprice">$211.05
-            </td><td class="center">$
-              <input class="tiny money" type="text" id="sotherdisc"><br/><br/>
-            </td></tr>
-
-          </tbody>
-        </table>
-      </fieldset>
+      <!-- Service -->
+      <div class="table" id="searchservicelist">
+        <input class="floatL search" placeholder="Search"/>
+        <span class="labels floatR">Discount: $<input class="floatR tiny money" type="text" id="serviceDisc"/></span>
+            <br/><br/>
+        <div class="data">
+          <ul class="row-header">
+            <li>Name</li>
+            <li>Price</li>
+          </ul>
+          <div class="list" id="listservice">
+              <!--search list will print here-->
+          </div>
+        </div>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
@@ -1190,8 +1177,8 @@
         <div class="data">
           <ul class="row-header">
             <li>Name</li>
-            <li>Quantity Remaining</li>
-            <li>Price</li>
+            <li class="center">Quantity Remaining</li>
+            <li class="center">Price</li>
           </ul>
           <div class="list" id="listproduct">
               <!--search list will print here-->
@@ -1241,8 +1228,38 @@
     </table>
   </div>
 </div>
-  
 
+
+<!-- inventory edit -->
+<div id="editInventorySModal" class="modal hide fade" data-focus-on="input:first">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3>Edit Servuct</h3>
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped"> 
+      <tr>
+        <td> 
+          <label for="editservname" id="servuctLabel">Servuct Name:</label> 
+          <input type="text" id="editservname">
+        </td>
+        <td rowspan="2" class="small">
+          <label for="editservprice">Price:</label> 
+          <input class="money" type="text" id="editservprice">
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <table class="table table-striped">
+      <tr>
+        <button type="button" class="button small center" id="sDelete">Delete</button>
+        <button type="button" class="button small center" id="sCancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="button small center" id="sSave">Save</button>
+      </tr>
+    </table>
+  </div>
+</div>
 
 
 
