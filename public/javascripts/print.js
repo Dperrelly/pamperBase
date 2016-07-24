@@ -15,6 +15,14 @@ function main(){
 	};
 	var total = 0;
 
+	function Number(str){
+		if(typeof str === "string"){
+			var numberNoCommas = number.replace(/,/g, '');
+    		return parseFloat(numberNoCommas);
+		} else 
+		if(typeof str === "number") return str;
+	}
+
 	function twoNumberDecimal(number) {
 		if(number === "") return 0;
 	    return parseFloat(number).toFixed(2);
