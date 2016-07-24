@@ -291,7 +291,8 @@ function main(){
 						else if(numServs) service += " + " + numServs + " others";
 						var total = appointment[5];
 						var notes = appointment[8] ? appointment[8] : "";
-						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight" data-toggle="modal" data-target="#apptModal"><td class="col200">'+ date +'</td><td class="col250">'+ service +'</td><td class="small">$'+ total +'</td><td class="col200">'+ notes +
+						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight" data-toggle="modal" data-target="#apptModal"><td class="col100">'+ date +
+										'</td><td class="col200">'+ service +'</td><td class="col100">$'+ total +'</td><td class="col100">$amountdue</td><td class="col200">'+ notes +
 										'</td><td id="printArea" class="col100 center print"><a id="print" class="icon icon-print"></a></td></tr>');
 						$('#appointments').append(newNode);
 						newNode.children(".print").click(function(event){
@@ -967,6 +968,7 @@ function main(){
 		$('#editservprice').val(0.00);
 		$('#editservdiscount').val(0.00);
 		$('#addServuct').modal('show');
+		createServiceList();
 	});
 
 	$('#proadd').click(function(){
@@ -1088,7 +1090,7 @@ function main(){
   		$('#apptModal').unbind();
 	});
 
-
+// add appointment products and services lists
 	function createProductList() {
 		$('#listproduct').empty();
 		var productArray = [];
@@ -1098,13 +1100,11 @@ function main(){
 			}
 		});
 		console.log(productArray);
-
 		var columns = {
 		    valueNames: ['pname', 'pquantity', 'pprice'],
-		    item: '<ul class="row-content"><li class="pname" id="pname"></li><li class="pquantity center" id="pquantity"></li><li class="pprice" id="pprice"></li></ul>'
+		    item: '<ul class="row-content"><li class="pname" id="pname"></li><li class="pquantity center" id="pquantity"></li><li class="pprice center" id="pprice"></li></ul>'
 		};
 	    var values = [];
-
 	    for(var i = 0; i < productArray.length ; i++){
 			values.push({pname: productArray[i][0] || "",
 		       pquantity: productArray[i][1] || "",
@@ -1113,7 +1113,28 @@ function main(){
 		}
 		console.log(values);
 			var searchProducts = new List('searchproductlist', columns, values);
-	
+	}
+	function createServiceList() {
+		$('#listservice').empty();
+		var serviceArray = [];
+		inventory.forEach(function(servuct){
+			if(servuct[1] === "Service"){
+				serviceArray.push(servuct);
+			}
+		});
+		console.log(serviceArray);
+		var columns = {
+		    valueNames: ['sname', 'squantity', 'sprice'],
+		    item: '<ul class="row-content"><li class="sname" id="sname"></li><li class="sprice" id="sprice"></li></ul>'
+		};
+	    var values = [];
+	    for(var i = 0; i < serviceArray.length ; i++){
+			values.push({sname: serviceArray[i][0] || "",
+		       sprice: serviceArray[i][2] || "",
+		    });
+		}
+		console.log(values);
+			var searchServices = new List('searchservicelist', columns, values);
 	}
 
 }

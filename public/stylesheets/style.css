@@ -114,8 +114,8 @@
   font-family:Arial, Helvetica, sans-serif;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-width: 200px !important;
-  max-width: 200px !important;
+  min-width: 15vw !important;
+  max-width: 15vw !important;
   }
 #e{
 	display:none;
@@ -124,15 +124,21 @@
   background-color:#360;
   color:#FFF;
   text-align:left;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
   }
 .row-content {
   background-color:#DBE8DC;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
   color:#333;
   text-align:left;
   }
 
+
+#searchlist {
+	margin-left: 70px !important;
+}
 
 /*Modals*/
 .modal-body {
@@ -446,7 +452,7 @@ max-height: 65vh !important;
 }
 
 #addProduct {
-	width: 46vw !important;
+	width: 50vw !important;
 }
 
 .namecol {
@@ -916,6 +922,9 @@ input[type=checkbox] {
 		width: 80vw !important;
 		max-width: 80vw !important;
 		min-width: 900px !important;
+		height: 90vh !important;
+		max-height: 90vh !important;
+		min-height: 1100px !important;
 		left:50% !important;
 		top: -120px;
 		transform: translateX(-50%) !important;
@@ -935,6 +944,15 @@ input[type=checkbox] {
 		top: -25px;
 	}
 
+		#calendar {
+		width: 80vw !important;
+		max-width: 80vw !important;
+		min-width: 900px !important;
+		height: 90vh !important;
+		max-height: 90vh !important;
+		min-height: 2000px !important;
+	}
+
 	.panel
 	{
 		padding: 2em 3.5em 1.5em 3.5em;
@@ -946,7 +964,7 @@ input[type=checkbox] {
 		min-width: 900px !important;
 		height: 90vh !important;
 		max-height: 90vh !important;
-		min-height: 1100px !important;
+		min-height: 2000px !important;
 		left:50% !important;
 		transform: translateX(-50%) !important;
 	}
