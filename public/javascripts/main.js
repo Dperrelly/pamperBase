@@ -5,6 +5,7 @@ function main(){
 	var peopleId = "1LRsyBbR57X9Gc2z1CLeUnHXkEpCiIwacnm2Hj4DbWSI";
 	var servuctsId = '1S0rzD4T5ougGfzZGqp6H8bm-QP8Zy29oPJeQpDiUYQ0';
 	var inventoryId = '18y6mvDC7vVcNISpyU7_Xuq_NSxVUcv8ZMhyz-xkHaLU';
+	var currentServuctName = "";
 	var currentPersonId = 'iql3hgup';
 	var currentAppointmentId = null;
 	var currentServuctId = '68w2dvp2.o00y66r';
@@ -14,6 +15,7 @@ function main(){
 	var servucts = [];
 	var inventory = [];
 	var newAppt = false;
+	var selectedServuct;
 	var parseTimeRegex1 = /^(\d+)/;
 	var parseTimeRegex2 = /:(\d+)/;
 	var parseTimeRegex3 = /\s(.*)$/;
@@ -41,6 +43,18 @@ function main(){
 	function twoNumberDecimal(number) {
 		if(number === "") return 0;
 	    return parseFloat(number).toFixed(2);
+	}
+
+	function selectServuct(event){
+		var selected = $(this);
+		$(".select-servuct").css("background-color", '#DBE8DC');
+		selected.css("background-color", '#e6ffe6');
+		selectedServuct = [
+		];
+		selected.children().each(function(){
+			selectedServuct.push($(this).text());
+		});
+		console.log(selectedServuct);
 	}
 
 	var calendarSetup = function(){
@@ -192,6 +206,7 @@ function main(){
 		$('#servuctLabel').html('Product Name:');
 		servucts.forEach(function(servuct){
 			if(servuct[0] === currentServuctId){
+				currentServuctName = servuct[2];
 				$('#editservname').val(servuct[2]);
 				$('#editservprice').val(servuct[4]);
 				$('#editservdiscount').val(servuct[5]);
@@ -289,10 +304,11 @@ function main(){
 						});
 						if(!service) service = "";
 						else if(numServs) service += " + " + numServs + " others";
-						var total = appointment[5];
+						var total = twoNumberDecimal(Number(appointment[5]) + Number(appointment[3]));
+						var due = twoNumberDecimal(total - (Number(appointment[9]) + Number(appointment[10])));
 						var notes = appointment[8] ? appointment[8] : "";
 						var newNode = $('<tr apptId="' + appointment[0]+ '"class="highlight" data-toggle="modal" data-target="#apptModal"><td class="col100">'+ date +
-										'</td><td class="col200">'+ service +'</td><td class="col100">$'+ total +'</td><td class="col100">$amountdue</td><td class="col200">'+ notes +
+										'</td><td class="col200">'+ service +'</td><td class="col100">$'+ total +'</td><td class="col100">$' + due + '</td><td class="col200">'+ notes +
 										'</td><td id="printArea" class="col100 center print"><a id="print" class="icon icon-print"></a></td></tr>');
 						$('#appointments').append(newNode);
 						newNode.children(".print").click(function(event){
@@ -787,7 +803,7 @@ function main(){
 		  		var range = 'A' + row + ":C" + row;
 		  		var array = [["", "", ""]];
 		  		console.log("deleting:", itemName, range, array);
-			  	updateSS(servuctsId, range, array).then(function(response){
+			  	updateSS(inventoryId, range, array).then(function(response){
 				console.log('edit inventory success');
 				loadInventory();
 			});
@@ -796,6 +812,74 @@ function main(){
 		    console.log('delete inventory error');
 		  });
 	}
+
+	function lowerQuantity(itemName){
+		ss.values.get({
+		    spreadsheetId: inventoryId,
+		    range: 'A1:C',
+		  }).then(function(response) {
+		  		var row = null;
+		  		var currentQuantity, currentItem;
+		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){
+		  			if (response.result.values[i][0] === itemName) {
+		  				row = i + 1;
+		  				if(response.result.values[i][0] === "Service") return;
+		  				currentQuantity = Number(response.result.values[i][1]);
+		  				currentItem = response.result.values[i];
+		  			}
+		  		}
+		  		if(!row) {
+		  			console.log('item name not found');
+		  			return;
+		  		}
+		  		var range = 'A' + row + ":C" + row;
+		  		currentItem[1] = --currentQuantity;
+		  		var array = [currentItem];
+		  		console.log("lowering:", itemName, range, array);
+			  	updateSS(inventoryId, range, array).then(function(response){
+				console.log('lower inventory success');
+				loadInventory();
+			});
+		  }, function(e) {
+		  	console.log(e);
+		    console.log('lower inventory error');
+		  });
+	}
+
+	function increaseQuantity(itemName){
+		ss.values.get({
+		    spreadsheetId: inventoryId,
+		    range: 'A1:C',
+		  }).then(function(response) {
+		  		var row = null;
+		  		var currentQuantity, currentItem;
+		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){
+		  			if (response.result.values[i][0] === itemName) {
+		  				row = i + 1;
+		  				if(response.result.values[i][0] === "Service") return;
+		  				currentQuantity = Number(response.result.values[i][1]);
+		  				currentItem = response.result.values[i];
+		  			}
+		  		}
+		  		if(!row) {
+		  			console.log('item name not found');
+		  			return;
+		  		}
+		  		var range = 'A' + row + ":C" + row;
+		  		currentItem[1] = ++currentQuantity;
+		  		var array = [currentItem];
+		  		console.log("increasing:", itemName, range, array);
+			  	updateSS(inventoryId, range, array).then(function(response){
+				console.log('increase inventory success');
+				loadInventory();
+			});
+		  }, function(e) {
+		  	console.log(e);
+		    console.log('increase inventory error');
+		  });
+	}
+
+
 
 	var sophie = {
 		last: 'hia',
@@ -934,6 +1018,7 @@ function main(){
 	});
 
 	$('#servuctDelete').click(function(){
+		if(currentServuctType === "Product") increaseQuantity(currentServuctName);
 		deleteServuct(currentServuctId);
 		$('#editServuctModal').modal('hide');
 	});
@@ -967,6 +1052,7 @@ function main(){
 		$('#editservname').val("");
 		$('#editservprice').val(0.00);
 		$('#editservdiscount').val(0.00);
+		$('#serviceDisc').val(0.00);
 		$('#addServuct').modal('show');
 		createServiceList();
 	});
@@ -974,12 +1060,59 @@ function main(){
 	$('#proadd').click(function(){
 		currentServuctType = "Product";
 		currentServuctId = null;
+		$('#productDisc').val();
 		$('#servuctHeader').html('New Product');
 		$('#servuctLabel').html('Product Name:');
 		$('#editservname').val("");
 		$('#editservprice').val(0.00);
+		$('#productDisc').val(0.00);
 		$('#editservdiscount').val(0.00);
 		$('#addProduct').modal('show');
+		createProductList();
+	});
+
+	$('#servsave').click(function(){
+		var servuct = [[
+			currentAppointmentId,
+  			selectedServuct[0],
+  			currentServuctType,
+  			selectedServuct[1],
+  			$('#serviceDisc').val(),
+		]];
+		if(currentServuctId) editServuct(currentServuctId, servuct);
+		else{
+			addServuct({
+				id: currentAppointmentId,
+				name: selectedServuct[0],
+				type: currentServuctType,
+				cost: selectedServuct[1],
+				discount: $('#serviceDisc').val(),
+			});
+		}
+		$('#addServuct').modal('hide');
+		createProductList();
+	});
+
+	$('#prosave').click(function(){
+		var servuct = [[
+			currentAppointmentId,
+  			selectedServuct[0],
+  			currentServuctType,
+  			selectedServuct[2],
+  			$('#productDisc').val(),
+		]];
+		if(currentServuctId) editServuct(currentServuctId, servuct);
+		else{
+			addServuct({
+				id: currentAppointmentId,
+				name: selectedServuct[0],
+				type: currentServuctType,
+				cost: selectedServuct[2],
+				discount: $('#productDisc').val(),
+			});
+		}
+		lowerQuantity(selectedServuct[0]);
+		$('#addProduct').modal('hide');
 		createProductList();
 	});
 
@@ -1102,7 +1235,7 @@ function main(){
 		console.log(productArray);
 		var columns = {
 		    valueNames: ['pname', 'pquantity', 'pprice'],
-		    item: '<ul class="row-content"><li class="pname" id="pname"></li><li class="pquantity center" id="pquantity"></li><li class="pprice center" id="pprice"></li></ul>'
+		    item: '<ul class="row-content select-servuct"><li class="pname" id="pname"></li><li class="pquantity center" id="pquantity"></li><li class="pprice center" id="pprice"></li></ul>'
 		};
 	    var values = [];
 	    for(var i = 0; i < productArray.length ; i++){
@@ -1113,6 +1246,7 @@ function main(){
 		}
 		console.log(values);
 			var searchProducts = new List('searchproductlist', columns, values);
+		$('.select-servuct').click(selectServuct);
 	}
 	function createServiceList() {
 		$('#listservice').empty();
@@ -1125,7 +1259,7 @@ function main(){
 		console.log(serviceArray);
 		var columns = {
 		    valueNames: ['sname', 'squantity', 'sprice'],
-		    item: '<ul class="row-content"><li class="sname" id="sname"></li><li class="sprice" id="sprice"></li></ul>'
+		    item: '<ul class="row-content select-servuct"><li class="sname" id="sname"></li><li class="sprice" id="sprice"></li></ul>'
 		};
 	    var values = [];
 	    for(var i = 0; i < serviceArray.length ; i++){
@@ -1135,6 +1269,7 @@ function main(){
 		}
 		console.log(values);
 			var searchServices = new List('searchservicelist', columns, values);
+		$('.select-servuct').click(selectServuct);
 	}
 
 }
