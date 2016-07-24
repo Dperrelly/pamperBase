@@ -8,8 +8,8 @@ function main(){
 	var currentServuctName = "";
 	var currentPersonId = 'iql3hgup';
 	var currentAppointmentId = null;
-	var currentServuctId = '68w2dvp2.o00y66r';
-	var currentServuctType = "Service";
+	var currentServuctId = null;
+	var currentServuctType = null;
 	var people = [];
 	var appointments = [];
 	var servucts = [];
