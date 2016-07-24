@@ -374,7 +374,7 @@ function main(){
 				var monthNum = parseInt(appt[7].substr(5,2));
 				var month = monthMap[monthNum];
 				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
-				var apptNode = $('<tr class="highlight"><td class="' + month + 'Name" class="colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv" class="colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro" class="colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax" class="colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc" class="colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due" class="colFixedB">' + twoNumberDecimal(appt[14]) + '</td><td class="' + month + 'AppTotal" class="colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
+				var apptNode = $('<tr class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(appt[14]) + '</td><td class="' + month + 'AppTotal colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
 				var mommaNode = $('#' + month + 'Apps');
 				mommaNode.append(apptNode);
 			}
