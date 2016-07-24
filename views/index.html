@@ -84,6 +84,7 @@
       Authorize
     </button>
   </div>
+  <img id="cat" src="/images/loading.gif">
   <div id="wrapper">
     <h1 id="title" class="center">PamperBase</h1>
     <nav id="nav"> 
@@ -224,6 +225,7 @@
                 <th class="col200 center" id="proTotal"></th>
                 <th class="col200 center" id="taxTotal"></th>
                 <th class="col200 center" id="discTotal"></th>
+                <th class="col200 center" id="totalDue">Amount Due: $$$$</th>
                 </tr>
               </thead>
             </table>
@@ -236,7 +238,7 @@
         <table id="monthsTable" class="table table-striped">
           <tr>
             <!-- jaunary column -->
-            <td class="col500">
+            <td class="">
               <table id="january" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">January</th></tr>
@@ -247,13 +249,14 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
+                      <th class="colFixedB">Amount Due</th>
                       <th class="colFixedB">Total</th>
                   </tr>
                 </thead>
               </table>
               <div class="overflowMonths"> <!-- scrolls excess apps -->
                 <table class="table table-striped">
-                  <tbody class="col500" id="janApps">
+                  <tbody class="" id="janApps">
                   <!-- january appointment details print here -->
                     <tr class="highlight">
                       <td id="janName" class="colFixedL">lastname, first</td>
@@ -261,24 +264,27 @@
                       <td id="janPro" class="colFixedB">547.00</td>
                       <td id="janTax" class="colFixedS">20.15</td>
                       <td id="janDisc" class="colFixedB">20.00</td>
-                      <td id="janAppTotal" class="colFixedB">8120.00</td>
+                      <td id="janDue" class="colFixedB">150.84</td>
+                      <td id="janAppTotal" class="colFixedB">810.00</td>
                     </tr>
                   </tbody>
                 </table> <!-- closes month appointments -->
               </div> <!-- close overflow -->
               <table class="table table-striped"> 
-                <tfoot>
+                <tfoot class="col500">
                   <tr>
                     <th id="janClients" class="colFixedL center">0 Clients</th>
                     <th id="janServTotal" class="colFixedB center">2310.00</th>
-                    <th id="janProTotal" class="colFixedB center">2310.00</th>
+                    <th id="janProTotal" class="colFixedB center">2346.00</th>
                     <th id="janTaxTotal" class="colFixedS center">210.00</th>
                     <th id="janDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th id="janAmountDue" class="colFixedB center">215.65</th>
+                    <th id="janClientTotal" class="colFixedB center">1564.15</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
             </td> <!-- closes january column -->
+            <tr>
             <!-- february column -->
             <td class="col500">
               <table id="February" class="col500 table table-striped">
@@ -1176,47 +1182,22 @@
   </div>
   <div class="modal-body newList">
     <form>
-      <fieldset>
-        <table class="table">
-          <tbody id="newList">
-            <!-- Product  -->
-
-            <div class="table" id="searchproductlist">
-          <input class="search" placeholder="Search" /><br/><br/>
-            <div class="data">
-              <ul class="row-header">
-                <li>Name</li>
-                <li>Quantity Remaining</li>
-                <li>Price</li>
-              </ul>
-              <div class="list" id="listproduct">
+      <!-- Product  -->
+      <div class="table" id="searchproductlist">
+        <input class="floatL search" placeholder="Search"/>
+        <span class="labels floatR">Discount: $<input class="floatR tiny money" type="text" id="prodcutDisc"/></span>
+            <br/><br/>
+        <div class="data">
+          <ul class="row-header">
+            <li>Name</li>
+            <li>Quantity Remaining</li>
+            <li>Price</li>
+          </ul>
+          <div class="list" id="listproduct">
               <!--search list will print here-->
-              </div>
-            </div>
+          </div>
         </div>
-
-            <!-- <tr><td class="namecol">
-              <label class="namecol"><input type="checkbox" id="proname1"/> Product 1asdadf asdffafaf </label>
-            </td><td>
-              <input class="tiny center" type="text" id="proquant1">
-            </td><td class="center" id="proprice1">$211.05
-            </td><td class="col200 center">$
-              <input class="tiny money" type="text" id="prodisc1"><br/><br/>
-            </td></tr>
-
-            <tr><td>
-              <label><input type="checkbox" id="pother"/> Other </label>
-              <input class="namecol center" type="text" id="pothername"><br/><br/>
-              </td><td>
-              <input class="tiny center" type="text" id="potherquant1">
-            </td><td class="center" id="potherprice">$211.05
-            </td><td class="col200 center">$
-              <input class="tiny money" type="text" id="potherdisc"><br/><br/>
-            </td></tr> -->
-
-          </tbody>
-        </table>
-      </fieldset>
+      </div>
     </form>
   </div>
   <div class="modal-footer">

@@ -128,7 +128,7 @@
   }
 .row-content {
   background-color:#DBE8DC;
-  font-size: 16px;
+  font-size: 18px;
   color:#333;
   text-align:left;
   }
@@ -165,13 +165,24 @@
 			font-weight: bold;
 }
 
-.modal-body input[type="text"], .modal input[type="date"], .modal input[type="time"]{
+.modal-body input[type="text"], .modal-body input[type="search"], .modal input[type="date"], .modal input[type="time"]{
 border: 0;
 			background: #f0f0f0;
 			font-size: 18px;
 			width: 90%;
 			height: 2.2em;
 			font-weight: bold;
+}
+
+.search {
+	border: 0;
+	background: #f0f0f0;
+	padding: 0.65em;
+	width: 50%;
+	height: 2.2em;
+	font-size: 18px;
+	font-weight: bold;
+	color: #000000;
 }
 
 /*Appointment Modal*/
@@ -296,7 +307,7 @@ border: 0;
 		height: auto !important;
 		min-height: 0px !important;
 		max-height: 220px !important;
-		min-width: 655px !important;
+		min-width: 750px !important;
 		max-width: 34vw !important;
 		overflow-y: auto !important;
 		overflow-x: hidden !important;
