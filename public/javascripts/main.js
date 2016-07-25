@@ -1032,8 +1032,9 @@ function main(){
 		console.log('new appt made');
 	});
 
-	$('#apptdelete').click(function(){
+	$('#delApptYes').click(function(){
 		deleteAppointment(currentAppointmentId);
+		$('#delApptModal').modal('hide');
 		$('#apptModal').modal('hide');
 	});
 
@@ -1071,11 +1072,12 @@ function main(){
 		deletePerson(currentPersonId);
 	});
 
-	$('#servuctDelete').click(function(){
+	$('#delServuctYes').click(function(){
 		if(currentServuctType === "Product") increaseQuantity(currentServuctName);
 		deleteServuct(currentServuctId);
 		updateAppt = true;
 		$('#editServuctModal').modal('hide');
+		$('#delServuctModal').modal('hide');
 	});
 
 	$('#editServuctSave').click(function(){
@@ -1279,6 +1281,12 @@ function main(){
 	});
 	$('#addProduct').on('show', function() {
   		$('#apptModal').unbind();
+	});
+	$('#delApptModal').on('show', function() {
+  		$('#apptModal').unbind();
+	});
+	$('#delServuctModal').on('show', function() {
+  		$('#editServuctModal').unbind();
 	});
 
 // add appointment products and services lists
