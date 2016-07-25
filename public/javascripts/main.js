@@ -141,7 +141,6 @@ function main(){
 
 	var setCurrentAppointmentId = function(event){
 		newAppt = false;
-		console.log(event);
 		if(event) {
 			// $('#apptModal').show();
 			// if(event.target.nodeName === "A" || $(event.target).attr('id') === "printArea") return;
@@ -379,7 +378,6 @@ function main(){
 				discTotal += Number(servuct[5]);
 				if(servuct[3] === "Service"){
 					servTotal += Number(servuct[4]);
-					console.log(apptKey);
 					apptKey[servuct[1]][11] += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
 					proTotal += Number(servuct[4]);
@@ -405,17 +403,18 @@ function main(){
 			};
 			for(var i in apptKey){
 				var appt = apptKey[i];
-				appt[5] -= appt[3];
+				var totalNoTip = Number(appt[5]) - Number(appt[3]);
 				var lastFirst = getName(appt[1]);
+
 				var monthNum = parseInt(appt[7].substr(5,2));
 				var month = monthMap[monthNum];
 				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
-				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(Number(appt[5]) - made) + '</td><td class="' + month + 'AppTotal colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
+				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
 				var mommaNode = $('#' + month + 'Apps');
+				appt[16] = lastFirst;
 				apptNode.click(goToAppt);
 				mommaNode.append(apptNode);
 			}
-			createReport();
 			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
 			$('#taxTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
@@ -481,16 +480,43 @@ function main(){
 		var yearlyReportId = '1WMw-xVQ3zRZx4lVcMUDwbJsdQlb6puhWGQooec1VDUg';
 		var array = [[],[],[],[],[],[],[],[],[],[],[],[]];
 		var data = [];
+		var monthMap = {
+			1: "January",
+			2: "February",
+			3: "March",
+			4: "April",
+			5: "May",
+			6: "June",
+			7: "July",
+			8: "August",
+			9: "September",
+			10: "October",
+			11: "November",
+			12: "December"
+		};
 		for(var i in apptKey){
 			apptKey[i][15] = Number(apptKey[i][10]) + Number(apptKey[i][9]) - Number(apptKey[i][3]);
-			console.log(apptKey[i][15]);
-			if(apptKey[i][7])array[parseInt(apptKey[i][7].substr(5,2)) - 1].push(apptKey[i]);
+			var appt = [
+			apptKey[i][7],
+			apptKey[i][16],
+			apptKey[i][11],
+			apptKey[i][12],
+			apptKey[i][2],
+			apptKey[i][13],
+			apptKey[i][4],
+			apptKey[i][3],
+			apptKey[i][5],
+			apptKey[i][9],
+			apptKey[i][10],
+			apptKey[i][15],
+			apptKey[i][14]
+			];
+			if(apptKey[i][7])array[parseInt(apptKey[i][7].substr(5,2)) - 1].push(appt);
 		}
-		console.log(array);
 		array.forEach(function(month, index){
 			data.push({
 				majorDimension: 'ROWS',
-				range: 'Sheet' + (index + 1) + '!A2:P' + (month.length + 1),
+				range: "" + monthMap[index + 1] + '!A2:P' + (month.length + 1),
 				values: month
 			});
 		});
@@ -1219,6 +1245,11 @@ function main(){
      	for(i = 2; i < length; i++){
         	$("#serviceDiv" + i).remove();
       	}
+	});
+
+	$('#spreadsheet').click(function(){
+		createReport();
+		window.open("https://docs.google.com/spreadsheets/d/1WMw-xVQ3zRZx4lVcMUDwbJsdQlb6puhWGQooec1VDUg", '_blank');
 	});
 
 	$('.updateGrandTotal').keyup(calculateGrandTotal);

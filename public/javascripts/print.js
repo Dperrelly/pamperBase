@@ -17,7 +17,7 @@ function main(){
 
 	function Number(str){
 		if(typeof str === "string"){
-			var numberNoCommas = number.replace(/,/g, '');
+			var numberNoCommas = str.replace(/,/g, '');
     		return parseFloat(numberNoCommas);
 		} else 
 		if(typeof str === "number") return str;
