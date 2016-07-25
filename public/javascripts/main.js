@@ -140,7 +140,6 @@ function main(){
 
 	var setCurrentAppointmentId = function(event){
 		newAppt = false;
-		console.log(event);
 		if(event) {
 			// $('#apptModal').show();
 			// if(event.target.nodeName === "A" || $(event.target).attr('id') === "printArea") return;
