@@ -17,6 +17,7 @@ function main(){
 	var inventory = [];
 	var newAppt = false;
 	var selectedServuct;
+	var apptKey = {};
 	var parseTimeRegex1 = /^(\d+)/;
 	var parseTimeRegex2 = /:(\d+)/;
 	var parseTimeRegex3 = /\s(.*)$/;
@@ -345,11 +346,11 @@ function main(){
 	}
 
 	function goToAppt(event){
-		$('#clientLink').trigger('click');
+		//$('#clientLink').trigger('click');
 		// window.setTimeout(function(){
 			console.log('opening');
-			$('#apptModal').modal('show');
-			setCurrentAppointmentId(event);		
+		$('#apptModal').modal('show');
+		setCurrentAppointmentId(event);		
 		// }, 1500);
 	}
 
@@ -365,7 +366,6 @@ function main(){
 				});
 			}
 			var servTotal = 0, proTotal = 0, taxTotal = 0, discTotal = 0, dueTotal = 0, tax;
-			var apptKey = {};
 			// 11 = service total, 12 = product total, 13 = tax, 4 = discount, 5 = total, 5 - (9 + 10) = due
 			appointments.forEach(function(appointment){
 				apptKey[appointment[0]] = appointment;
@@ -379,6 +379,7 @@ function main(){
 				discTotal += Number(servuct[5]);
 				if(servuct[3] === "Service"){
 					servTotal += Number(servuct[4]);
+					console.log(apptKey);
 					apptKey[servuct[1]][11] += Number(servuct[4]);
 				} else if(servuct[3] === "Product"){
 					proTotal += Number(servuct[4]);
@@ -414,6 +415,7 @@ function main(){
 				apptNode.click(goToAppt);
 				mommaNode.append(apptNode);
 			}
+			createReport();
 			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
 			$('#taxTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
@@ -469,6 +471,30 @@ function main(){
 
 	function updateSS(id, range, array){
 		return ss.values.update({valueInputOption: 'USER_ENTERED', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
+		}, function(e){
+			console.log('update error');
+			console.log(e);
+		});
+	}
+
+	function createReport(){
+		var yearlyReportId = '1WMw-xVQ3zRZx4lVcMUDwbJsdQlb6puhWGQooec1VDUg';
+		var array = [[],[],[],[],[],[],[],[],[],[],[],[]];
+		var data = [];
+		for(var i in apptKey){
+			apptKey[i][15] = Number(apptKey[i][10]) + Number(apptKey[i][9]) - Number(apptKey[i][3]);
+			console.log(apptKey[i][15]);
+			if(apptKey[i][7])array[parseInt(apptKey[i][7].substr(5,2)) - 1].push(apptKey[i]);
+		}
+		console.log(array);
+		array.forEach(function(month, index){
+			data.push({
+				majorDimension: 'ROWS',
+				range: 'Sheet' + (index + 1) + '!A2:P' + (month.length + 1),
+				values: month
+			});
+		});
+		return ss.values.batchUpdate({valueInputOption: 'USER_ENTERED', spreadsheetId: yearlyReportId, data: data}).then(function(response){
 		}, function(e){
 			console.log('update error');
 			console.log(e);
