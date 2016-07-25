@@ -17,6 +17,7 @@ function main(){
 	var inventory = [];
 	var newAppt = false;
 	var selectedServuct;
+	var apptKey = {};
 	var parseTimeRegex1 = /^(\d+)/;
 	var parseTimeRegex2 = /:(\d+)/;
 	var parseTimeRegex3 = /\s(.*)$/;
@@ -344,11 +345,11 @@ function main(){
 	}
 
 	function goToAppt(event){
-		$('#clientLink').trigger('click');
+		//$('#clientLink').trigger('click');
 		// window.setTimeout(function(){
 			console.log('opening');
-			$('#apptModal').modal('show');
-			setCurrentAppointmentId(event);		
+		$('#apptModal').modal('show');
+		setCurrentAppointmentId(event);		
 		// }, 1500);
 	}
 
@@ -364,7 +365,6 @@ function main(){
 				});
 			}
 			var servTotal = 0, proTotal = 0, taxTotal = 0, discTotal = 0, dueTotal = 0, tax;
-			var apptKey = {};
 			// 11 = service total, 12 = product total, 13 = tax, 4 = discount, 5 = total, 5 - (9 + 10) = due
 			appointments.forEach(function(appointment){
 				apptKey[appointment[0]] = appointment;
@@ -403,13 +403,15 @@ function main(){
 			};
 			for(var i in apptKey){
 				var appt = apptKey[i];
-				appt[5] -= appt[3];
+				var totalNoTip = Number(appt[5]) - Number(appt[3]);
 				var lastFirst = getName(appt[1]);
+
 				var monthNum = parseInt(appt[7].substr(5,2));
 				var month = monthMap[monthNum];
 				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
-				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(Number(appt[5]) - made) + '</td><td class="' + month + 'AppTotal colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
+				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
 				var mommaNode = $('#' + month + 'Apps');
+				appt[16] = lastFirst;
 				apptNode.click(goToAppt);
 				mommaNode.append(apptNode);
 			}
@@ -468,6 +470,57 @@ function main(){
 
 	function updateSS(id, range, array){
 		return ss.values.update({valueInputOption: 'USER_ENTERED', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
+		}, function(e){
+			console.log('update error');
+			console.log(e);
+		});
+	}
+
+	function createReport(){
+		var yearlyReportId = '1WMw-xVQ3zRZx4lVcMUDwbJsdQlb6puhWGQooec1VDUg';
+		var array = [[],[],[],[],[],[],[],[],[],[],[],[]];
+		var data = [];
+		var monthMap = {
+			1: "January",
+			2: "February",
+			3: "March",
+			4: "April",
+			5: "May",
+			6: "June",
+			7: "July",
+			8: "August",
+			9: "September",
+			10: "October",
+			11: "November",
+			12: "December"
+		};
+		for(var i in apptKey){
+			apptKey[i][15] = Number(apptKey[i][10]) + Number(apptKey[i][9]) - Number(apptKey[i][3]);
+			var appt = [
+			apptKey[i][7],
+			apptKey[i][16],
+			apptKey[i][11],
+			apptKey[i][12],
+			apptKey[i][2],
+			apptKey[i][13],
+			apptKey[i][4],
+			apptKey[i][3],
+			apptKey[i][5],
+			apptKey[i][9],
+			apptKey[i][10],
+			apptKey[i][15],
+			apptKey[i][14]
+			];
+			if(apptKey[i][7])array[parseInt(apptKey[i][7].substr(5,2)) - 1].push(appt);
+		}
+		array.forEach(function(month, index){
+			data.push({
+				majorDimension: 'ROWS',
+				range: "" + monthMap[index + 1] + '!A2:P' + (month.length + 1),
+				values: month
+			});
+		});
+		return ss.values.batchUpdate({valueInputOption: 'USER_ENTERED', spreadsheetId: yearlyReportId, data: data}).then(function(response){
 		}, function(e){
 			console.log('update error');
 			console.log(e);
@@ -1192,6 +1245,11 @@ function main(){
      	for(i = 2; i < length; i++){
         	$("#serviceDiv" + i).remove();
       	}
+	});
+
+	$('#spreadsheet').click(function(){
+		createReport();
+		window.open("https://docs.google.com/spreadsheets/d/1WMw-xVQ3zRZx4lVcMUDwbJsdQlb6puhWGQooec1VDUg", '_blank');
 	});
 
 	$('.updateGrandTotal').keyup(calculateGrandTotal);
