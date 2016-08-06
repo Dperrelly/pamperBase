@@ -231,7 +231,7 @@ function main(){
 	    });
 	}
 
-	function loadPeople(){
+	function loadPeople(boot){
 		ss.values.get({
 			spreadsheetId: peopleId,
 			range: 'A2:G'
@@ -242,7 +242,7 @@ function main(){
 					if(value.length) people.push(value);
 				});
 			}
-			loadAppointments();
+			if(boot) loadAppointments(true);
 
 		}, function(e){
 			console.log('load people error');
@@ -250,7 +250,7 @@ function main(){
 		});
 	}
 
-	function loadAppointments(){
+	function loadAppointments(boot){
 		ss.values.get({
 			spreadsheetId: appointmentsId,
 			range: 'A2:K'
@@ -270,7 +270,7 @@ function main(){
 			});
 			calendarSetup();
 			createList();
-			loadServucts();
+			if(boot) loadServucts(true);
 		}, function(e){
 			console.log('load appointments error');
 			console.log(e);
@@ -353,7 +353,7 @@ function main(){
 		// }, 1500);
 	}
 
-	function loadServucts(){
+	function loadServucts(boot){
 		ss.values.get({
 			spreadsheetId: servuctsId,
 			range: 'A2:F'
@@ -401,7 +401,10 @@ function main(){
 				11: 'nov',
 				12: 'dec',
 			};
-			for(var i in apptKey){
+			for(var i in monthMap){
+				$('#' + monthMap[i] + 'Apps').empty();
+			}
+			for(i in apptKey){
 				var appt = apptKey[i];
 				var totalNoTip = Number(appt[5]) - Number(appt[3]);
 				var lastFirst = getName(appt[1]);
@@ -422,8 +425,8 @@ function main(){
 			$('#totalDue').html("Amount Due: $" + twoNumberDecimal(dueTotal));
 			$('#yearlyTotal').html(
 				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal - dueTotal));
-			loadPerson(currentPersonId);
-			loadInventory();
+			if(boot) loadPerson(currentPersonId);
+			if(boot) loadInventory();
 			setCurrentAppointmentId();
 		}, function(e){
 			console.log('load servucts error');
@@ -466,7 +469,7 @@ function main(){
 		});
 	}
 
-	loadPeople();	
+	loadPeople(true);	
 
 	function updateSS(id, range, array){
 		return ss.values.update({valueInputOption: 'USER_ENTERED', majorDimension: 'ROWS', spreadsheetId: id, range: range, values: array}).then(function(response){
@@ -656,7 +659,7 @@ function main(){
 			  	console.log(array);
 			  	updateSS(appointmentsId, range, array).then(function(response){
 				console.log('add appointment success');
-				loadPeople();
+				loadAppointments(true);
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -685,7 +688,7 @@ function main(){
 				servucts.forEach(function(servuct){
 					if(servuct[1] === id) deleteServuct(servuct[0]);
 				});
-				loadPeople();
+				loadAppointments(true);
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -709,7 +712,7 @@ function main(){
 		  		var range = 'B' + row + ":K" + row;
 			  	updateSS(appointmentsId, range, array).then(function(response){
 				console.log('edit appointment success', range, array);
-				loadPeople();
+				loadAppointments(true);
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -741,7 +744,7 @@ function main(){
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('add servuct success');
 				currentServuctId = now;
-				loadPeople();
+				loadServucts();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -766,7 +769,7 @@ function main(){
 		  		console.log("updating:", id, range, array);
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('edit servuct success');
-				loadPeople();
+				loadServucts();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -791,7 +794,7 @@ function main(){
 		  		var array = [["", "", "", "", "", ""]];
 			  	updateSS(servuctsId, range, array).then(function(response){
 				console.log('delete servuct success');
-				loadPeople();
+				loadServucts();
 			});
 		  }, function(e) {
 		  	console.log(e);
@@ -1015,7 +1018,7 @@ function main(){
 			$('#cash').val(),
 			$('#card').val(),
 			]]);
-		loadPeople();
+		loadAppointments();
 	}
 
 	$('#apptsave').click(function(){
@@ -1035,7 +1038,7 @@ function main(){
 		$('#productBody').empty();
 		$('#tax').val(8);
 		$('#tip').val(0);
-		$('#discount').val(0);
+		$('#discount').html("$0.00");
 		$('#time').val("");
 		$('#servicedate').val(0);
 		$('#notes').val("");
