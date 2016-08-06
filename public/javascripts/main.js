@@ -409,7 +409,7 @@ function main(){
 				var monthNum = parseInt(appt[7].substr(5,2));
 				var month = monthMap[monthNum];
 				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
-				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal colFixedB">' + twoNumberDecimal(made) + '</td></tr>');
+				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal col250 center">' + twoNumberDecimal(made) + '</td></tr>');
 				var mommaNode = $('#' + month + 'Apps');
 				appt[16] = lastFirst;
 				apptNode.click(goToAppt);
@@ -1131,7 +1131,7 @@ function main(){
 	$('#servadd').click(function(){
 		currentServuctType = "Service";
 		currentServuctId = null;
-		$('#servuctHeader').html('New Service');
+		$('#servuctHeader').html('Add Service');
 		$('#servuctLabel').html('Service Name:');
 		$('#editservname').val("");
 		$('#editservprice').val(0.00);
