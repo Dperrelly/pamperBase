@@ -9,6 +9,7 @@ function main(){
 	var currentPersonId = 'iql3hgup';
 	var updateAppt = false;
 	var currentAppointmentId = null;
+	var currentYear = new Date().getFullYear().toString();
 	var currentServuctId = null;
 	var currentServuctType = null;
 	var currentInventoryServuct = null;
@@ -386,17 +387,33 @@ function main(){
 					if(value.length) servucts.push(value);
 				});
 			}
-			var servTotal = 0, proTotal = 0, taxTotal = 0, discTotal = 0, dueTotal = 0, tax;
-			// 11 = service total, 12 = product total, 13 = tax, 4 = discount, 5 = total, 5 - (9 + 10) = due
-			appointments.forEach(function(appointment){
-				apptKey[appointment[0]] = appointment;
-				apptKey[appointment[0]][11] = 0;
-				apptKey[appointment[0]][12] = 0;
-				apptKey[appointment[0]][13] = 0;
-				apptKey[appointment[0]][14] = (Number(appointment[5]) - (Number(appointment[9]) + Number(appointment[10])) - Number(appointment[3]));
+
+			UpdateReport();
+			
+			if(boot) loadPerson(currentPersonId);
+			if(boot) loadInventory();
+			setCurrentAppointmentId();
+		}, function(e){
+			console.log('load servucts error');
+			console.log(e);
+		});
+	}
+
+	function UpdateReport(){
+		var servTotal = 0, proTotal = 0, taxTotal = 0, discTotal = 0, dueTotal = 0, tax;
+		// 11 = service total, 12 = product total, 13 = tax, 4 = discount, 5 = total, 5 - (9 + 10) = due
+		appointments.forEach(function(appointment){
+			apptKey[appointment[0]] = appointment;
+			apptKey[appointment[0]][11] = 0;
+			apptKey[appointment[0]][12] = 0;
+			apptKey[appointment[0]][13] = 0;
+			apptKey[appointment[0]][14] = (Number(appointment[5]) - (Number(appointment[9]) + Number(appointment[10])) - Number(appointment[3]));
+			if(appointment[7].substr(0, 4) === currentYear){
 				dueTotal += apptKey[appointment[0]][14];
-			});
-			servucts.forEach(function(servuct){
+			}
+		});
+		servucts.forEach(function(servuct){
+			if(apptKey[servuct[1]][7].substr(0, 4) === currentYear){
 				discTotal += Number(servuct[5]);
 				if(servuct[3] === "Service"){
 					servTotal += Number(servuct[4]);
@@ -408,8 +425,11 @@ function main(){
 					apptKey[servuct[1]][13] += servuct[4] * tax;
 					taxTotal += servuct[4] * tax;
 				}
-			});
-			var monthMap = {
+			}
+		});
+
+
+		var monthMap = {
 				1: 'jan',
 				2: 'feb',
 				3: 'mar',
@@ -428,17 +448,20 @@ function main(){
 			}
 			for(i in apptKey){
 				var appt = apptKey[i];
-				var totalNoTip = Number(appt[5]) - Number(appt[3]);
-				var lastFirst = getName(appt[1]);
-				var monthNum = parseInt(appt[7].substr(5,2));
-				var month = monthMap[monthNum];
-				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
-				var totalappt = Number(appt[11]) + Number(appt[12]) + Number(appt[13]) - Number(appt[4]);
-				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="colFixedB">'+ twoNumberDecimal(totalappt) + '</td><td class="' + month + 'Due colFixedL center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal colFixedL center">' + twoNumberDecimal(made) + '</td></tr>');
-				var mommaNode = $('#' + month + 'Apps');
-				appt[16] = lastFirst;
-				apptNode.click(goToAppt);
-				mommaNode.append(apptNode);
+				if(appt[7].substr(0, 4) === currentYear){
+					console.log(appt[7].substr(0, 4));
+					var totalNoTip = Number(appt[5]) - Number(appt[3]);
+					var lastFirst = getName(appt[1]);
+					var monthNum = parseInt(appt[7].substr(5,2));
+					var month = monthMap[monthNum];
+					var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
+					var totalappt = Number(appt[11]) + Number(appt[12]) + Number(appt[13]) - Number(appt[4]);
+					var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="colFixedB">'+ twoNumberDecimal(totalappt) + '</td><td class="' + month + 'Due colFixedL center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal colFixedL center">' + twoNumberDecimal(made) + '</td></tr>');
+					var mommaNode = $('#' + month + 'Apps');
+					appt[16] = lastFirst;
+					apptNode.click(goToAppt);
+					mommaNode.append(apptNode);
+				}
 			}
 			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
@@ -446,13 +469,6 @@ function main(){
 			$('#discTotal').html("Discount Total: $" + twoNumberDecimal(discTotal));
 			$('#totalDue').html("Balance Due: $" + twoNumberDecimal(dueTotal));
 			$('#yearlyTotal').html("Total Paid: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal - dueTotal));
-			if(boot) loadPerson(currentPersonId);
-			if(boot) loadInventory();
-			setCurrentAppointmentId();
-		}, function(e){
-			console.log('load servucts error');
-			console.log(e);
-		});
 	}
 
 	function loadInventory(){
@@ -466,6 +482,12 @@ function main(){
 					if(value.length) inventory.push(value);
 				});
 			}
+
+			inventory.sort(function(a, b){
+				if(a[0].toUpperCase() > b[0].toUpperCase()) return 1;
+				if(a[0].toUpperCase() < b[0].toUpperCase()) return -1;
+				if(a[0].toUpperCase() === b[0].toUpperCase()) return 0;
+			});
 
 			$('#services').empty();
 			$('#products').empty();
@@ -878,8 +900,8 @@ function main(){
 		  			return;
 		  		}
 		  		var range = 'A' + row + ":C" + row;
-		  		console.log("updating:", itemName, range, array);
-			  	updateSS(servuctsId, range, array).then(function(response){
+		  		console.log("updating:", itemName, range, [array]);
+			  	updateSS(inventoryId, range, [array]).then(function(response){
 				console.log('edit inventory success');
 				loadInventory();
 			});
@@ -1270,6 +1292,34 @@ function main(){
      	for(i = 2; i < length; i++){
         	$("#serviceDiv" + i).remove();
       	}
+	});
+
+	$('#pSave').click(function(){
+		editInventory(currentInventoryServuct, [
+			$('#editProductName').val(),
+			$('#editProductQuantity').val(),
+			$('#editProductPrice').val()
+			]);
+		$('#editInventoryPModal').modal('hide');
+	});
+
+	$('#sSave').click(function(){
+		editInventory(currentInventoryServuct, [
+			$('#editServiceName').val(),
+			"Service",
+			$('#editServicePrice').val()
+			]);
+		$('#editInventorySModal').modal('hide');
+	});
+
+	$('#pDelete').click(function(){
+		deleteInventory(currentInventoryServuct);
+		$('#editInventoryPModal').modal('hide');
+	});
+
+	$('#sDelete').click(function(){
+		deleteInventory(currentInventoryServuct);
+		$('#editInventorySModal').modal('hide');
 	});
 
 	$('#spreadsheet').click(function(){
