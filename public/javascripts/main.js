@@ -399,7 +399,17 @@ function main(){
 		});
 	}
 
+	$('#yearIncrease').click(function(){
+		currentYear=String(Number(currentYear)+1);
+		UpdateReport();
+	});
+	$('#yearDecrease').click(function(){
+		currentYear=String(Number(currentYear)-1);
+		UpdateReport();
+	});
+
 	function UpdateReport(){
+		$('#year').html(currentYear);
 		var servTotal = 0, proTotal = 0, taxTotal = 0, discTotal = 0, dueTotal = 0, tax;
 		// 11 = service total, 12 = product total, 13 = tax, 4 = discount, 5 = total, 5 - (9 + 10) = due
 		appointments.forEach(function(appointment){
@@ -448,8 +458,8 @@ function main(){
 			}
 			for(i in apptKey){
 				var appt = apptKey[i];
+				console.log(appt[7].substr(0, 4), currentYear);
 				if(appt[7].substr(0, 4) === currentYear){
-					console.log(appt[7].substr(0, 4));
 					var totalNoTip = Number(appt[5]) - Number(appt[3]);
 					var lastFirst = getName(appt[1]);
 					var monthNum = parseInt(appt[7].substr(5,2));

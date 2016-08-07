@@ -815,6 +815,7 @@ input[type=checkbox] {
 	.icon
 	{
 		text-decoration: none;
+		cursor: pointer; cursor: hand;
 	}
 
 		.icon:before
@@ -875,7 +876,8 @@ input[type=checkbox] {
 	.icon-memo:before			{ content: '\E08d'; }
 	.icon-drawer:before			{ content: '\E028'; }
 	.icon-print:before			{ content: '\E10a'; font-size: 30px !important;}
-
+	.icon-left:before			{ content: '\E00c'; }
+	.icon-right:before			{ content: '\E00d'; }
 
 	.icon-dribbble:before		{ content: '\E03f'; }
 	.icon-facebook:before		{ content: '\E047'; }
