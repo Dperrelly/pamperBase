@@ -408,11 +408,11 @@ function main(){
 				var appt = apptKey[i];
 				var totalNoTip = Number(appt[5]) - Number(appt[3]);
 				var lastFirst = getName(appt[1]);
-
 				var monthNum = parseInt(appt[7].substr(5,2));
 				var month = monthMap[monthNum];
 				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
-				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="' + month + 'Due col250 center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal col250 center">' + twoNumberDecimal(made) + '</td></tr>');
+				var totalappt = Number(appt[11]) + Number(appt[12]) + Number(appt[13]) - Number(appt[4]);
+				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="colFixedB">'+ twoNumberDecimal(totalappt) + '</td><td class="' + month + 'Due colFixedL center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal colFixedL center">' + twoNumberDecimal(made) + '</td></tr>');
 				var mommaNode = $('#' + month + 'Apps');
 				appt[16] = lastFirst;
 				apptNode.click(goToAppt);
@@ -420,11 +420,10 @@ function main(){
 			}
 			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
-			$('#taxTotal').html("Tax Total: $" + twoNumberDecimal(taxTotal));
+			$('#taxTotal').html("Tax Total: </br> $" + twoNumberDecimal(taxTotal));
 			$('#discTotal').html("Discount Total: $" + twoNumberDecimal(discTotal));
-			$('#totalDue').html("Amount Due: $" + twoNumberDecimal(dueTotal));
-			$('#yearlyTotal').html(
-				"Yearly Total: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal - dueTotal));
+			$('#totalDue').html("Balance Due: $" + twoNumberDecimal(dueTotal));
+			$('#yearlyTotal').html("Total Paid: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal - dueTotal));
 			if(boot) loadPerson(currentPersonId);
 			if(boot) loadInventory();
 			setCurrentAppointmentId();

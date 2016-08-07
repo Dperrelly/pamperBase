@@ -6,8 +6,8 @@
 <script type="text/javascript" src="/javascripts/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/javascripts/main.js"></script>
 <script type="text/javascript" src="/javascripts/oauth.js"></script>
-<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
-<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+<script src="https://apis.google.com/js/client.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" />
 <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
 <script src="/javascripts/jquery.formerize-1.1.js"></script>
 <script src="/stylesheets/5grid/init.js?use=mobile,desktop"></script>
@@ -17,11 +17,11 @@
 <script src="javascripts/addmore.js"></script>
 <noscript>
 <link rel="stylesheet" href="/stylesheets/5grid/core.css">
-<link rel="stylesheet" href="/stylesheets/5grid/core-desktop.css">
-<link rel="stylesheet" href="/stylesheets/5grid/core-1200px.css">
-<link rel="stylesheet" href="/stylesheets/5grid/core-noscript.css">
-<link rel="stylesheet" href="/stylesheets/style.css">
-<link rel="stylesheet" href="/stylesheets/style-desktop.css">
+<link rel="stylesheet" href="/stylesheets/5grid/core-desktop.css" />
+<link rel="stylesheet" href="/stylesheets/5grid/core-1200px.css" />
+<link rel="stylesheet" href="/stylesheets/5grid/core-noscript.css" />
+<link rel="stylesheet" href="/stylesheets/style.css" />
+<link rel="stylesheet" href="/stylesheets/style-desktop.css" />
 <link rel="stylesheet" href="/stylesheets/noscript.css">
 </noscript>
  
@@ -30,7 +30,7 @@
 <link rel='stylesheet' href='/stylesheets/fullcalendar.css' />
 <script type="text/javascript" src="/javascripts/list.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-combined.min.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-combined.min.css" />
 <script type='text/javascript'>
 	$(function(){
    	$('#apptModal').modal({
@@ -223,7 +223,7 @@
           <br/>
           <div> 
           <!-- yearly totals -->
-            <h2 class="center reportYear">2016</h2>
+            <h2 class="center reportYear" id="year">2016</h2>
             <h3 class="center" id="yearlyTotal"></h3>
             <table id="reportTable" class="table table-striped" align="center">
               <thead>
@@ -232,7 +232,7 @@
                 <th class="col200 center" id="proTotal"></th>
                 <th class="col200 center" id="taxTotal"></th>
                 <th class="col200 center" id="discTotal"></th>
-                <th class="col200 center" id="totalDue">Balance Due: $$$$</th>
+                <th class="col200 center" id="totalDue"></th>
                 </tr>
               </thead>
             </table>
@@ -241,11 +241,6 @@
         </header>
        <!--  monthly totals -->
        <div class="height900">
-          <!-- Jan Feb -->
-        <table id="monthsTable" class="table table-striped">
-          <tr>
-            <!-- jaunary column -->
-            <td class="">
               <table id="january" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">January</th></tr>
@@ -256,17 +251,15 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
               <div class="overflowMonths"> <!-- scrolls excess apps -->
                 <table class="table table-striped">
                   <tbody class="" id="janApps">
-                  <!-- january 
-
-                  ails print here -->
                   </tbody>
                 </table> <!-- closes month appointments -->
               </div> <!-- close overflow -->
@@ -278,15 +271,12 @@
                     <th id="janProTotal" class="colFixedB center">2346.00</th>
                     <th id="janTaxTotal" class="colFixedS center">210.00</th>
                     <th id="janDiscTotal" class="colFixedB center">2310.00</th>
-                    <th id="janAmountDue" class="col250 center">215.65</th>
-                    <th id="janClientTotal" class="col250 center">1564.15</th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes january column -->
-            <tr>
-            <!-- february column -->
-            <td class="col500">
               <table id="February" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">February</th></tr>
@@ -297,8 +287,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -317,16 +308,12 @@
                     <th id="febProTotal" class="colFixedB center">2310.00</th>
                     <th id="febTaxTotal" class="colFixedS center">210.00</th>
                     <th id="febDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes february column -->
-          </tr> 
-          <!-- Mar - Apr  -->
-          <tr>
-            <!-- march column -->
-            <td class="col500">
               <table id="march" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">March</th></tr>
@@ -337,8 +324,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -357,13 +345,12 @@
                     <th id="marProTotal" class="colFixedB center">2310.00</th>
                     <th id="marTaxTotal" class="colFixedS center">210.00</th>
                     <th id="marDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes March column -->
-            <!-- April column -->
-            <td class="col500">
               <table id="april" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">April</th></tr>
@@ -374,8 +361,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -394,16 +382,12 @@
                     <th id="aprProTotal" class="colFixedB center">2310.00</th>
                     <th id="aprTaxTotal" class="colFixedS center">210.00</th>
                     <th id="aprDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes April column -->
-          </tr>
-          <!-- May - Jun -->
-          <tr>
-            <!-- May column -->
-            <td class="col500">
               <table id="may" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">May</th></tr>
@@ -414,8 +398,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -434,13 +419,12 @@
                     <th id="mayProTotal" class="colFixedB center">2310.00</th>
                     <th id="mayTaxTotal" class="colFixedS center">210.00</th>
                     <th id="mayDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes May column -->
-            <!-- June column -->
-            <td class="col500">
               <table id="june" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">June</th></tr>
@@ -451,8 +435,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -471,16 +456,12 @@
                     <th id="junProTotal" class="colFixedB center">2310.00</th>
                     <th id="junTaxTotal" class="colFixedS center">210.00</th>
                     <th id="junDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes jun column -->
-          </tr>
-          <!-- Jul - Aug -->
-          <tr>
-            <!-- Jul column -->
-            <td class="col500">
               <table id="jul" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">July</th></tr>
@@ -491,8 +472,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -511,13 +493,13 @@
                     <th id="julProTotal" class="colFixedB center">2310.00</th>
                     <th id="julTaxTotal" class="colFixedS center">210.00</th>
                     <th id="julDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes jul column -->
-            <!-- aug column -->
-            <td class="col500">
+
               <table id="august" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">August</th></tr>
@@ -528,8 +510,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -548,16 +531,12 @@
                     <th id="augProTotal" class="colFixedB center">2310.00</th>
                     <th id="augTaxTotal" class="colFixedS center">210.00</th>
                     <th id="augDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes jun column -->
-          </tr>
-          <!-- sep - oct -->
-          <tr>
-            <!-- sep column -->
-            <td class="col500">
               <table id="september" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">September</th></tr>
@@ -568,8 +547,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -588,13 +568,12 @@
                     <th id="sepProTotal" class="colFixedB center">2310.00</th>
                     <th id="sepTaxTotal" class="colFixedS center">210.00</th>
                     <th id="sepDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes sep column -->
-            <!-- oct column -->
-            <td class="col500">
               <table id="october" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">October</th></tr>
@@ -605,8 +584,9 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
@@ -625,16 +605,13 @@
                     <th id="octProTotal" class="colFixedB center">2310.00</th>
                     <th id="octTaxTotal" class="colFixedS center">210.00</th>
                     <th id="octDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes oct column -->
-          </tr>
           <!-- nov - dec -->
-          <tr>
-            <!-- sep column -->
-            <td class="col500">
               <table id="november" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">November</th></tr>
@@ -645,15 +622,16 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
               <div class="overflowMonths"> <!-- scrolls excess apps -->
                 <table class="table table-striped">
                   <tbody class="col500" id="novApps">
-                  <!-- sep appointment details print here -->
+                  <!-- nov appointment details print here -->
                   </tbody>
                 </table> <!-- closes month appointments -->
               </div> <!-- close overflow -->
@@ -665,13 +643,12 @@
                     <th id="novProTotal" class="colFixedB center">2310.00</th>
                     <th id="novTaxTotal" class="colFixedS center">210.00</th>
                     <th id="novDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
-              </table> <!-- closes month totals -->
-            </td> <!-- closes sep column -->
-            <!-- oct column -->
-            <td class="col500">
+              </table> 
               <table id="december" class="col500 table table-striped">
                 <thead>
                   <tr><th class="center">December</th></tr>
@@ -682,15 +659,16 @@
                       <th class="colFixedB">Products</th>
                       <th class="colFixedS">Tax</th>
                       <th class="colFixedB">Discount</th>
-                      <th class="col250 center">Balance Due</th>
-                      <th class="col250 center">Amount Paid</th>
+                      <th class="colFixedB">Total</th>
+                      <th class="colFixedL">Balance Due</th>
+                      <th class="colFixedL">Amount Paid</th>
                   </tr>
                 </thead>
               </table>
               <div class="overflowMonths"> <!-- scrolls excess apps -->
                 <table class="table table-striped">
                   <tbody class="col500" id="decApps">
-                  <!-- oct appointment details print here -->
+                  <!-- dec appointment details print here -->
                   </tbody>
                 </table> <!-- closes month appointments -->
               </div> <!-- close overflow -->
@@ -702,12 +680,12 @@
                     <th id="decProTotal" class="colFixedB center">2310.00</th>
                     <th id="decTaxTotal" class="colFixedS center">210.00</th>
                     <th id="decDiscTotal" class="colFixedB center">2310.00</th>
-                    <th class="colFixedB"></th>
+                    <th class="colFixedB">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
+                    <th class="colFixedL">2310.00</th>
                   </tr>
                 </tfoot>
               </table> <!-- closes month totals -->
-            </td> <!-- closes oct column -->
-          </tr>
         </table>
       </div> <!-- closes months overflow -->
     </article>

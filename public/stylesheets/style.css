@@ -194,9 +194,9 @@ border: 0;
 /*Appointment Modal*/
 #apptModal {
 	margin:0 auto !important;
-	width: 80vw !important;
+	width: 90vw !important;
 	max-width: 1152px !important;
-	min-width: 900px !important;
+	min-width: 950px !important;
 	top:7%;
 	left:50% !important;
 	transform: translateX(-50%);
@@ -204,9 +204,10 @@ border: 0;
 	#apptBody {
 	text-align:center !important;
 	min-height: 360px !important;
-	height: 500px !important;
-	max-height:71vh !important;
-	overflow-y:hidden;
+	height: 550px !important;
+	max-height:65vh !important;
+	padding: 0 0.5em 0 0.5em;
+	overflow-y:auto;
 	overflow-x:auto;
 	}
 
@@ -237,6 +238,7 @@ border: 0;
 		width:75vw;
 		min-width: 70vw;
 		margin-top: 50px;
+		margin-left: -20px;
 }
 	.col500 {
 		overflow-x: show !important;
