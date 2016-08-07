@@ -11,6 +11,7 @@ function main(){
 	var currentAppointmentId = null;
 	var currentServuctId = null;
 	var currentServuctType = null;
+	var currentInventoryServuct = null;
 	var people = [];
 	var appointments = [];
 	var servucts = [];
@@ -283,11 +284,11 @@ function main(){
 		    range: 'A2:G',
 		  }).then(function(response) {
 		  		var row = null;
-		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
+		  		for(var i = response.result.values.length - 1 ; i >= 0 ; i--){		
 		  			if (response.result.values[i][0] === id) row = i;
 		  		}
-		  		if(!row) {
-		  			console.log('id not found');
+		  		if(row === undefined) {
+		  			console.log('id: ' + id + ' not found');
 		  			return;
 		  		}
 				$('#fname').val(response.result.values[row][1]);
@@ -313,7 +314,7 @@ function main(){
 							}
 						});
 						if(!service) service = "";
-						else if(numServs) service += " + " + numServs + " others";
+						else if(numServs) service += " + " + numServs + " other(s)";
 						var total = twoNumberDecimal(Number(appointment[5]) + Number(appointment[3]));
 						var due = twoNumberDecimal(total - (Number(appointment[9]) + Number(appointment[10])));
 						var notes = appointment[8] ? appointment[8] : "";
@@ -347,10 +348,31 @@ function main(){
 	function goToAppt(event){
 		//$('#clientLink').trigger('click');
 		// window.setTimeout(function(){
-			console.log('opening');
+		console.log('opening');
 		$('#apptModal').modal('show');
 		setCurrentAppointmentId(event);		
 		// }, 1500);
+	}
+
+	function loadInventoryService(event){
+		currentInventoryServuct = $(this).children('#itemName').text();
+		inventory.forEach(function(item){
+			if (item[0] === currentInventoryServuct){
+				$('#editServiceName').val(item[0]);
+				$('#editServicePrice').val(item[2]);
+			}
+		});
+	}
+
+	function loadInventoryProduct(event){
+		currentInventoryServuct = $(this).children('#itemName').text();
+		inventory.forEach(function(item){
+			if (item[0] === currentInventoryServuct){
+				$('#editProductName').val(item[0]);
+				$('#editProductQuantity').val(item[1]);
+				$('#editProductPrice').val(item[2]);
+			}
+		});
 	}
 
 	function loadServucts(boot){
@@ -452,10 +474,12 @@ function main(){
 			inventory.forEach(function(item){
 				var newNode;
 				if(item[1] === "Service"){
-					newNode = $('<tr class="highlight" data-toggle="modal" data-target="#editInventorySModal"><td class="colServuct">' + item[0] + '</td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td></tr>');
+					newNode = $('<tr class="highlight" data-toggle="modal" data-target="#editInventorySModal"><td class="colServuct" id="itemName">' + item[0] + '</td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td></tr>');
+					newNode.click(loadInventoryService);
 					$('#services').append(newNode);
 				}else{
-					newNode = $('<tr class="highlight" data-toggle="modal" data-target="#editInventoryPModal"><td class="colServuct">' + item[0] + '</td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td><td class="col200">' + item[1] + '</td></tr>');
+					newNode = $('<tr class="highlight" data-toggle="modal" data-target="#editInventoryPModal"><td class="colServuct" id="itemName">' + item[0] + '</td><td class="col200">$' + twoNumberDecimal(item[2]) + '</td><td class="col200">' + item[1] + '</td></tr>');
+					newNode.click(loadInventoryProduct);
 					$('#products').append(newNode);
 				}
 			});
@@ -709,7 +733,7 @@ function main(){
 		  			console.log('id not found');
 		  			return;
 		  		}
-		  		var range = 'B' + row + ":K" + row;
+		  		var range = 'C' + row + ":K" + row;
 			  	updateSS(appointmentsId, range, array).then(function(response){
 				console.log('edit appointment success', range, array);
 				loadAppointments(true);
@@ -1007,7 +1031,6 @@ function main(){
 	//deletePerson('iql3h8vd');
 	function saveCurrentAppt(){
 		editAppointment(currentAppointmentId, [[
-			currentPersonId,
 			$('#tax').val(),
 			$('#tip').val(),
 			$('#discount').html(),

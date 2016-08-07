@@ -92,3 +92,5 @@ function appendPre(message) {
   var textContent = document.createTextNode(message + '\n');
   pre.appendChild(textContent);
 }
+
+window.onload = checkAuth;
