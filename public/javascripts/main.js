@@ -29,6 +29,28 @@ function main(){
 	    dropdown: false,
 	});
 
+	function Month(){
+		this.appts = 0;
+		this.services = 0;
+		this.products = 0;
+		this.tax = 0;
+		this.discount = 0;
+		this.total = 0;
+		this.balance = 0;
+		this.paid = 0;
+	}
+
+	Month.prototype.add = function(services, products, tax, discount, total, balance, paid){
+		this.appts++;
+		this.services += services;
+		this.products += products;
+		this.tax += tax;
+		this.discount += discount;
+		this.total += total;
+		this.balance += balance;
+		this.paid += paid;
+	};
+
 	function Number(str){
 		if(typeof str === "string"){
 			var numberNoCommas = str.replace(/,/g, '');
@@ -453,32 +475,61 @@ function main(){
 				11: 'nov',
 				12: 'dec',
 			};
-			for(var i in monthMap){
-				$('#' + monthMap[i] + 'Apps').empty();
+		var monthTotals = {
+			jan: new Month(),
+			feb: new Month(),
+			mar: new Month(),
+			apr: new Month(),
+			may: new Month(),
+			jun: new Month(),
+			jul: new Month(),
+			aug: new Month(),
+			sep: new Month(),
+			oct: new Month(),
+			nov: new Month(),
+			dec: new Month(),
+		};
+		for(var i in monthMap){
+			$('#' + monthMap[i] + 'Apps').empty();
+		}
+		for(i in apptKey){
+			var appt = apptKey[i];
+			if(appt[7].substr(0, 4) === currentYear){
+				var totalNoTip = Number(appt[5]) - Number(appt[3]);
+				var lastFirst = getName(appt[1]);
+				var monthNum = parseInt(appt[7].substr(5,2));
+				var month = monthMap[monthNum];
+
+				var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
+				var totalappt = Number(appt[11]) + Number(appt[12]) + Number(appt[13]) - Number(appt[4]);
+				monthTotals[month].add(
+					Number(appt[11]),
+					Number(appt[12]),
+					Number(appt[13]),
+					Number(appt[4]),
+					Number(totalappt),
+					Number(Number(totalNoTip) - made),
+					Number(made)
+					);
+				var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="colFixedB">'+ twoNumberDecimal(totalappt) + '</td><td class="' + month + 'Due colFixedL center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal colFixedL center">' + twoNumberDecimal(made) + '</td></tr>');
+				var mommaNode = $('#' + month + 'Apps');
+				appt[16] = lastFirst;
+				apptNode.click(goToAppt);
+				mommaNode.append(apptNode);
 			}
-			for(i in apptKey){
-				var appt = apptKey[i];
-				console.log(appt[7].substr(0, 4), currentYear);
-				if(appt[7].substr(0, 4) === currentYear){
-					var totalNoTip = Number(appt[5]) - Number(appt[3]);
-					var lastFirst = getName(appt[1]);
-					var monthNum = parseInt(appt[7].substr(5,2));
-					var month = monthMap[monthNum];
-					var made = Number(appt[9]) + Number(appt[10]) - Number(appt[3]);
-					var totalappt = Number(appt[11]) + Number(appt[12]) + Number(appt[13]) - Number(appt[4]);
-					var apptNode = $('<tr apptId="' + appt[0]+ '" class="highlight"><td class="' + month + 'Name colFixedL">' + lastFirst + '</td><td class="' + month + 'Serv colFixedB">' + twoNumberDecimal(appt[11]) + '</td><td class="' + month + 'Pro colFixedB">' + twoNumberDecimal(appt[12]) + '</td><td class="' + month + 'Tax colFixedS">' + twoNumberDecimal(appt[13]) + '</td><td class="' + month + 'Disc colFixedB">' + twoNumberDecimal(appt[4]) + '</td><td class="colFixedB">'+ twoNumberDecimal(totalappt) + '</td><td class="' + month + 'Due colFixedL center">' + twoNumberDecimal(Number(totalNoTip) - made) + '</td><td class="' + month + 'AppTotal colFixedL center">' + twoNumberDecimal(made) + '</td></tr>');
-					var mommaNode = $('#' + month + 'Apps');
-					appt[16] = lastFirst;
-					apptNode.click(goToAppt);
-					mommaNode.append(apptNode);
-				}
-			}
-			$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
-			$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
-			$('#taxTotal').html("Tax Total: </br> $" + twoNumberDecimal(taxTotal));
-			$('#discTotal').html("Discount Total: $" + twoNumberDecimal(discTotal));
-			$('#totalDue').html("Balance Due: $" + twoNumberDecimal(dueTotal));
-			$('#yearlyTotal').html("Total Paid: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal - dueTotal));
+		}
+		for(i in monthTotals){
+			var mon = monthTotals[i];
+			var totalNode = $('<tr><th id="' + i + 'Clients" class="colFixedL center">' + mon.appts + ' Appt(s)</th><th id="' + i + 'ServTotal" class="colFixedB center">' + twoNumberDecimal(mon.services) + '</th><th id="' + i + 'ProTotal" class="colFixedB center">' + twoNumberDecimal(mon.products) + '</th><th id="' + i + 'TaxTotal" class="colFixedS center">' + twoNumberDecimal(mon.tax) + '</th><th id="' + i + 'DiscTotal" class="colFixedB center">' + twoNumberDecimal(mon.discount) + '</th><th class="colFixedB">' + twoNumberDecimal(mon.total) + '</th><th class="colFixedL">' + twoNumberDecimal(mon.balance) + '</th><th class="colFixedL">' + twoNumberDecimal(mon.paid) + '</th></tr>');
+			$('#' + i + 'Totals').append(totalNode);
+		}
+		console.log(monthTotals);
+		$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
+		$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
+		$('#taxTotal').html("Tax Total: </br> $" + twoNumberDecimal(taxTotal));
+		$('#discTotal').html("Discount Total: $" + twoNumberDecimal(discTotal));
+		$('#totalDue').html("Balance Due: $" + twoNumberDecimal(dueTotal));
+		$('#yearlyTotal').html("Total Paid: $" + twoNumberDecimal(taxTotal + proTotal + servTotal - discTotal - dueTotal));
 	}
 
 	function loadInventory(){
