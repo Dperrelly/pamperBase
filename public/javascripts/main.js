@@ -491,6 +491,7 @@ function main(){
 		};
 		for(var i in monthMap){
 			$('#' + monthMap[i] + 'Apps').empty();
+			$('#' + monthMap[i] + 'Totals').empty();
 		}
 		for(i in apptKey){
 			var appt = apptKey[i];
@@ -523,7 +524,6 @@ function main(){
 			var totalNode = $('<tr><th id="' + i + 'Clients" class="colFixedL center">' + mon.appts + ' Appt(s)</th><th id="' + i + 'ServTotal" class="colFixedB center">' + twoNumberDecimal(mon.services) + '</th><th id="' + i + 'ProTotal" class="colFixedB center">' + twoNumberDecimal(mon.products) + '</th><th id="' + i + 'TaxTotal" class="colFixedS center">' + twoNumberDecimal(mon.tax) + '</th><th id="' + i + 'DiscTotal" class="colFixedB center">' + twoNumberDecimal(mon.discount) + '</th><th class="colFixedB">' + twoNumberDecimal(mon.total) + '</th><th class="colFixedL">' + twoNumberDecimal(mon.balance) + '</th><th class="colFixedL">' + twoNumberDecimal(mon.paid) + '</th></tr>');
 			$('#' + i + 'Totals').append(totalNode);
 		}
-		console.log(monthTotals);
 		$('#servTotal').html("Service Total: $" + twoNumberDecimal(servTotal));
 		$('#proTotal').html("Product Total: $" + twoNumberDecimal(proTotal));
 		$('#taxTotal').html("Tax Total: </br> $" + twoNumberDecimal(taxTotal));
