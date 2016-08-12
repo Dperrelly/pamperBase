@@ -82,7 +82,7 @@ function main(){
 	function selectServuct(event){
 		var selected = $(this);
 		$(".select-servuct").css("background-color", '#DBE8DC');
-		selected.css("background-color", '#e6ffe6');
+		selected.css("background-color", '#ffe6ff');
 		selectedServuct = [
 		];
 		selected.children().each(function(){
@@ -1252,7 +1252,6 @@ function main(){
 	$('#proadd').click(function(){
 		currentServuctType = "Product";
 		currentServuctId = null;
-		$('#productDisc').val();
 		$('#servuctHeader').html('New Product');
 		$('#servuctLabel').html('Product Name:');
 		$('#editservname').val("");
