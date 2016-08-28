@@ -37,7 +37,6 @@ function handleAuthResult(authResult) {
     $('#wrapper').hide();
   }
 }
-
 /**
  * Initiate auth flow in response to user clicking authorize button.
  *
