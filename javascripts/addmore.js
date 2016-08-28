@@ -2,7 +2,7 @@ $(document).ready(function(){
     var pcounter = 2;
     var scounter = 2;
     
-    $("#addProduct").click(function () {
+    $("#addProducts").click(function () {
     
     var newTextBoxDiv = $(document.createElement('div'))
          .attr("id", 'productDiv' + pcounter);

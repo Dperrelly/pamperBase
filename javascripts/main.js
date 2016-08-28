@@ -82,7 +82,7 @@ function main(){
 	function selectServuct(event){
 		var selected = $(this);
 		$(".select-servuct").css("background-color", '#DBE8DC');
-		selected.css("background-color", '#e6ffe6');
+		selected.css("background-color", '#ffe6ff');
 		selectedServuct = [
 		];
 		selected.children().each(function(){
@@ -1252,7 +1252,6 @@ function main(){
 	$('#proadd').click(function(){
 		currentServuctType = "Product";
 		currentServuctId = null;
-		$('#productDisc').val();
 		$('#servuctHeader').html('New Product');
 		$('#servuctLabel').html('Product Name:');
 		$('#editservname').val("");
@@ -1428,17 +1427,13 @@ function main(){
 			date = [];
 		}
 	    var searchable = new List('searchlist', columns, values);
+	    searchable.sort('a', { order: "asc" });
+
 	    $('.person').click(function(){
 			console.log($(this).children('#e').html());
 			currentPersonId = $(this).children('#e').html();
 		    loadPerson(currentPersonId);
 		    $('#clientLink').trigger('click');
-		}).hover(function(){
-			$(this).children().css('background-color', '#e6ffe6');
-			$(this).children().css('cursor', 'pointer');
-		}, function(){
-			$(this).children().css('background-color', '#DBE8DC');
-			$(this).children().css('cursor', 'default');
 		});
 	}	
 
