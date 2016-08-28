@@ -32,6 +32,7 @@ app.on('ready', () => {
   let win = new BrowserWindow({
   	width:1440, 
   	height: 1000,
+  	icon: __dirname + "/images/favicon.ico"
   });
   win.loadURL(`http://localhost:3000/`);
 });

@@ -257,16 +257,18 @@ border: 0;
 	}
 
 	.colFixedL {
-		width:153px !important;
-		min-width:153px !important;
-		max-width:153px !important;
+		width:175px !important;
+		min-width:175px !important;
+		max-width:175px !important;
 		text-align: center !important;
+		overflow: hidden !important;
+		text-overflow: ellipsis;
 	}
 
 	.colFixedB {
-		width:103px !important;
-		min-width:103px !important;
-		max-width:103px !important;
+		width:105px !important;
+		min-width:105px !important;
+		max-width:105px !important;
 		text-align: center !important;
 	}
 	.colFixedS {
@@ -378,15 +380,14 @@ border: 0;
 	max-height: 350px !important;
 	overflow-y: auto;
 }
-.overflowMonths {
-	height: auto !important;
-	min-height: 0px !important;
-	max-height: 300px !important;
-	overflow-y: auto !important;
+
+.border {
+	border: 2px solid black !important;
 }
 
 .month-content {
-  background-color:#DBE8DC;
+	margin-bottom: 0 !important;
+	background-color:#DBE8DC;
  }
 
 .monthLabel {
