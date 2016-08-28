@@ -24,10 +24,10 @@ function main(){
 	var parseTimeRegex2 = /:(\d+)/;
 	var parseTimeRegex3 = /\s(.*)$/;
 
-	$('#time').timepicker({
-	    timeFormat: 'h:mm p',
-	    dropdown: false,
-	});
+	// $('#time').timepicker({
+	//     timeFormat: 'h:mm p',
+	//     dropdown: false,
+	// });
 
 	function Month(){
 		this.appts = 0;
@@ -1507,3 +1507,8 @@ function main(){
 
 }
 
+// setTimeout(function(){
+// 	var discoveryUrl =
+//       'https://sheets.googleapis.com/$discovery/rest?version=v4';
+//   	gapi.client.load(discoveryUrl).then(main);
+// }, 2000);

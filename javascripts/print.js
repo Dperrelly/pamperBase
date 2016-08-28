@@ -69,12 +69,16 @@ function main(){
 					done.done = true;
 					$('#cat').hide();
 					$('#hider').show();
-					window.print();
+					printt();
 				}
 			}, function(e){
 				console.log('load person error');
 				console.log(e);
 			});
+	}
+
+	function printt(){
+		window.print();
 	}
 
 	function getServucts(){
