@@ -24,10 +24,10 @@ function main(){
 	var parseTimeRegex2 = /:(\d+)/;
 	var parseTimeRegex3 = /\s(.*)$/;
 
-	// $('#time').timepicker({
-	//     timeFormat: 'h:mm p',
-	//     dropdown: false,
-	// });
+	$('#time').timepicker({
+	    timeFormat: 'h:mm p',
+	    dropdown: false,
+	});
 
 	function Month(){
 		this.appts = 0;
