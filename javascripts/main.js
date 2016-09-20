@@ -6,7 +6,7 @@ function main(){
 	var servuctsId = '1S0rzD4T5ougGfzZGqp6H8bm-QP8Zy29oPJeQpDiUYQ0';
 	var inventoryId = '18y6mvDC7vVcNISpyU7_Xuq_NSxVUcv8ZMhyz-xkHaLU';
 	var currentServuctName = "";
-	var currentPersonId = 'iql3hgup';
+	var currentPersonId = null;
 	var updateAppt = false;
 	var currentAppointmentId = null;
 	var currentYear = new Date().getFullYear().toString();
@@ -76,6 +76,7 @@ function main(){
 
 	function twoNumberDecimal(number) {
 		if(number === "") return 0;
+		if(typeof number==="string") number=Number(number.split(',').join(''));
 	    return parseFloat(number).toFixed(2);
 	}
 
@@ -302,6 +303,7 @@ function main(){
 	}
 
 	var loadPerson = function(id){
+		if(!id) return;
 		ss.values.get({
 		    spreadsheetId: peopleId,
 		    range: 'A2:G',
@@ -696,9 +698,12 @@ function main(){
 		    range: 'A2:G',
 		  }).then(function(response) {
 		  		var row = null;
-		  		for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
-		  			if (response.result.values[i][0] === id) row = i + 2;
+		  		if(!response.result.values){
+		  			response.result.values=[];
 		  		}
+		  			for(var i = response.result.values.length - 1 ; i > 0 ; i--){		
+		  				if (response.result.values[i][0] === id) row = i + 2;
+		  			}
 			  	var range = 'A' + row + ":G" + row;
 		  		
 		  		if(!row) {
@@ -713,6 +718,10 @@ function main(){
 				  	updateSS(peopleId, range, array).then(function(response){
 					  	currentPersonId = now;
 						console.log('add person success');
+						$('#newappt').show();
+						$('#apptInfo').show();
+						$('#deletebtn').show();
+						$("#save-client").html('Saved!');
 						loadPeople();
 						window.setTimeout(function(){
 							$("#save-client").html('Save Changes');
@@ -1126,6 +1135,27 @@ function main(){
 		loadAppointments();
 	}
 
+	$('#mail').click(function(){
+		createList();
+	});
+
+	$('#clientLink').click(function(){
+		if(!currentPersonId) {
+			$('#newappt').hide();
+			$('#save-client').hide();
+			$('#deletebtn').hide();
+			$('#clientInfo').hide();
+			$('#apptInfo').hide();
+		}
+		else{
+			$('#newappt').show();
+			$('#save-client').show();
+			$('#deletebtn').show();
+			$('#clientInfo').show();
+			$('#apptInfo').show();
+		}
+	});
+
 	$('#apptsave').click(function(){
 		saveCurrentAppt();
 		$('#apptModal').modal('hide');
@@ -1191,6 +1221,11 @@ function main(){
 	});
 
 	$('#newclientyes').click(function(){
+		$('#save-client').show();
+		$('#clientInfo').show();
+		$('#newappt').hide();
+		$('#deletebtn').hide();
+		$('#apptInfo').hide();
 		$('#newclientmodal').modal('hide');
 		$('#lname').val("");
 		$('#fname').val("");
@@ -1199,6 +1234,7 @@ function main(){
 		$('#eMail').val("");
 		$('#bday').val("");
 		currentPersonId = null;
+		$('#appointments').empty();
 		console.log("adding person");
 	});
 
