@@ -28,6 +28,10 @@ var server = http.createServer(serverApp);
 
 server.listen(3000);
 
+app.on('window-all-closed', function(){
+  app.quit();
+});
+
 app.on('ready', () => {
   let win = new BrowserWindow({
   	width:1440, 

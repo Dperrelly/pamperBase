@@ -14,9 +14,15 @@
     "moment": "^2.14.1",
     "path": "^0.12.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "electron-prebuilt": "^1.3.3",
+    "electron-packager": "^5.0.0"
+  },
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "package": "npm run package-osx",
+    "package-osx": "asar pack PamperBase-darwin-x64/PamperBase/Contents/Resources/app PamperBase-darwin-x64/PamperBase/Contents/Resources/app.asar"
+
   },
   "author": "zofalo",
   "license": "ISC"
